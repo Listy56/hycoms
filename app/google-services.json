@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "781793565461",
+    "firebase_url": "https://hics-976fb-default-rtdb.firebaseio.com",
+    "project_id": "hics-976fb",
+    "storage_bucket": "hics-976fb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781793565461:android:ea43bdf2d9a0fbdc99e71c",
+        "android_client_info": {
+          "package_name": "com.example.hics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781793565461-rjbq48n1f6vs532eqptbf4vrn4trl8v9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hics",
+            "certificate_hash": "a0639a459cd0d28ecaad8aff2677f679036e9b52"
+          }
+        },
+        {
+          "client_id": "781793565461-kvgho3chlpb3fuf4nmg3ludog8jve3pp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuNwSk86meWK0na86VfJ76Iyyg3yiAMNU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781793565461-kvgho3chlpb3fuf4nmg3ludog8jve3pp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

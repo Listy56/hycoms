@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background -->
+    <item>
+        <shape>
+            <solid android:color="#009688"/>
+            <corners android:radius="20dp"/>
+        </shape>
+    </item>
+
+    <!-- Icon dropdown -->
+    <item
+        android:gravity="end|center_vertical"
+        android:right="10dp"
+        android:drawable="@drawable/ic_arrow_down"/>
+
+</layer-list>

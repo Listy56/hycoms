@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Background -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background" />
+
+    <!-- Content -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <!-- Logo -->
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/logo"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Title -->
+        <TextView
+            android:text="Buat Nama Pengguna"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Subtitle -->
+        <TextView
+            android:text="Silakan masukkan Nama Pengguna untuk melanjutkan"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Username Input -->
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Nama Pengguna"
+            android:background="@drawable/input_bg"
+            android:padding="12dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Button Lanjut -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="Lanjutkan"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_outline"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="10dp" />
+
+        <!--  BUTTON BATAL (PENTING) -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCancel"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="Batal"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_outline"
+            android:layout_marginHorizontal="10dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

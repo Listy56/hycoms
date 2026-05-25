@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Background -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background" />
+
+    <!-- Scroll biar aman di layar kecil -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/back"
+                android:layout_gravity="start"
+                android:layout_marginBottom="12dp"
+                android:clickable="true"
+                android:layout_marginHorizontal="10dp"
+                android:focusable="true"/>
+
+            <!-- Logo -->
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/logo"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Title -->
+            <TextView
+                android:text="Buat Akun"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- Subtitle -->
+            <TextView
+                android:text="Isi informasi Anda di bawah ini"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- Nama -->
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="Nama Pengguna"
+                android:background="@drawable/input_bg"
+                android:padding="12dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Email -->
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/input_bg"
+                android:padding="12dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Password -->
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="Kata Sandi"
+                android:inputType="textPassword"
+                android:background="@drawable/input_bg"
+                android:padding="12dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Confirm Password -->
+            <EditText
+                android:id="@+id/etConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:hint="Konfirmasi Kata Sandi"
+                android:inputType="textPassword"
+                android:background="@drawable/input_bg"
+                android:padding="12dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Button Register -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="Daftar"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_outline"
+                android:backgroundTint="@null"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- OR Divider -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="16dp">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="1dp"
+                    android:background="@color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  Atau  "
+                    android:textColor="@color/white"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="1dp"
+                    android:background="@color/white"/>
+            </LinearLayout>
+
+            <!-- Google Button -->
+            <Button
+                android:id="@+id/btnGoogle"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="Daftar dengan Google"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/white"
+                android:textColor="@android:color/black"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Login -->
+            <TextView
+                android:id="@+id/tvLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sudah punya akun? Masuk"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
