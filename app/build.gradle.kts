@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.hics"
+    namespace = "com.example.hycoms"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.hics"
+        applicationId = "com.example.hycoms"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

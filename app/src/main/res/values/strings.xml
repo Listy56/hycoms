@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">HICS</string>
+    <string name="app_name">HYCOMS</string>
     <string name="account_data"><![CDATA[Account & Data]]></string>
     <string name="data_backup"><![CDATA[Data & Backup]]></string>
-    <string name="default_web_client_id">781793565461-kvgho3chlpb3fuf4nmg3ludog8jve3pp.apps.googleusercontent.com</string>
+    <string name="default_web_client_id">615327501849-q6lisajlahcj23mq0katkf8h3mu541da.apps.googleusercontent.com</string>
 </resources>

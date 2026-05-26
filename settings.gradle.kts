@@ -20,5 +20,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "HICS"
+rootProject.name = "hycoms"
 include(":app")

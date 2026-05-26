@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.HICS" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.HYCOMS" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">@color/hijau_start</item>
     </style>
 
-    <style name="Theme.HICS" parent="Base.Theme.HICS" />
+    <style name="Theme.HYCOMS" parent="Base.Theme.HYCOMS" />
 </resources>
