@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
-import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -25,7 +24,7 @@ class HomeFragment : Fragment() {
     private lateinit var waterTemp: TextView
     private lateinit var waterLevelPercent: TextView
     private lateinit var waterLevel: LinearLayout
-    private lateinit var baseWaterLevel: FrameLayout
+    private lateinit var baseWaterLevel: LinearLayout
     private var lastWaterTempStatus = Status.NORMAL
     private var lastAirTempStatus = Status.NORMAL
 

@@ -5,223 +5,200 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_home"
+    android:background="@android:color/transparent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingLeft="21dp"
+    android:paddingRight="21dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="21dp">
 
-    <!-- TITLE -->
+    <!-- ========================================= -->
+    <!-- WEATHER CARD -->
+    <!-- ========================================= -->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="14dp"
-        android:fontFamily="@font/poppinmedium"
-        android:text="Monitoring Data"
-        android:textColor="@color/hijau_end"
-        android:textSize="18sp" />
-
-    <!-- SCROLL -->
-
-    <androidx.core.widget.NestedScrollView
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardWeather"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:scrollbars="none">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="1dp"
+        app:strokeColor="#6B8F7A"
+        app:strokeWidth="0.8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="14dp">
 
-            <!-- ========================================= -->
-            <!-- WEATHER CARD -->
-            <!-- ========================================= -->
+            <!-- HEADER -->
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardWeather"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="2dp">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppinsbold"
+                    android:text="Prakiraan Cuaca"
+                    android:textColor="#244636"
+                    android:textSize="14sp" />
 
-                    <!-- HEADER -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Data Langsung"
+                    android:textColor="#8A9BB0"
+                    android:textSize="11sp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="10dp">
+            </LinearLayout>
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/poppinsbold"
-                            android:text="Prakiraan Cuaca"
-                            android:textColor="@color/hijau_end"
-                            android:textSize="14sp" />
+            <!-- WEATHER LIST -->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Data Langsung"
-                            android:textColor="#8A9BB0"
-                            android:textSize="11sp" />
-
-                    </LinearLayout>
-
-                    <!-- WEATHER LIST -->
-
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scrollbars="none">
-
-                        <LinearLayout
-                            android:id="@+id/layoutWeatherContainer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-
-                        </LinearLayout>
-
-                    </HorizontalScrollView>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- ========================================= -->
-            <!-- CHART CARD -->
-            <!-- ========================================= -->
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardChart"
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/white"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="2dp">
+                android:scrollbars="none">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/layoutWeatherContainer"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:orientation="horizontal"/>
 
-                    <!-- HEADER -->
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="14dp">
-
-                        <!-- TITLE -->
-
-                        <TextView
-                            android:id="@+id/tvChartTitle"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/poppinsbold"
-                            android:text="Grafik Sensor"
-                            android:textColor="@color/hijau_end"
-                            android:textSize="14sp" />
-
-                        <!-- SPINNER DATA -->
-
-                        <LinearLayout
-                            android:id="@+id/layoutSpinnerData"
-                            android:layout_width="wrap_content"
-                            android:layout_height="34dp"
-                            android:layout_marginEnd="8dp"
-                            android:background="@drawable/bg_pill_teal"
-                            android:gravity="center_vertical"
-                            android:minWidth="95dp"
-                            android:orientation="horizontal"
-                            android:paddingStart="12dp"
-                            android:paddingEnd="10dp">
-
-                            <Spinner
-                                android:id="@+id/spinnerDataType"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:background="@android:color/transparent"
-                                android:popupBackground="@drawable/bg_dropdown_item"
-                                android:spinnerMode="dropdown" />
-
-                            <ImageView
-                                android:id="@+id/ivArrowData"
-                                android:layout_width="7dp"
-                                android:layout_height="7dp"
-                                android:layout_marginStart="4dp"
-                                android:contentDescription="dropdown"
-                                android:scaleType="fitCenter"
-                                android:src="@drawable/arrow_white" />
-
-                        </LinearLayout>
-
-                        <!-- SPINNER PERIOD -->
-
-                        <LinearLayout
-                            android:id="@+id/layoutSpinnerPeriod"
-                            android:layout_width="wrap_content"
-                            android:layout_height="34dp"
-                            android:background="@drawable/bg_pill_white_stroke"
-                            android:gravity="center_vertical"
-                            android:minWidth="95dp"
-                            android:orientation="horizontal"
-                            android:paddingStart="12dp"
-                            android:paddingEnd="10dp">
-
-                            <Spinner
-                                android:id="@+id/spinnerPeriod"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:background="@null"
-                                android:spinnerMode="dropdown" />
-
-                            <ImageView
-                                android:id="@+id/ivArrowPeriod"
-                                android:layout_width="7dp"
-                                android:layout_height="7dp"
-                                android:layout_marginStart="4dp"
-                                android:contentDescription="dropdown"
-                                android:scaleType="fitCenter"
-                                android:src="@drawable/arrow_grey" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <!-- CHART -->
-
-                    <com.github.mikephil.charting.charts.LineChart
-                        android:id="@+id/lineChart"
-                        android:layout_width="match_parent"
-                        android:layout_height="220dp" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+            </HorizontalScrollView>
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- ========================================= -->
+    <!-- CHART CARD -->
+    <!-- ========================================= -->
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardChart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="1dp"
+        app:strokeColor="#6B8F7A"
+        app:strokeWidth="0.8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <!-- HEADER -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <!-- TITLE -->
+
+                <TextView
+                    android:id="@+id/tvChartTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppinsbold"
+                    android:text="Grafik Sensor"
+                    android:textColor="#244636"
+                    android:textSize="14sp" />
+
+                <!-- SPINNER DATA -->
+
+                <LinearLayout
+                    android:id="@+id/layoutSpinnerData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="34dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_pill_teal"
+                    android:gravity="center_vertical"
+                    android:minWidth="95dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="10dp">
+
+                    <Spinner
+                        android:id="@+id/spinnerDataType"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:popupBackground="@drawable/bg_dropdown_item"
+                        android:spinnerMode="dropdown" />
+
+                    <ImageView
+                        android:id="@+id/ivArrowData"
+                        android:layout_width="7dp"
+                        android:layout_height="7dp"
+                        android:layout_marginStart="4dp"
+                        android:contentDescription="dropdown"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/arrow_white" />
+
+                </LinearLayout>
+
+                <!-- SPINNER PERIOD -->
+
+                <LinearLayout
+                    android:id="@+id/layoutSpinnerPeriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="34dp"
+                    android:background="@drawable/bg_pill_white_stroke"
+                    android:gravity="center_vertical"
+                    android:minWidth="95dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="10dp">
+
+                    <Spinner
+                        android:id="@+id/spinnerPeriod"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:spinnerMode="dropdown" />
+
+                    <ImageView
+                        android:id="@+id/ivArrowPeriod"
+                        android:layout_width="7dp"
+                        android:layout_height="7dp"
+                        android:layout_marginStart="4dp"
+                        android:contentDescription="dropdown"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/arrow_grey" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- CHART -->
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/lineChart"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

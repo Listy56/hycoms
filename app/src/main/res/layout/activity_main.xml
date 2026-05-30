@@ -1,200 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:gravity="bottom"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
     tools:context=".MainActivity">
 
-<!--    layout dasar-->
+    <!-- TOP BACKGROUND -->
+    <ImageView
+        android:id="@+id/bgTop"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/background" />
+
+    <!-- KONTEN ATAS -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:padding="20dp">
+
+        <!-- Logo -->
+        <ImageView
+            android:id="@+id/logoLeaf"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            />
+
+        <!-- NOTIF -->
+        <RelativeLayout
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/bg_circle_dark"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/btn_notif"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/notif" />
+
+            <TextView
+                android:id="@+id/badge_notif"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignEnd="@id/btn_notif"
+                android:background="@drawable/badge_background"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@android:color/white"
+                android:textSize="9sp" />
+        </RelativeLayout>
+
+        <!-- TITLE -->
+        <TextView
+            android:id="@+id/titleHycoms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logoLeaf"
+            android:layout_marginTop="8dp"
+            android:text="hycoms"
+            android:textColor="@android:color/white"
+            android:textSize="32sp"
+            android:fontFamily="@font/poppinsbold" />
+
+        <!-- SUBTITLE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleHycoms"
+            android:text="Hydroponic Control &amp; Monitoring System"
+            android:textColor="@android:color/white"
+            android:textSize="11sp"
+            android:fontFamily="@font/poppinsregular" />
+
+    </RelativeLayout>
+
+    <!-- CONTENT -->
     <LinearLayout
+        android:id="@+id/contentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="bottom"
-        android:paddingTop="10dp"
-        android:background="@drawable/background_home">
+        android:layout_below="@id/bgTop"
+        android:layout_above="@id/bottomNav"
+        android:layout_marginTop="-85dp"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
 
-<!--        Ini bagian Logo & Notif-->
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/mainFragment"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:weightSum="4"
-            android:orientation="horizontal"
-            android:layout_weight="25">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.75"/>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="2.5">
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/logo"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="HICS"
-                    android:textSize="28sp"
-                    android:fontFamily="@font/poppinsbold"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Hydro-IoT Control System"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:fontFamily="@font/poppinmedium"
-                    android:textSize="18sp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:layout_weight="0.75">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/btn_notif"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:paddingRight="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="4dp"
-                        android:src="@drawable/notif" />
-
-                    <TextView
-                        android:id="@+id/badge_notif"
-                        android:layout_width="17dp"
-                        android:layout_height="17dp"
-                        android:layout_alignEnd="@+id/btn_notif"
-                        android:layout_marginEnd="4dp"
-                        android:background="@drawable/badge_background"
-                        android:gravity="center"
-                        android:text="0"
-                        android:textColor="@color/white"
-                        android:textSize="10sp"
-                        android:visibility="visible" />
-                </RelativeLayout>
-
-            </LinearLayout>
-        </LinearLayout>
-
-<!--        Ini akan diisi fragment home, grafik, sama setting-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="80"
-            android:orientation="vertical"
-            android:background="@drawable/bg_home">
-            <FrameLayout
-                android:id="@+id/mainFragment"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:backgroundTint="#F9F8F8"
-                android:orientation="horizontal">
-            </FrameLayout>
-
-<!--            tombol home, grafik, setting-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/bottom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                app:cardElevation="10dp"
-                android:background="@color/white"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="bottom"
-                    android:layout_marginTop="8dp"
-                    android:background="@color/white"
-                    android:weightSum="3">
-                    <LinearLayout
-                        android:id="@+id/homeBt"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="bottom"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
-                        <ImageView
-                            android:id="@+id/imgHome"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/home_green"/>
-                        <TextView
-                            android:id="@+id/tvHome"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Dashboard"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/poppinsregular"
-                            android:textSize="16sp"
-                            android:textColor="#0BAE9D"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:id="@+id/chartBt"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="bottom"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
-                        <ImageView
-                            android:id="@+id/imgChart"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/chart_abu"/>
-                        <TextView
-                            android:id="@+id/tvChart"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Grafik"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/poppinsregular"
-                            android:textSize="16sp"
-                            android:textColor="#66000000"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:id="@+id/settingBt"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="bottom"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
-                        <ImageView
-                            android:id="@+id/imgSetting"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/setting_grey"/>
-                        <TextView
-                            android:id="@+id/tvSetting"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Pengaturan"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/poppinsregular"
-                            android:textSize="16sp"
-                            android:textColor="#66000000"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
+            android:layout_height="match_parent" />
 
     </LinearLayout>
-</LinearLayout>
+
+    <!-- BOTTOM NAV -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="0dp"
+        app:strokeColor="#295548"
+        app:strokeWidth="0.5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <!-- HOME -->
+            <LinearLayout
+                android:id="@+id/homeBt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_nav_selected"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgHome"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_home"
+                    app:tint="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tvHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Home"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppinsbold" />
+            </LinearLayout>
+
+            <!-- CHART -->
+            <LinearLayout
+                android:id="@+id/chartBt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgChart"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_chart"
+                    app:tint="#9B9B9B" />
+
+                <TextView
+                    android:id="@+id/tvChart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Charts"
+                    android:textColor="#9B9B9B"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppinsregular" />
+            </LinearLayout>
+
+            <!-- SETTINGS -->
+            <LinearLayout
+                android:id="@+id/settingBt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgSetting"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_setting"
+                    app:tint="#9B9B9B" />
+
+                <TextView
+                    android:id="@+id/tvSetting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Settings"
+                    android:textColor="#9B9B9B"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppinsregular" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

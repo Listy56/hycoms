@@ -16,8 +16,11 @@ import com.google.firebase.database.*
 import com.google.firebase.messaging.FirebaseMessaging
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Color
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import android.graphics.Typeface
+import androidx.core.content.res.ResourcesCompat
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,6 +40,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var badgeNotif: TextView
     private lateinit var btnNotif: ImageView
 
+    private lateinit var poppinsBold: Typeface
+    private lateinit var poppinsRegular: Typeface
     private var indexAcc: Int = -1
 
     private val firebaseDatabase = FirebaseDatabase.getInstance()
@@ -46,7 +51,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        poppinsBold = ResourcesCompat.getFont(this, R.font.poppinsbold)!!
+        poppinsRegular = ResourcesCompat.getFont(this, R.font.poppinsregular)!!
         NotificationHelper.createChannel(this)
 
         // ================= IZIN NOTIF =================
@@ -73,11 +79,6 @@ class MainActivity : AppCompatActivity() {
 
                 Log.d("FCM_TOKEN", token)
 
-                Toast.makeText(
-                    this,
-                    token,
-                    Toast.LENGTH_LONG
-                ).show()
 
                 val userRef =
                     firebaseDatabase
@@ -272,50 +273,70 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // ================= REPLACE FRAGMENT =================
+    // CHANGE FRAGMENT
     private fun replaceFragment(fragment: Fragment, mode: Int) {
 
-        val transaction = supportFragmentManager.beginTransaction()
+        // RESET BACKGROUND
+        homeBt.setBackgroundColor(Color.TRANSPARENT)
+        chartBt.setBackgroundColor(Color.TRANSPARENT)
+        settingBt.setBackgroundColor(Color.TRANSPARENT)
+
+        // RESET TEXT COLOR
+        tvHome.setTextColor(getColor(R.color.abu))
+        tvChart.setTextColor(getColor(R.color.abu))
+        tvSetting.setTextColor(getColor(R.color.abu))
+
+        // RESET FONT
+        tvHome.typeface = poppinsRegular
+        tvChart.typeface = poppinsRegular
+        tvSetting.typeface = poppinsRegular
+
+        // RESET ICON
+        imgHome.setColorFilter(getColor(R.color.abu))
+        imgChart.setColorFilter(getColor(R.color.abu))
+        imgSetting.setColorFilter(getColor(R.color.abu))
 
         when (mode) {
 
             0 -> {
-                imgHome.setImageResource(R.drawable.home_green)
-                tvHome.setTextColor(resources.getColor(R.color.hijau))
 
-                imgChart.setImageResource(R.drawable.chart_abu)
-                tvChart.setTextColor(resources.getColor(R.color.abu))
+                homeBt.setBackgroundResource(
+                    R.drawable.bg_nav_selected
+                )
 
-                imgSetting.setImageResource(R.drawable.setting_grey)
-                tvSetting.setTextColor(resources.getColor(R.color.abu))
+                tvHome.setTextColor(Color.WHITE)
+                tvHome.typeface = poppinsBold
+
+                imgHome.setColorFilter(Color.WHITE)
             }
 
             1 -> {
-                imgHome.setImageResource(R.drawable.home_grey)
-                tvHome.setTextColor(resources.getColor(R.color.abu))
 
-                imgChart.setImageResource(R.drawable.chart_hijau)
-                tvChart.setTextColor(resources.getColor(R.color.hijau))
+                chartBt.setBackgroundResource(
+                    R.drawable.bg_nav_selected
+                )
 
-                imgSetting.setImageResource(R.drawable.setting_grey)
-                tvSetting.setTextColor(resources.getColor(R.color.abu))
+                tvChart.setTextColor(Color.WHITE)
+                tvChart.typeface = poppinsBold
+
+                imgChart.setColorFilter(Color.WHITE)
             }
 
             2 -> {
-                imgHome.setImageResource(R.drawable.home_grey)
-                tvHome.setTextColor(resources.getColor(R.color.abu))
 
-                imgChart.setImageResource(R.drawable.chart_abu)
-                tvChart.setTextColor(resources.getColor(R.color.abu))
+                settingBt.setBackgroundResource(
+                    R.drawable.bg_nav_selected
+                )
 
-                imgSetting.setImageResource(R.drawable.setting_green)
-                tvSetting.setTextColor(resources.getColor(R.color.hijau))
+                tvSetting.setTextColor(Color.WHITE)
+                tvSetting.typeface = poppinsBold
+
+                imgSetting.setColorFilter(Color.WHITE)
             }
         }
 
-        transaction.replace(R.id.mainFragment, fragment)
-        transaction.commit()
-
-        currentFragment = fragment
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.mainFragment, fragment)
+            .commit()
     }
 }
