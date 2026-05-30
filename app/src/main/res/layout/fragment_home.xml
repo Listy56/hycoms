@@ -414,7 +414,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/bg_cardlux"
+                android:background="@drawable/bg_luxcard"
                 android:clipToOutline="true"
                 android:padding="12dp">
 
