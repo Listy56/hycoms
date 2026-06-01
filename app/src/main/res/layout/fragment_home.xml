@@ -8,7 +8,7 @@
     android:paddingLeft="21dp"
     android:paddingRight="21dp"
     android:paddingTop="0dp"
-    android:paddingBottom="21dp">
+    android:paddingBottom="0dp">
 
 
     <!-- ================= TOP CARD ================= -->
@@ -16,7 +16,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.4"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="28dp"
         android:layout_marginBottom="21dp"
@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/bg_cardwater"
             android:clipToOutline="true"
-            android:padding="20dp">
+            android:padding="16dp">
 
             <!-- TITLE -->
 
@@ -60,46 +60,131 @@
 
             <TextView
                 android:id="@+id/waterLevelPercent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="66dp"
+                android:layout_height="53dp"
                 android:layout_below="@id/topTitle"
-                android:layout_marginTop="18dp"
-                android:text="72%"
-                android:textColor="#2E7D5B"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="18sp"
-                android:autoSizeMaxTextSize="48sp"
+                android:layout_marginTop="12dp"
+                android:autoSizeMaxTextSize="60sp"
+                android:autoSizeMinTextSize="48sp"
                 android:autoSizeStepGranularity="2sp"
-                android:fontFamily="@font/poppinsbold" />
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/poppinsbold"
+                android:text="72%"
+                android:textColor="#2E7D5B" />
 
             <!-- STATUS -->
 
+            <!-- WATER BAR -->
+
             <TextView
+                android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/waterLevelPercent"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="33dp"
+                android:autoSizeMaxTextSize="11sp"
+                android:autoSizeMinTextSize="8sp"
+                android:autoSizeStepGranularity="1sp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/poppinsbold"
                 android:text="Status: Safe"
-                android:textColor="#244636"
-                android:textSize="13sp"
-                android:fontFamily="@font/poppinsregular" />
-
-            <!-- WATER BAR -->
+                android:textColor="#244636" />
 
             <LinearLayout
-                android:id="@+id/baseWaterLevel"
-                android:layout_width="48dp"
-                android:layout_height="120dp"
+                android:id="@+id/waterContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="155dp"
                 android:layout_alignParentEnd="true"
-                android:background="@drawable/bg_air_putih"
-                android:gravity="bottom"
-                android:padding="4dp">
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="24dp"
+                android:orientation="horizontal">
+
+                <!-- WATER BAR -->
 
                 <LinearLayout
-                    android:id="@+id/waterLevel"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:background="@drawable/bg_air_hijau" />
+                    android:id="@+id/baseWaterLevel"
+                    android:layout_width="38dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_air_putih"
+                    android:gravity="bottom">
+
+                    <LinearLayout
+                        android:id="@+id/waterLevel"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@drawable/bg_air_hijau" />
+
+                </LinearLayout>
+
+                <!-- SCALE -->
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:text="100%"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10sp"
+                        android:textColor="#244636"/>
+
+                    <View
+                        android:layout_width="18dp"
+                        android:layout_height="1dp"
+                        android:background="#244636"/>
+
+                    <TextView
+                        android:layout_marginTop="18dp"
+                        android:text="75%"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10sp"
+                        android:textColor="#244636"/>
+
+                    <View
+                        android:layout_width="18dp"
+                        android:layout_height="1dp"
+                        android:background="#244636"/>
+
+                    <TextView
+                        android:layout_marginTop="18dp"
+                        android:text="50%"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10sp"
+                        android:textColor="#244636"/>
+
+                    <View
+                        android:layout_width="18dp"
+                        android:layout_height="1dp"
+                        android:background="#244636"/>
+
+                    <TextView
+                        android:layout_marginTop="18dp"
+                        android:text="25%"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10sp"
+                        android:textColor="#244636"/>
+
+                    <View
+                        android:layout_width="18dp"
+                        android:layout_height="1dp"
+                        android:background="#244636"/>
+
+                    <TextView
+                        android:layout_marginTop="18dp"
+                        android:text="0%"
+                        android:textSize="10sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#244636"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -149,26 +234,22 @@
                     android:layout_marginTop="8dp"
                     android:text="Water Pump"
                     android:textColor="#244636"
-                    android:textSize="13sp"
+                    android:textSize="11sp"
                     android:fontFamily="@font/poppinsbold" />
 
-                <Switch
-                    android:id="@+id/switchPompa"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp" />
 
                 <TextView
                     android:id="@+id/statusSwitch"
-                    android:layout_width="wrap_content"
+                    android:layout_width="36dp"
+                    android:layout_marginTop="12dp"
                     android:layout_height="wrap_content"
-                    android:text="ON"
-                    android:textColor="#2E7D5B"
-                    android:autoSizeTextType="uniform"
-                    android:autoSizeMinTextSize="8sp"
-                    android:autoSizeMaxTextSize="16sp"
+                    android:autoSizeMaxTextSize="24sp"
+                    android:autoSizeMinTextSize="18sp"
                     android:autoSizeStepGranularity="2sp"
-                    android:fontFamily="@font/poppinsbold" />
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/poppinsbold"
+                    android:text="ON"
+                    android:textColor="#2E7D5B" />
 
             </LinearLayout>
 
@@ -204,30 +285,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppinsbold"
                     android:text="Nutrition"
                     android:textColor="#244636"
-                    android:textSize="13sp"
-                    android:fontFamily="@font/poppinsbold" />
+                    android:textSize="11sp" />
 
                 <TextView
                     android:id="@+id/tvNutrisi"
-                    android:layout_width="wrap_content"
+                    android:layout_width="39dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="900"
-                    android:textColor="#2E7D5B"
-                    android:autoSizeTextType="uniform"
+                    android:layout_marginTop="12dp"
+                    android:autoSizeMaxTextSize="24sp"
                     android:autoSizeMinTextSize="18sp"
-                    android:autoSizeMaxTextSize="36sp"
                     android:autoSizeStepGranularity="2sp"
-                    android:fontFamily="@font/poppinsbold" />
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/poppinsbold"
+                    android:text="900"
+                    android:textColor="#2E7D5B" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PPM"
+                    android:layout_marginTop="12dp"
                     android:textColor="#2E7D5B"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     android:fontFamily="@font/poppinsbold" />
 
             </LinearLayout>
@@ -265,14 +347,14 @@
                     android:layout_marginTop="8dp"
                     android:text="pH"
                     android:textColor="#244636"
-                    android:textSize="13sp"
+                    android:textSize="11sp"
                     android:fontFamily="@font/poppinsbold" />
 
                 <TextView
                     android:id="@+id/tvPh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="22dp"
+                    android:layout_marginTop="12dp"
                     android:text="6"
                     android:textColor="#2E7D5B"
                     android:autoSizeTextType="uniform"
@@ -312,6 +394,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center_horizontal"
                 android:background="@drawable/bg_cardtemp"
                 android:clipToOutline="true"
                 android:orientation="vertical"
@@ -341,8 +424,9 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:gravity="center_horizontal"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="26dp"
+                    android:layout_marginTop="12dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -356,12 +440,12 @@
                         android:id="@+id/airTemp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="21dp"
+                        android:layout_marginStart="18dp"
                         android:text="20 C"
                         android:textColor="#2E7D5B"
                         android:autoSizeTextType="uniform"
-                        android:autoSizeMinTextSize="8sp"
-                        android:autoSizeMaxTextSize="16sp"
+                        android:autoSizeMinTextSize="14sp"
+                        android:autoSizeMaxTextSize="20sp"
                         android:autoSizeStepGranularity="2sp"
                         android:fontFamily="@font/poppinsbold" />
 
@@ -369,8 +453,9 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:gravity="center_horizontal"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="21dp"
+                    android:layout_marginTop="2dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -385,13 +470,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="38dp"
-                        android:text="20 C"
-                        android:textColor="#2E7D5B"
-                        android:autoSizeTextType="uniform"
-                        android:autoSizeMinTextSize="8sp"
-                        android:autoSizeMaxTextSize="16sp"
+                        android:autoSizeMaxTextSize="20sp"
+                        android:autoSizeMinTextSize="14sp"
                         android:autoSizeStepGranularity="2sp"
-                        android:fontFamily="@font/poppinsbold" />
+                        android:autoSizeTextType="uniform"
+                        android:fontFamily="@font/poppinsbold"
+                        android:text="20 C"
+                        android:textColor="#2E7D5B" />
 
                 </LinearLayout>
 
@@ -411,17 +496,20 @@
             app:strokeColor="#6B8F7A"
             app:strokeWidth="0.8dp">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/bg_luxcard"
                 android:clipToOutline="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
                 android:padding="12dp">
 
+                <!-- Header -->
                 <LinearLayout
-                    android:id="@+id/lightHeader"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -441,34 +529,33 @@
 
                 </LinearLayout>
 
+                <!-- Value -->
                 <TextView
                     android:id="@+id/tvIntensitas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="12dp"
                     android:text="900"
                     android:textColor="#2E7D5B"
                     android:autoSizeTextType="uniform"
                     android:autoSizeMinTextSize="18sp"
-                    android:autoSizeMaxTextSize="36sp"
+                    android:autoSizeMaxTextSize="24sp"
                     android:autoSizeStepGranularity="2sp"
                     android:fontFamily="@font/poppinsbold" />
 
+                <!-- Unit -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvIntensitas"
-                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="12dp"
                     android:text="LUX"
                     android:textColor="#2E7D5B"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     android:fontFamily="@font/poppinsbold" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
-
     </LinearLayout>
 
 </LinearLayout>

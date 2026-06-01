@@ -12,6 +12,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.database.*
+import android.graphics.Color
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 
 class HomeFragment : Fragment() {
 
@@ -27,6 +31,7 @@ class HomeFragment : Fragment() {
     private lateinit var baseWaterLevel: LinearLayout
     private var lastWaterTempStatus = Status.NORMAL
     private var lastAirTempStatus = Status.NORMAL
+    private lateinit var tvStatus: TextView
 
     private var deviceID: String? = ""
     private var firebaseDatabase = FirebaseDatabase.getInstance()
@@ -83,6 +88,7 @@ class HomeFragment : Fragment() {
         waterLevel = view.findViewById(R.id.waterLevel)
         baseWaterLevel = view.findViewById(R.id.baseWaterLevel)
         waterLevelPercent = view.findViewById(R.id.waterLevelPercent)
+        tvStatus = view.findViewById(R.id.tvStatus)
 
         val accPref = requireActivity().getSharedPreferences("ACCOUNT", MODE_PRIVATE)
         deviceID = accPref.getString("deviceID", "")
@@ -154,14 +160,51 @@ class HomeFragment : Fragment() {
                 waterTemp.text = String.format("%.1f%s", displayWaterTemp, unit)
 
                 // ===== WATER LEVEL =====
-                if (level < 15) level = 15.0
-                if (level > 100) level = 100.0
+                val waterPercent = level.coerceIn(0.0, 100.0)
 
                 baseWaterLevel.post {
-                    val maxHeight = baseWaterLevel.height
-                    val newHeight = (level * maxHeight) / 100.0
-                    waterLevelPercent.text = "$level%"
-                    animateWaterLevel(newHeight.toInt())
+
+                    val maxHeight =
+                        baseWaterLevel.height -
+                                baseWaterLevel.paddingTop -
+                                baseWaterLevel.paddingBottom
+
+                    val newHeight =
+                        ((waterPercent / 100.0) * maxHeight).toInt()
+
+                    waterLevelPercent.text = "${waterPercent.toInt()}%"
+
+                    when {
+                        waterPercent <= 20 -> {
+                            setStatusText(
+                                "Critical",
+                                resources.getColor(android.R.color.holo_red_dark)
+                            )
+                        }
+
+                        waterPercent <= 50 -> {
+                            setStatusText(
+                                "Low",
+                                resources.getColor(android.R.color.holo_orange_dark)
+                            )
+                        }
+
+                        waterPercent <= 80 -> {
+                            setStatusText(
+                                "Safe",
+                                resources.getColor(android.R.color.holo_green_dark)
+                            )
+                        }
+
+                        else -> {
+                            setStatusText(
+                                "Full",
+                                resources.getColor(android.R.color.holo_green_dark)
+                            )
+                        }
+                    }
+
+                    animateWaterLevel(newHeight)
                 }
             }
 
@@ -170,7 +213,20 @@ class HomeFragment : Fragment() {
             }
         })
     }
+    private fun setStatusText(status: String, color: Int) {
+        val fullText = "Status: $status"
 
+        val spannable = SpannableString(fullText)
+
+        spannable.setSpan(
+            ForegroundColorSpan(color),
+            8, // posisi setelah "Status: "
+            fullText.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        tvStatus.text = spannable
+    }
     // ================= GENERIC CHECK =================
     private fun convertTemp(value: Double): Pair<Double, String> {
         return if (tempUnit == "F") {
@@ -388,19 +444,25 @@ class HomeFragment : Fragment() {
     // ================= ANIMASI =================
 
     private fun animateWaterLevel(targetHeight: Int) {
+
         waterAnimator?.cancel()
 
-        val startHeight = waterLevel.height
+        val startHeight = waterLevel.layoutParams.height
 
         waterAnimator = ValueAnimator.ofInt(startHeight, targetHeight).apply {
-            duration = 300
+
+            duration = 500
             interpolator = DecelerateInterpolator()
-            addUpdateListener {
+
+            addUpdateListener { animator ->
+
                 val params = waterLevel.layoutParams
-                params.height = it.animatedValue as Int
+                params.height = animator.animatedValue as Int
                 waterLevel.layoutParams = params
             }
+
             start()
         }
+
     }
 }
