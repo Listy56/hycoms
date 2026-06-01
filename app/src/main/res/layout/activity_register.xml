@@ -1,179 +1,297 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/auth_background">
 
-    <!-- Background -->
+    <!-- Header Area dengan Gradient Background -->
     <ImageView
+        android:id="@+id/imgHeaderBackground"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_auth_header_gradient"
         android:scaleType="centerCrop"
-        android:src="@drawable/background" />
+        app:layout_constraintBottom_toTopOf="@id/scrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.28"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Scroll biar aman di layar kecil -->
+    <!-- Decorative Leaf/Circle (Optional) -->
+    <ImageView
+        android:id="@+id/imgDecor"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:alpha="0.2"
+        android:contentDescription="@null"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_auth_leaf"
+        app:layout_constraintEnd_toEndOf="@id/imgHeaderBackground"
+        app:layout_constraintTop_toTopOf="@id/imgHeaderBackground" />
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="@dimen/auth_header_horizontal_margin"
+        android:layout_marginTop="@dimen/auth_header_top_margin"
+        android:contentDescription="@null"
+        android:src="@drawable/logo"
+        app:layout_constraintStart_toStartOf="@id/imgHeaderBackground"
+        app:layout_constraintTop_toTopOf="@id/imgHeaderBackground" />
+
+    <!-- Welcome Text -->
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/auth_header_horizontal_margin"
+        android:layout_marginEnd="@dimen/auth_header_horizontal_margin"
+        android:layout_marginTop="12dp"
+        android:text="Welcome"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppinsregular"
+        app:layout_constraintEnd_toEndOf="@id/imgHeaderBackground"
+        app:layout_constraintStart_toStartOf="@id/imgHeaderBackground"
+        app:layout_constraintTop_toBottomOf="@id/imgLogo" />
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/auth_header_horizontal_margin"
+        android:layout_marginEnd="@dimen/auth_header_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:text="Sign Up to continue"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        android:fontFamily="@font/poppinsregular"
+        android:alpha="0.8"
+        app:layout_constraintEnd_toEndOf="@id/imgHeaderBackground"
+        app:layout_constraintStart_toStartOf="@id/imgHeaderBackground"
+        app:layout_constraintTop_toBottomOf="@id/tvWelcome" />
+
+    <!-- Main ScrollView untuk Form -->
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgHeaderBackground">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:padding="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="32dp">
 
-            <ImageView
-                android:id="@+id/btnBack"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:src="@drawable/back"
-                android:layout_gravity="start"
-                android:layout_marginBottom="12dp"
-                android:clickable="true"
-                android:layout_marginHorizontal="10dp"
-                android:focusable="true"/>
-
-            <!-- Logo -->
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/logo"
-                android:layout_marginBottom="16dp"/>
-
-            <!-- Title -->
-            <TextView
-                android:text="Buat Akun"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:gravity="center"
-                android:layout_marginBottom="8dp"/>
-
-            <!-- Subtitle -->
-            <TextView
-                android:text="Isi informasi Anda di bawah ini"
-                android:textColor="@color/text_secondary"
-                android:textSize="14sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginBottom="24dp"/>
-
-            <!-- Nama -->
-            <EditText
-                android:id="@+id/etUsername"
+            <!-- First Name & Last Name Row -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:hint="Nama Pengguna"
-                android:background="@drawable/input_bg"
-                android:padding="12dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="12dp"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginBottom="12dp">
+
+                <!-- First Name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilFirstName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    style="@style/Widget.HYCOMS.Auth.TextInputLayout"
+                    app:boxStrokeColor="@color/auth_input_stroke"
+                    app:startIconDrawable="@drawable/ic_auth_person">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/auth_input_height"
+                        android:hint="First Name"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Last Name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilLastName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    style="@style/Widget.HYCOMS.Auth.TextInputLayout"
+                    app:boxStrokeColor="@color/auth_input_stroke"
+                    app:startIconDrawable="@drawable/ic_auth_person">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/auth_input_height"
+                        android:hint="Last Name"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
 
             <!-- Email -->
-            <EditText
-                android:id="@+id/etEmail"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmail"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:background="@drawable/input_bg"
-                android:padding="12dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="12dp"/>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.HYCOMS.Auth.TextInputLayout"
+                app:boxStrokeColor="@color/auth_input_stroke"
+                app:startIconDrawable="@drawable/ic_auth_mail">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/auth_input_height"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Password -->
-            <EditText
-                android:id="@+id/etPassword"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:hint="Kata Sandi"
-                android:inputType="textPassword"
-                android:background="@drawable/input_bg"
-                android:padding="12dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="12dp"/>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.HYCOMS.Auth.TextInputLayout"
+                app:boxStrokeColor="@color/auth_input_stroke"
+                app:startIconDrawable="@drawable/ic_auth_lock"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/auth_input_height"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Confirm Password -->
-            <EditText
-                android:id="@+id/etConfirmPassword"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilConfirmPassword"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:hint="Konfirmasi Kata Sandi"
-                android:inputType="textPassword"
-                android:background="@drawable/input_bg"
-                android:padding="12dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                style="@style/Widget.HYCOMS.Auth.TextInputLayout"
+                app:boxStrokeColor="@color/auth_input_stroke"
+                app:startIconDrawable="@drawable/ic_auth_lock"
+                app:endIconMode="password_toggle">
 
-            <!-- Button Register -->
-            <androidx.appcompat.widget.AppCompatButton
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/auth_input_height"
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Sign Up Button -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:text="Daftar"
-                android:textAllCaps="false"
+                android:layout_height="@dimen/auth_button_height"
+                android:text="Sign Up"
                 android:textColor="@color/white"
-                android:background="@drawable/btn_outline"
-                android:backgroundTint="@null"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="16dp"/>
+                android:textSize="18sp"
+                app:cornerRadius="@dimen/auth_radius"
+                app:backgroundTint="@color/auth_primary_green"
+                app:elevation="6dp"
+                android:layout_marginBottom="20dp"
+                style="@style/Widget.HYCOMS.Auth.PrimaryButton" />
 
             <!-- OR Divider -->
             <LinearLayout
-                android:orientation="horizontal"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="16dp">
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="20dp">
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="1dp"
-                    android:background="@color/white"/>
+                    android:layout_weight="1"
+                    android:background="@color/auth_divider" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="  Atau  "
-                    android:textColor="@color/white"/>
+                    android:text="  OR  "
+                    android:textColor="@color/auth_text_secondary"
+                    android:textSize="14sp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp" />
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="1dp"
-                    android:background="@color/white"/>
+                    android:layout_weight="1"
+                    android:background="@color/auth_divider" />
             </LinearLayout>
 
-            <!-- Google Button -->
-            <Button
+            <!-- Google Sign Up Button -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnGoogle"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:text="Daftar dengan Google"
-                android:textAllCaps="false"
-                android:backgroundTint="@color/white"
-                android:textColor="@android:color/black"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="16dp"/>
+                android:layout_height="@dimen/auth_button_height"
+                android:text="Continue with Google"
+                android:textColor="@color/auth_text_primary"
+                android:textSize="16sp"
+                app:cornerRadius="@dimen/auth_radius"
+                app:backgroundTint="@color/auth_background"
+                app:strokeColor="@color/auth_light_green"
+                app:strokeWidth="1.5dp"
+                app:icon="@drawable/ic_google"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                android:layout_marginBottom="20dp"
+                style="@style/Widget.HYCOMS.Auth.GoogleButton" />
 
-            <!-- Login -->
-            <TextView
-                android:id="@+id/tvLogin"
-                android:layout_width="wrap_content"
+            <!-- Footer - Already have account? -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sudah punya akun? Masuk"
-                android:textColor="@color/white"
-                android:textSize="13sp"
+                android:orientation="horizontal"
                 android:gravity="center"
-                android:clickable="true"
-                android:focusable="true"/>
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Already have an account?  "
+                    style="@style/TextAppearance.HYCOMS.Auth.Footer" />
+
+                <TextView
+                    android:id="@+id/tvLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Login"
+                    android:clickable="true"
+                    android:focusable="true"
+                    style="@style/TextAppearance.HYCOMS.Auth.FooterLink" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

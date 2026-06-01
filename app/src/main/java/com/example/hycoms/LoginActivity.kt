@@ -119,7 +119,24 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "Token Google null", Toast.LENGTH_SHORT).show()
                 }
 
+            } catch (e: ApiException) {
+                // DIAGNOSTIC LOGGING
+                android.util.Log.e("GoogleSignIn_Login", "API Exception StatusCode: ${e.statusCode}", e)
+                android.util.Log.e("GoogleSignIn_Login", "Message: ${e.message}")
+                android.util.Log.e("GoogleSignIn_Login", "LocalizedMessage: ${e.localizedMessage}")
+                
+                val errorMsg = when (e.statusCode) {
+                    10 -> "DEVELOPER_ERROR - Certificate hash/package name mismatch. Check Firebase Console."
+                    12501 -> "Sign-in cancelled by user"
+                    12502 -> "Sign-in failed - network error"
+                    12500 -> "Internal error"
+                    else -> "Google Sign-In Error ${e.statusCode}: ${e.message}"
+                }
+                
+                Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show()
+                
             } catch (e: Exception) {
+                android.util.Log.e("GoogleSignIn_Login", "Unexpected Exception: ${e.message}", e)
                 Toast.makeText(this, "Google gagal: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
@@ -137,7 +154,7 @@ class LoginActivity : AppCompatActivity() {
 
                 val user = FirebaseAuth.getInstance().currentUser
                 val email = user?.email
-                val username = user?.displayName ?: "user"
+                val displayName = user?.displayName ?: "user"
 
                 if (email.isNullOrEmpty()) {
                     Toast.makeText(this, "Email tidak ditemukan", Toast.LENGTH_SHORT).show()
@@ -150,28 +167,50 @@ class LoginActivity : AppCompatActivity() {
                     .addOnSuccessListener { snapshot ->
 
                         var foundIndex: Int? = null
+                        var profileCompleted = true
+                        var userName = ""
 
                         for (snap in snapshot.children) {
                             if (snap.child("email").value.toString() == email) {
                                 val key = snap.key
                                 foundIndex = key?.substringAfter("_")?.toIntOrNull()
+                                val completed = snap.child("profileCompleted").value
+                                profileCompleted = completed != null && completed.toString().toBoolean()
+                                userName = snap.child("userName").value?.toString() ?: ""
                                 break
                             }
                         }
 
-                        if (foundIndex != null) {
+                        if (foundIndex != null && profileCompleted && userName.isNotEmpty()) {
+                            // ✅ user sudah lengkap
                             saveSession(foundIndex)
-                        } else {
-                            // 🔥 USER BARU → KE USERNAME ACTIVITY
+                        } else if (foundIndex != null) {
+                            // ⚠️ user sudah ada tapi belum lengkap
+                            getSharedPreferences("ACCOUNT", MODE_PRIVATE).edit()
+                                .putInt("index", foundIndex)
+                                .apply()
+
+                            val nameParts = displayName.trim().split("\\s+".toRegex())
+                            val firstName = nameParts.getOrNull(0) ?: "user"
+                            val lastName = nameParts.drop(1).joinToString(" ")
+                            val fullName = displayName
+
                             val intent = Intent(this, UsernameActivity::class.java)
                             intent.putExtra("email", email)
-                            intent.putExtra("defaultUsername", username)
+                            intent.putExtra("firstName", firstName)
+                            intent.putExtra("lastName", lastName)
+                            intent.putExtra("fullName", fullName)
                             startActivity(intent)
+                            finish()
+                        } else {
+                            // ✨ user baru (tidak seharusnya terjadi dari login, tapi handle untuk safety)
+                            Toast.makeText(this, "User tidak ditemukan, silakan daftar", Toast.LENGTH_SHORT).show()
                         }
                     }
             }
-            .addOnFailureListener {
-                Toast.makeText(this, "Auth Google gagal", Toast.LENGTH_SHORT).show()
+            .addOnFailureListener { exception ->
+                android.util.Log.e("GoogleAuth_Login", "Firebase signInWithCredential failed: ${exception.message}", exception)
+                Toast.makeText(this, "Auth Google gagal: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -189,16 +228,32 @@ class LoginActivity : AppCompatActivity() {
                     .addOnSuccessListener { snapshot ->
 
                         var index: Int? = null
+                        var profileCompleted = true
+                        var userName = ""
 
                         for (snap in snapshot.children) {
                             if (snap.child("email").value.toString() == email) {
                                 index = snap.key?.substringAfter("_")?.toIntOrNull()
+                                val completed = snap.child("profileCompleted").value
+                                profileCompleted = completed != null && completed.toString().toBoolean()
+                                userName = snap.child("userName").value?.toString() ?: ""
                                 break
                             }
                         }
 
-                        if (index != null) {
+                        if (index != null && profileCompleted && userName.isNotEmpty()) {
+                            // ✅ user sudah lengkap
                             saveSession(index)
+                        } else if (index != null) {
+                            // ⚠️ user sudah ada tapi belum lengkap
+                            getSharedPreferences("ACCOUNT", MODE_PRIVATE).edit()
+                                .putInt("index", index)
+                                .apply()
+
+                            val intent = Intent(this, UsernameActivity::class.java)
+                            intent.putExtra("email", email)
+                            startActivity(intent)
+                            finish()
                         } else {
                             Toast.makeText(this, "User tidak ditemukan", Toast.LENGTH_SHORT).show()
                         }

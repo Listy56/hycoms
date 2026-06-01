@@ -37,20 +37,19 @@
         android:layout_height="64dp"
         android:contentDescription="@null"
         android:src="@drawable/logo"
-        android:layout_marginStart="@dimen/auth_header_horizontal_margin"
-        android:layout_marginTop="@dimen/auth_header_top_margin"
         app:layout_constraintStart_toStartOf="@id/imgHeaderBackground"
-        app:layout_constraintTop_toTopOf="@id/imgHeaderBackground" />
+        app:layout_constraintTop_toTopOf="@id/imgHeaderBackground"
+        android:layout_margin="24dp" />
 
     <!-- Welcome Text -->
     <TextView
         android:id="@+id/tvWelcome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/auth_header_horizontal_margin"
-        android:layout_marginEnd="@dimen/auth_header_horizontal_margin"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="12dp"
-        android:text="Welcome Back"
+        android:text="Welcome"
         android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -64,10 +63,10 @@
         android:id="@+id/tvSubtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/auth_header_horizontal_margin"
-        android:layout_marginEnd="@dimen/auth_header_horizontal_margin"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="8dp"
-        android:text="Login to continue"
+        android:text="Sign Up to continue"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="normal"
@@ -97,7 +96,58 @@
             android:paddingTop="24dp"
             android:paddingBottom="32dp">
 
-            <!-- Email / Username -->
+            <!-- First Name & Last Name Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginBottom="12dp">
+
+                <!-- First Name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilFirstName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    style="@style/Widget.HYCOMS.Auth.TextInputLayout"
+                    app:boxStrokeColor="@color/auth_input_stroke"
+                    app:startIconDrawable="@drawable/ic_auth_person">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/auth_input_height"
+                        android:hint="First Name"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp"
+                        style="@style/TextAppearance.HYCOMS.Auth.Input" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Last Name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilLastName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    style="@style/Widget.HYCOMS.Auth.TextInputLayout"
+                    app:boxStrokeColor="@color/auth_input_stroke"
+                    app:startIconDrawable="@drawable/ic_auth_person">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/auth_input_height"
+                        android:hint="Last Name"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp"
+                        style="@style/TextAppearance.HYCOMS.Auth.Input" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!-- Email -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilEmail"
                 android:layout_width="match_parent"
@@ -111,7 +161,7 @@
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/auth_input_height"
-                    android:hint="Email or Username"
+                    android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:textSize="16sp"
                     style="@style/TextAppearance.HYCOMS.Auth.Input" />
@@ -122,7 +172,7 @@
                 android:id="@+id/tilPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="12dp"
                 style="@style/Widget.HYCOMS.Auth.TextInputLayout"
                 app:boxStrokeColor="@color/auth_input_stroke"
                 app:startIconDrawable="@drawable/ic_auth_lock"
@@ -138,32 +188,40 @@
                     style="@style/TextAppearance.HYCOMS.Auth.Input" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Forgot Password -->
-            <TextView
-                android:id="@+id/tvForgot"
+            <!-- Confirm Password -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Forgot Password?"
-                android:textColor="@color/auth_forgot"
-                android:textSize="14sp"
-                android:gravity="end"
                 android:layout_marginBottom="24dp"
-                android:clickable="true"
-                android:focusable="true" />
+                style="@style/Widget.HYCOMS.Auth.TextInputLayout"
+                app:boxStrokeColor="@color/auth_input_stroke"
+                app:startIconDrawable="@drawable/ic_auth_lock"
+                app:endIconMode="password_toggle">
 
-            <!-- Login Button -->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/auth_input_height"
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword"
+                    android:textSize="16sp"
+                    style="@style/TextAppearance.HYCOMS.Auth.Input" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Sign Up Button -->
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/auth_button_height"
-                android:text="Login"
+                android:text="Sign Up"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:cornerRadius="@dimen/auth_radius"
                 app:backgroundTint="@color/auth_primary_green"
                 app:elevation="6dp"
                 android:layout_marginBottom="20dp"
-                style="@style/Widget.HYCOMS.Auth.PrimaryButton" />
+                style="@style/TextAppearance.HYCOMS.Auth.Button" />
 
             <!-- OR Divider -->
             <LinearLayout
@@ -195,9 +253,9 @@
                     android:background="@color/auth_divider" />
             </LinearLayout>
 
-            <!-- Google Login Button -->
+            <!-- Google Sign Up Button -->
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLoginGoogle"
+                android:id="@+id/btnGoogle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/auth_button_height"
                 android:text="Continue with Google"
@@ -211,9 +269,9 @@
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
                 android:layout_marginBottom="20dp"
-                style="@style/Widget.HYCOMS.Auth.GoogleButton" />
+                style="@style/TextAppearance.HYCOMS.Auth.Button" />
 
-            <!-- Footer - Don't have account? -->
+            <!-- Footer - Already have account? -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -224,14 +282,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Don't have an account?  "
+                    android:text="Already have an account?  "
                     style="@style/TextAppearance.HYCOMS.Auth.Footer" />
 
                 <TextView
-                    android:id="@+id/tvSignUp"
+                    android:id="@+id/tvLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sign Up"
+                    android:text="Login"
                     android:clickable="true"
                     android:focusable="true"
                     style="@style/TextAppearance.HYCOMS.Auth.FooterLink" />
@@ -239,5 +297,20 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <!-- Back Button di Header (absolute) -->
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@null"
+        android:scaleType="centerInside"
+        android:src="@drawable/back"
+        android:tint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

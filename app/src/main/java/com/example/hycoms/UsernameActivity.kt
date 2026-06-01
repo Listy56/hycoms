@@ -21,94 +21,100 @@ class UsernameActivity : AppCompatActivity() {
         val btnSave = findViewById<Button>(R.id.btnSave)
         val btnCancel = findViewById<Button>(R.id.btnCancel)
 
-        val email = intent.getStringExtra("email") ?: ""
-        val defaultUsername = intent.getStringExtra("defaultUsername") ?: ""
-
-        etUsername.setText(defaultUsername)
+        val email = intent.getStringExtra("email") 
+            ?: getSharedPreferences("ACCOUNT", MODE_PRIVATE).getString("currentEmail", "") ?: ""
 
         val database = FirebaseDatabase.getInstance().reference
 
-        // 🔥 INIT GOOGLE CLIENT
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
 
         googleClient = GoogleSignIn.getClient(this, gso)
 
-        // =========================
-        // 🔥 SIMPAN USERNAME
-        // =========================
         btnSave.setOnClickListener {
 
-            val username = etUsername.text.toString().trim()
+            val username = etUsername.text.toString().trim().lowercase()
 
             if (username.isEmpty()) {
                 Toast.makeText(this, "Username wajib diisi", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
+            btnSave.isEnabled = false
+
             database.child("user").get()
                 .addOnSuccessListener { snapshot ->
 
-                    // 🔥 CEK DUPLIKAT USERNAME
+                    var usernameExists = false
+
                     for (snap in snapshot.children) {
                         val dbUsername = snap.child("userName").value.toString()
-                        if (dbUsername == username) {
-                            Toast.makeText(this, "Username sudah dipakai", Toast.LENGTH_SHORT).show()
-                            return@addOnSuccessListener
+                        val dbEmail = snap.child("email").value.toString()
+
+                        if (dbUsername == username && dbEmail != email) {
+                            usernameExists = true
+                            break
                         }
                     }
 
-                    // 🔥 BUAT user_X
-                    var index = 1
-                    var key: String
+                    if (usernameExists) {
+                        btnSave.isEnabled = true
+                        Toast.makeText(this, "Username sudah dipakai", Toast.LENGTH_SHORT).show()
+                        return@addOnSuccessListener
+                    }
 
-                    do {
-                        key = "user_$index"
-                        index++
-                    } while (snapshot.hasChild(key))
+                    var userKey: String? = null
 
-                    val userMap = HashMap<String, Any>()
-                    userMap["userName"] = username
-                    userMap["email"] = email
-                    userMap["id"] = ""
+                    for (snap in snapshot.children) {
+                        if (snap.child("email").value.toString() == email) {
+                            userKey = snap.key
+                            break
+                        }
+                    }
 
-                    // 🔥 SIMPAN USER
+                    if (userKey.isNullOrEmpty()) {
+                        btnSave.isEnabled = true
+                        Toast.makeText(this, "User tidak ditemukan", Toast.LENGTH_SHORT).show()
+                        return@addOnSuccessListener
+                    }
+
+                    val currentTime = System.currentTimeMillis()
+
+                    val updateMap = HashMap<String, Any>()
+                    updateMap["userName"] = username
+                    updateMap["profileCompleted"] = true
+                    updateMap["updatedAt"] = currentTime
+
                     database.child("user")
-                        .child(key)
-                        .setValue(userMap)
+                        .child(userKey)
+                        .updateChildren(updateMap)
                         .addOnSuccessListener {
 
-                            val indexFix = key.substringAfter("_").toIntOrNull()
-
                             getSharedPreferences("ACCOUNT", MODE_PRIVATE).edit()
-                                .putInt("index", indexFix ?: -1)
+                                .putBoolean("isLogin", true)
                                 .apply()
 
-                            Toast.makeText(this, "Register berhasil", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Username berhasil disimpan", Toast.LENGTH_SHORT).show()
 
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()
                         }
                         .addOnFailureListener {
-                            Toast.makeText(this, "Gagal simpan user", Toast.LENGTH_SHORT).show()
+                            btnSave.isEnabled = true
+                            Toast.makeText(this, "Gagal simpan username", Toast.LENGTH_SHORT).show()
                         }
                 }
                 .addOnFailureListener {
+                    btnSave.isEnabled = true
                     Toast.makeText(this, "Gagal ambil data user", Toast.LENGTH_SHORT).show()
                 }
         }
 
-        // =========================
-        // 🔥 TOMBOL BATAL
-        // =========================
         btnCancel.setOnClickListener {
             logoutAndBack()
         }
 
-        // =========================
-        // 🔥 BACK BUTTON FIX (ANDROID BARU)
-        // =========================
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 logoutAndBack()
@@ -116,28 +122,18 @@ class UsernameActivity : AppCompatActivity() {
         })
     }
 
-    // =========================
-    // 🔥 LOGOUT + HAPUS AKUN FIREBASE
-    // =========================
     private fun logoutAndBack() {
 
-        val user = FirebaseAuth.getInstance().currentUser
+        FirebaseAuth.getInstance().signOut()
+        googleClient.signOut()
 
-        if (user != null) {
-            user.delete().addOnCompleteListener {
+        getSharedPreferences("ACCOUNT", MODE_PRIVATE).edit()
+            .clear()
+            .apply()
 
-                FirebaseAuth.getInstance().signOut()
-                googleClient.signOut()
+        Toast.makeText(this, "Login dibatalkan", Toast.LENGTH_SHORT).show()
 
-                Toast.makeText(this, "Login dibatalkan", Toast.LENGTH_SHORT).show()
-
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
-            }
-        } else {
-            FirebaseAuth.getInstance().signOut()
-            googleClient.signOut()
-            finish()
-        }
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
 }
