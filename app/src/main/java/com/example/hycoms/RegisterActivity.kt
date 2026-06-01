@@ -189,7 +189,24 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, "Token Google null", Toast.LENGTH_SHORT).show()
                 }
 
+            } catch (e: ApiException) {
+                // DIAGNOSTIC LOGGING
+                android.util.Log.e("GoogleSignIn_Register", "API Exception StatusCode: ${e.statusCode}", e)
+                android.util.Log.e("GoogleSignIn_Register", "Message: ${e.message}")
+                android.util.Log.e("GoogleSignIn_Register", "LocalizedMessage: ${e.localizedMessage}")
+                
+                val errorMsg = when (e.statusCode) {
+                    10 -> "DEVELOPER_ERROR - Certificate hash/package name mismatch. Check Firebase Console."
+                    12501 -> "Sign-in cancelled by user"
+                    12502 -> "Sign-in failed - network error"
+                    12500 -> "Internal error"
+                    else -> "Google Sign-In Error ${e.statusCode}: ${e.message}"
+                }
+                
+                Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show()
+                
             } catch (e: Exception) {
+                android.util.Log.e("GoogleSignIn_Register", "Unexpected Exception: ${e.message}", e)
                 Toast.makeText(this, "Google gagal: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
@@ -309,8 +326,9 @@ class RegisterActivity : AppCompatActivity() {
                         }
                     }
             }
-            .addOnFailureListener {
-                Toast.makeText(this, "Auth Google gagal", Toast.LENGTH_SHORT).show()
+            .addOnFailureListener { exception ->
+                android.util.Log.e("GoogleAuth_Register", "Firebase signInWithCredential failed: ${exception.message}", exception)
+                Toast.makeText(this, "Auth Google gagal: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
