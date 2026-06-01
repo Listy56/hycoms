@@ -23,7 +23,6 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         val logo = findViewById<ImageView>(R.id.logoSplash)
-        val title = findViewById<TextView>(R.id.titleSplash)
         val subtitle = findViewById<TextView>(R.id.subtitleSplash)
         val bg = findViewById<ImageView>(R.id.bgSplash)
 
@@ -32,7 +31,6 @@ class SplashActivity : AppCompatActivity() {
         logo.post {
 
             logo.alpha = 0f
-            title.alpha = 0f
             subtitle.alpha = 0f
 
             bg.scaleX = 1.1f
@@ -48,13 +46,6 @@ class SplashActivity : AppCompatActivity() {
             logo.animate()
                 .alpha(1f)
                 .setDuration(800)
-                .setInterpolator(smooth)
-                .start()
-
-            title.animate()
-                .alpha(1f)
-                .setDuration(800)
-                .setStartDelay(200)
                 .setInterpolator(smooth)
                 .start()
 

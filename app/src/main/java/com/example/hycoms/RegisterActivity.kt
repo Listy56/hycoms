@@ -26,7 +26,6 @@ class RegisterActivity : AppCompatActivity() {
         val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword)
 
         val btnRegister = findViewById<Button>(R.id.btnRegister)
-        val btnBack = findViewById<ImageView>(R.id.btnBack)
         val tvLogin = findViewById<TextView>(R.id.tvLogin)
         val btnGoogle = findViewById<Button>(R.id.btnGoogle)
 
@@ -40,8 +39,6 @@ class RegisterActivity : AppCompatActivity() {
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        btnBack.setOnClickListener { finish() }
 
         tvLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))

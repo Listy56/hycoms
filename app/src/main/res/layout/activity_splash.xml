@@ -2,7 +2,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Background -->
     <ImageView
         android:id="@+id/bgSplash"
         android:layout_width="match_parent"
@@ -10,9 +9,6 @@
         android:scaleType="centerCrop"
         android:src="@drawable/background" />
 
-
-
-    <!-- Konten Tengah -->
     <LinearLayout
         android:orientation="vertical"
         android:gravity="center"
@@ -20,34 +16,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <!-- Logo -->
         <ImageView
             android:id="@+id/logoSplash"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/logo"
-            android:layout_marginBottom="16dp"
-            android:elevation="8dp"/>
+            android:layout_width="204dp"
+            android:layout_height="192dp"
+            android:layout_marginBottom="-20dp"
+            android:elevation="8dp"
+            android:src="@drawable/logo_splash" />
 
-        <!-- Title -->
-        <TextView
-            android:id="@+id/titleSplash"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="HICS"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="28sp"/>
-
-        <!-- Subtitle -->
         <TextView
             android:id="@+id/subtitleSplash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hydro-IoT Control System"
+            android:layout_marginTop="0dp"
+            android:text="Hydroponic Control &amp; Monitoring System"
+            android:textAlignment="center"
             android:textColor="#DDFFFFFF"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp"/>
+            android:textSize="14sp" />
+
     </LinearLayout>
 
 </RelativeLayout>
