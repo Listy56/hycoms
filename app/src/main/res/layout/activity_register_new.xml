@@ -121,7 +121,8 @@
                         android:layout_height="@dimen/auth_input_height"
                         android:hint="First Name"
                         android:inputType="textPersonName"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        style="@style/TextAppearance.HYCOMS.Auth.Input" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Last Name -->
@@ -141,7 +142,8 @@
                         android:layout_height="@dimen/auth_input_height"
                         android:hint="Last Name"
                         android:inputType="textPersonName"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        style="@style/TextAppearance.HYCOMS.Auth.Input" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
@@ -161,7 +163,8 @@
                     android:layout_height="@dimen/auth_input_height"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    style="@style/TextAppearance.HYCOMS.Auth.Input" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Password -->
@@ -181,7 +184,8 @@
                     android:layout_height="@dimen/auth_input_height"
                     android:hint="Password"
                     android:inputType="textPassword"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    style="@style/TextAppearance.HYCOMS.Auth.Input" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Confirm Password -->
@@ -201,7 +205,8 @@
                     android:layout_height="@dimen/auth_input_height"
                     android:hint="Confirm Password"
                     android:inputType="textPassword"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    style="@style/TextAppearance.HYCOMS.Auth.Input" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Sign Up Button -->
@@ -216,7 +221,7 @@
                 app:backgroundTint="@color/auth_primary_green"
                 app:elevation="6dp"
                 android:layout_marginBottom="20dp"
-                style="@style/Widget.HYCOMS.Auth.PrimaryButton" />
+                style="@style/TextAppearance.HYCOMS.Auth.Button" />
 
             <!-- OR Divider -->
             <LinearLayout
@@ -264,7 +269,7 @@
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
                 android:layout_marginBottom="20dp"
-                style="@style/Widget.HYCOMS.Auth.GoogleButton" />
+                style="@style/TextAppearance.HYCOMS.Auth.Button" />
 
             <!-- Footer - Already have account? -->
             <LinearLayout

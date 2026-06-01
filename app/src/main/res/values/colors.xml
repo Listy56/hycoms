@@ -12,4 +12,17 @@
     <color name="hijau_end">#01A6A4</color>
     <color name="abu">#BDBDBD</color>
     <color name="text_secondary">#E0F2F1</color>
+
+    <color name="auth_primary_green">#1E6B42</color>
+    <color name="auth_dark_green">#0B3A32</color>
+    <color name="auth_header_start">#1E5A48</color>
+    <color name="auth_header_end">#0B3A32</color>
+    <color name="auth_light_green">#5EB75A</color>
+    <color name="auth_background">#FFFFFF</color>
+    <color name="auth_text_primary">#1F2937</color>
+    <color name="auth_text_secondary">#98A2B3</color>
+    <color name="auth_forgot">#7C7F95</color>
+    <color name="auth_divider">#5EB75A</color>
+    <color name="auth_icon">#5EB75A</color>
+    <color name="auth_border">#E5E7EB</color>
 </resources>

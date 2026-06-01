@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.HYCOMS.Auth.Heading" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/poppinsregular</item>
+        <item name="android:textSize">48sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.HYCOMS.Auth.Subtitle" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/poppinsregular</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.HYCOMS.Auth.Input" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/poppinsregular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/auth_text_primary</item>
+        <item name="android:textColorHint">@color/auth_text_secondary</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.HYCOMS.Auth.Button" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/poppinsbold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.HYCOMS.Auth.Footer" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/poppinsregular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/auth_text_secondary</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.HYCOMS.Auth.FooterLink" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/poppinsbold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/auth_primary_green</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="Widget.HYCOMS.Auth.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@color/auth_background</item>
+        <item name="boxBackgroundMode">outline</item>
+        <item name="boxStrokeColor">@color/auth_input_stroke</item>
+        <item name="boxStrokeWidth">1.5dp</item>
+        <item name="boxStrokeWidthFocused">1.5dp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/auth_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/auth_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/auth_radius</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/auth_radius</item>
+        <item name="hintTextColor">@color/auth_text_secondary</item>
+        <item name="startIconTint">@color/auth_icon</item>
+        <item name="endIconTint">@color/auth_icon</item>
+    </style>
+
+    <style name="Widget.HYCOMS.Auth.PrimaryButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:minHeight">@dimen/auth_button_height</item>
+        <item name="cornerRadius">@dimen/auth_radius</item>
+        <item name="backgroundTint">@color/auth_primary_green</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/poppinsbold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="elevation">6dp</item>
+    </style>
+
+    <style name="Widget.HYCOMS.Auth.GoogleButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:minHeight">@dimen/auth_button_height</item>
+        <item name="cornerRadius">@dimen/auth_radius</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="strokeColor">@color/auth_light_green</item>
+        <item name="strokeWidth">1.5dp</item>
+        <item name="android:textColor">@color/auth_text_primary</item>
+        <item name="android:fontFamily">@font/poppinsbold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="iconPadding">12dp</item>
+    </style>
+</resources>

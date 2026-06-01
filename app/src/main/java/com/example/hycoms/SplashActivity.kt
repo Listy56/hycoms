@@ -6,8 +6,10 @@ import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class SplashActivity : AppCompatActivity() {
 
@@ -29,7 +31,6 @@ class SplashActivity : AppCompatActivity() {
 
         logo.post {
 
-            // initial state
             logo.alpha = 0f
             title.alpha = 0f
             subtitle.alpha = 0f
@@ -37,7 +38,6 @@ class SplashActivity : AppCompatActivity() {
             bg.scaleX = 1.1f
             bg.scaleY = 1.1f
 
-            // 🔥 ANIMASI MASUK (cinematic zoom + fade)
             bg.animate()
                 .scaleX(1f)
                 .scaleY(1f)
@@ -65,26 +65,74 @@ class SplashActivity : AppCompatActivity() {
                 .setInterpolator(smooth)
                 .start()
 
-            // 🔥 LANGSUNG PINDAH TANPA JEDA NGACO
             logo.animate()
-                .setStartDelay(1800) // tunggu animasi selesai
+                .setStartDelay(1800) 
                 .setDuration(300)
                 .withEndAction {
-
-                    val user = FirebaseAuth.getInstance().currentUser
-
-                    if (user != null) {
-                        // ✅ sudah login
-                        startActivity(Intent(this, MainActivity::class.java))
-                    } else {
-                        // ❌ belum login
-                        startActivity(Intent(this, LoginActivity::class.java))
-                    }
-
-                    overridePendingTransition(0, 0)
-                    finish()
+                    validateAndNavigate()
                 }
                 .start()
         }
+    }
+
+    private fun validateAndNavigate() {
+
+        val user = FirebaseAuth.getInstance().currentUser
+
+        if (user == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            overridePendingTransition(0, 0)
+            finish()
+            return
+        }
+
+        val email = user.email ?: ""
+        val database = FirebaseDatabase.getInstance().reference
+
+        database.child("user").get()
+            .addOnSuccessListener { snapshot ->
+
+                var userFound = false
+                var profileCompleted = true
+                var userName = ""
+
+                for (snap in snapshot.children) {
+                    if (snap.child("email").value.toString() == email) {
+                        userFound = true
+
+                        val completed = snap.child("profileCompleted").value
+                        profileCompleted = completed != null && completed.toString().toBoolean()
+
+                        userName = snap.child("userName").value?.toString() ?: ""
+
+                        break
+                    }
+                }
+
+                if (!userFound) {
+                    FirebaseAuth.getInstance().signOut()
+                    getSharedPreferences("ACCOUNT", MODE_PRIVATE).edit().clear().apply()
+                    Toast.makeText(this, "User tidak ditemukan", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    finish()
+                } else if (!profileCompleted || userName.isEmpty()) {
+                    val intent = Intent(this, UsernameActivity::class.java)
+                    intent.putExtra("email", email)
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
+                    finish()
+                } else {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    finish()
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Gagal validasi akun", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, LoginActivity::class.java))
+                overridePendingTransition(0, 0)
+                finish()
+            }
     }
 }
