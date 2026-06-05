@@ -1,6 +1,7 @@
 package com.example.hycoms
 
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -42,12 +43,9 @@ class SettingFragment: Fragment() {
 
 
         monitoring.setOnClickListener {
-            // Handle monitoring button click
-            val fragment = MonitoringFragment()
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.mainFragment, fragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+            startActivity(
+                Intent(requireContext(), MonitoringActivity::class.java)
+            )
         }
 
         control.setOnClickListener {

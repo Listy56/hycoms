@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.google.firebase.database.DataSnapshot
@@ -18,7 +20,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class MonitoringFragment: Fragment() {
+class MonitoringActivity : AppCompatActivity() {
 
     private lateinit var etPhMin : EditText
     private lateinit var etPhMax : EditText
@@ -44,35 +46,52 @@ class MonitoringFragment: Fragment() {
     var ppmMin: String? = ""
     var ppmMax: String = ""
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.setting_monitoring, container, false)
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        setContentView(R.layout.setting_monitoring)
 
-        etPhMin     = view.findViewById(R.id.phMin)
-        etPhMax     = view.findViewById(R.id.phMax)
-        etPpmMin    = view.findViewById(R.id.ppmMin)
-        etPpmMax    = view.findViewById(R.id.ppmMax)
-        switchNotif = view.findViewById(R.id.switchNotif)
-        circleNotif = view.findViewById(R.id.circleNotif)
-        spinnerInterval  = view.findViewById(R.id.spinnerInterval)
-        spinnerSuhu      = view.findViewById(R.id.spinnerSuhu)
-        save             = view.findViewById(R.id.save)
+        etPhMin = findViewById(R.id.phMin)
+        etPhMax = findViewById(R.id.phMax)
+        etPpmMin = findViewById(R.id.ppmMin)
+        etPpmMax = findViewById(R.id.ppmMax)
+
+        switchNotif = findViewById(R.id.switchNotif)
+        circleNotif = findViewById(R.id.circleNotif)
+
+        spinnerInterval = findViewById(R.id.spinnerInterval)
+        spinnerSuhu = findViewById(R.id.spinnerSuhu)
+
+        save = findViewById(R.id.save)
+
+        val btnBack = findViewById<ImageView>(R.id.btnBack)
+
+        btnBack.setOnClickListener {
+            finish()
+        }
 
         val intervalList = listOf("10", "30", "60", "120")
         val suhuList     = listOf("C", "F")
 
-        spinnerInterval.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, intervalList)
-        spinnerSuhu.adapter     = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, suhuList)
+        spinnerInterval.adapter =
+            ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_dropdown_item,
+                intervalList
+            )
 
+        spinnerSuhu.adapter =
+            ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_dropdown_item,
+                suhuList
+            )
 
-        val accPref      = requireActivity().getSharedPreferences("ACCOUNT", MODE_PRIVATE)
+        val accPref =
+            getSharedPreferences(
+                "ACCOUNT",
+                MODE_PRIVATE
+            )
         deviceID         = accPref.getString("deviceID", "")
 
         Log.d("MonitoringFragment", "DeviceID: $deviceID")
@@ -137,7 +156,11 @@ class MonitoringFragment: Fragment() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(requireContext(), "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@MonitoringActivity,
+                        "Error: ${error.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             })
 
@@ -170,11 +193,16 @@ class MonitoringFragment: Fragment() {
                         )
                 }
 
-                Toast.makeText(requireContext(), "Data Updated", Toast.LENGTH_SHORT).show()
-                val fragment = SettingFragment()
-                val transaction = requireActivity().supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.mainFragment, fragment)
-                transaction.commit()
+                Toast.makeText(
+                    this@MonitoringActivity,
+                    "Data Updated",
+                    Toast.LENGTH_SHORT
+                ).show()
+                finish()
+                overridePendingTransition(
+                    android.R.anim.fade_in,
+                    android.R.anim.fade_out
+                )
             }
         }
     }

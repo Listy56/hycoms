@@ -33,6 +33,7 @@
         <activity android:name=".LoginActivity"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".MonitoringActivity"/>
         <activity android:name=".NotifActivity"/>
         <activity android:name=".ForgotPasswordActivity"/>
         <activity android:name=".UsernameActivity" />

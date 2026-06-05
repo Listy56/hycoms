@@ -1,19 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bg_home"
-    android:padding="16dp"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:padding="16dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_home">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="Monitoring"
-        android:fontFamily="@font/poppinmedium"
-        android:textColor="@color/hijau_end"
-        android:layout_gravity="center"/>
+    <!-- HEADER -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="20dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_back"
+            app:tint="#244636"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Monitoring"
+            android:textColor="#244636"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppinsbold"/>
+
+        <View
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -526,4 +548,5 @@
             </androidx.cardview.widget.CardView>
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>
