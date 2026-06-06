@@ -19,11 +19,14 @@ import android.content.Context
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 
-class ControlFragment : Fragment() {
+class ControlActivity : AppCompatActivity() {
 
     private lateinit var mode: TextView
     private lateinit var tvStatusMode: TextView
+    private lateinit var btnBack: ImageView
 
     // MODE
     private lateinit var switchMode: LinearLayout
@@ -72,55 +75,56 @@ class ControlFragment : Fragment() {
 
     private var online = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.setting_control, container, false)
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.setting_control)
+        btnBack = findViewById(R.id.btnBack)
+        btnBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         // MODE
-        mode = view.findViewById(R.id.mode)
-        switchMode = view.findViewById(R.id.switchMode)
-        circleMode = view.findViewById(R.id.circleMode)
-        tvStatusMode = view.findViewById(R.id.tvStatusMode)
+            mode = findViewById(R.id.mode)
+            switchMode = findViewById(R.id.switchMode)
+            circleMode = findViewById(R.id.circleMode)
+        tvStatusMode = findViewById(R.id.tvStatusMode)
 
         // POMPA
-        pumpLayout = view.findViewById(R.id.pumpLayout)
-        switchPump = view.findViewById(R.id.switchPump)
-        circlePump = view.findViewById(R.id.circlePump)
-        statusSwitch = view.findViewById(R.id.statusSwitch)
+        pumpLayout = findViewById(R.id.pumpLayout)
+        switchPump = findViewById(R.id.switchPump)
+        circlePump = findViewById(R.id.circlePump)
+        statusSwitch = findViewById(R.id.statusSwitch)
 
         // PH UP
-        phUpLayout = view.findViewById(R.id.phUpLayout)
-        switchPhUp = view.findViewById(R.id.switchPhUp)
-        circlePhUp = view.findViewById(R.id.circlePhUp)
-        statusPhUp = view.findViewById(R.id.statusPhUp)
+        phUpLayout = findViewById(R.id.phUpLayout)
+        switchPhUp = findViewById(R.id.switchPhUp)
+        circlePhUp = findViewById(R.id.circlePhUp)
+        statusPhUp = findViewById(R.id.statusPhUp)
 
         // PH DOWN
-        phDownLayout = view.findViewById(R.id.phDownLayout)
-        switchPhDown = view.findViewById(R.id.switchPhDown)
-        circlePhDown = view.findViewById(R.id.circlePhDown)
-        statusPhDown = view.findViewById(R.id.statusPhDown)
+        phDownLayout = findViewById(R.id.phDownLayout)
+        switchPhDown = findViewById(R.id.switchPhDown)
+        circlePhDown = findViewById(R.id.circlePhDown)
+        statusPhDown = findViewById(R.id.statusPhDown)
 
         // NUTRISI UP
-        nutrisiUpLayout = view.findViewById(R.id.nutrisiUpLayout)
-        switchNutrisiUp = view.findViewById(R.id.switchNutrisiUp)
-        circleNutrisiUp = view.findViewById(R.id.circleNutrisiUp)
-        statusNutrisiUp = view.findViewById(R.id.statusNutrisiUp)
+        nutrisiUpLayout = findViewById(R.id.nutrisiUpLayout)
+        switchNutrisiUp = findViewById(R.id.switchNutrisiUp)
+        circleNutrisiUp = findViewById(R.id.circleNutrisiUp)
+        statusNutrisiUp = findViewById(R.id.statusNutrisiUp)
 
         // NUTRISI DOWN
-        nutrisiDownLayout = view.findViewById(R.id.nutrisiDownLayout)
-        switchNutrisiDown = view.findViewById(R.id.switchNutrisiDown)
-        circleNutrisiDown = view.findViewById(R.id.circleNutrisiDown)
-        statusNutrisiDown = view.findViewById(R.id.statusNutrisiDown)
+        nutrisiDownLayout = findViewById(R.id.nutrisiDownLayout)
+        switchNutrisiDown = findViewById(R.id.switchNutrisiDown)
+        circleNutrisiDown = findViewById(R.id.circleNutrisiDown)
+        statusNutrisiDown = findViewById(R.id.statusNutrisiDown)
 
-        val accPref =
-            requireActivity().getSharedPreferences("ACCOUNT", MODE_PRIVATE)
+            val accPref =
+                getSharedPreferences(
+                    "ACCOUNT",
+                    MODE_PRIVATE
+                )
 
         deviceID = accPref.getString("deviceID", "")
 
@@ -210,8 +214,8 @@ class ControlFragment : Fragment() {
                     override fun onCancelled(error: DatabaseError) {
 
                         Toast.makeText(
-                            requireContext(),
-                            "Error: ${error.message}",
+                            this@ControlActivity,
+                            "Error",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -494,7 +498,7 @@ class ControlFragment : Fragment() {
     private fun vibratePhone() {
 
         val vibrator =
-            requireContext().getSystemService(
+            getSystemService(
                 Context.VIBRATOR_SERVICE
             ) as Vibrator
 

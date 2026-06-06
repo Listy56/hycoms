@@ -49,30 +49,20 @@ class SettingFragment: Fragment() {
         }
 
         control.setOnClickListener {
-            // Handle control button click
-            val fragment = ControlFragment()
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.mainFragment, fragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+            startActivity(
+                Intent(requireContext(), ControlActivity::class.java)
+            )
         }
-
         device.setOnClickListener {
-            // Handle device button click
-            val fragment = DeviceFragment()
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.mainFragment, fragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+            startActivity(
+                Intent(requireContext(), DeviceActivity::class.java)
+            )
         }
 
         account.setOnClickListener {
-            // Handle account button click
-            val fragment = AccountFragment()
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.mainFragment, fragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+            startActivity(
+                Intent(requireContext(), AccountActivity::class.java)
+            )
         }
     }
 }

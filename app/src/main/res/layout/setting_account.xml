@@ -1,259 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bg_home"
-    android:padding="16dp"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="Akun dan Data"
-        android:fontFamily="@font/poppinmedium"
-        android:textColor="@color/hijau_end"
-        android:layout_gravity="center"/>
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_home">
 
-    <androidx.cardview.widget.CardView
+    <!-- HEADER -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="2dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Profil"
-                android:textSize="14sp"
-                android:fontFamily="@font/poppinsbold"
-                android:textColor="@color/hijau_end"/>
+        android:layout_height="70dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="20dp">
 
-            <!--            Motitoring-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/user_name"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:weightSum="4"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppinmedium"
-                            android:textColor="#808080"
-                            android:textSize="14sp"
-                            android:layout_weight="2"
-                            android:text="Nama Pengguna"/>
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_back"
+            app:tint="@color/hijau_end" />
 
-                        <TextView
-                            android:id="@+id/userName"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppinsregular"
-                            android:textColor="#66000000"
-                            android:textSize="12sp"
-                            android:textStyle="italic"
-                            android:textAlignment="textEnd"
-                            android:paddingRight="10dp"
-                            android:layout_weight="2"
-                            android:text="userName"/>
-                    </LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Akun &amp; Data"
+            android:textColor="@color/hijau_end"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppinsbold"/>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="5dp"
-                        android:background="#22000000"/>
-                </LinearLayout>
+        <View
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
+    </LinearLayout>
 
-            </LinearLayout>
-            <!--            Motitoring-->
-            <LinearLayout
-                android:id="@+id/monitoring"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/email"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:weightSum="4"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppinmedium"
-                            android:textColor="#808080"
-                            android:textSize="14sp"
-                            android:layout_weight="2"
-                            android:text="E-mail"/>
-
-                        <TextView
-                            android:id="@+id/email"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppinsregular"
-                            android:textColor="#66000000"
-                            android:textSize="12sp"
-                            android:textStyle="italic"
-                            android:paddingRight="10dp"
-                            android:textAlignment="textEnd"
-                            android:layout_weight="2"
-                            android:text="email"/>
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="5dp"
-                        android:background="#22000000"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <!--            Control-->
-            <LinearLayout
-                android:id="@+id/control"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="7dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        app:cardCornerRadius="10dp"
-        android:layout_marginTop="20dp"
-        app:cardElevation="2dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/data_backup"
-                android:textSize="14sp"
-                android:fontFamily="@font/poppinsbold"
-                android:textColor="@color/hijau_end"/>
-
-            <!--            Data & Backup-->
-            <LinearLayout
-                android:id="@+id/exportCsv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/csv"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:weightSum="4"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppinmedium"
-                            android:textColor="#808080"
-                            android:textSize="14sp"
-                            android:layout_weight="2"
-                            android:text="Riwayat Data"/>
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <View
+    <!-- CONTENT -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:fillViewport="true">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/disconnectBt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="2dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="#BBFF0000"
-        app:cardCornerRadius="30dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical">
+
+            <!-- CARD PROFIL -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Keluar"
-                android:fontFamily="@font/poppinmedium"
-                android:textColor="@color/white"/>
+                android:backgroundTint="@android:color/white"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Profil"
+                        android:textColor="@color/hijau_end"
+                        android:fontFamily="@font/poppinsbold"
+                        android:textSize="14sp"/>
+
+                    <!-- USERNAME -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/user_name"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="10dp"
+                            android:text="Nama Pengguna"
+                            android:textSize="13sp"
+                            android:textColor="#666"/>
+
+                        <TextView
+                            android:id="@+id/userName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="userName"
+                            android:textSize="12sp"
+                            android:textColor="#888"
+                            android:textStyle="italic"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="8dp"
+                        android:background="#22000000"/>
+
+                    <!-- EMAIL -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/email"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="10dp"
+                            android:text="E-mail"
+                            android:textSize="13sp"
+                            android:textColor="#666"/>
+
+                        <TextView
+                            android:id="@+id/email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="email"
+                            android:textSize="12sp"
+                            android:textColor="#888"
+                            android:textStyle="italic"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- CARD BACKUP -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@android:color/white"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/data_backup"
+                        android:textColor="@color/hijau_end"
+                        android:fontFamily="@font/poppinsbold"
+                        android:textSize="14sp"/>
+
+                    <!-- EXPORT CSV -->
+                    <LinearLayout
+                        android:id="@+id/exportCsv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/csv"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="Riwayat Data"
+                            android:textSize="13sp"
+                            android:textColor="#666"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- SPACER -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+
+            <!-- LOGOUT -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/disconnectBt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:backgroundTint="#BBFF0000"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Keluar"
+                        android:textColor="@android:color/white"
+                        android:fontFamily="@font/poppinmedium"/>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+
+    </ScrollView>
 
 </LinearLayout>

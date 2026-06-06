@@ -1,27 +1,25 @@
 package com.example.hycoms
 
-import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import android.content.Intent
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 
-class AccountFragment : Fragment() {
+class AccountActivity : AppCompatActivity() {
 
     private lateinit var userNameTv: TextView
     private lateinit var emailTv: TextView
     private lateinit var exportCsvLayout: LinearLayout
     private lateinit var disconnectBt: androidx.cardview.widget.CardView
+    private lateinit var btnBack: ImageView
 
     private var deviceID: String = ""
     private var indexAcc: Int = -1
@@ -29,52 +27,38 @@ class AccountFragment : Fragment() {
     private val firebaseDatabase =
         FirebaseDatabase.getInstance()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.setting_account)
 
-        return inflater.inflate(
-            R.layout.setting_account,
-            container,
-            false
-        )
-    }
-
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?
-    ) {
-
-        super.onViewCreated(
-            view,
-            savedInstanceState
-        )
 
         // =========================================
         // INIT VIEW
         // =========================================
 
         userNameTv =
-            view.findViewById(R.id.userName)
+            findViewById(R.id.userName)
 
         emailTv =
-            view.findViewById(R.id.email)
+            findViewById(R.id.email)
 
         exportCsvLayout =
-            view.findViewById(R.id.exportCsv)
+            findViewById(R.id.exportCsv)
+
+        btnBack = findViewById(R.id.btnBack)
+        btnBack.setOnClickListener {
+            finish()
+        }
 
         disconnectBt =
-            view.findViewById(R.id.disconnectBt)
+            findViewById(R.id.disconnectBt)
 
         // =========================================
         // GET SHARED PREF
         // =========================================
 
         val accPref =
-            requireActivity()
-                .getSharedPreferences(
+            getSharedPreferences(
                     "ACCOUNT",
                     MODE_PRIVATE
                 )
@@ -134,7 +118,7 @@ class AccountFragment : Fragment() {
                     ) {
 
                         Toast.makeText(
-                            requireContext(),
+                            this@AccountActivity,
                             "Error : ${error.message}",
                             Toast.LENGTH_SHORT
                         ).show()
@@ -151,7 +135,7 @@ class AccountFragment : Fragment() {
             if (deviceID.isEmpty()) {
 
                 Toast.makeText(
-                    requireContext(),
+                    this@AccountActivity,
                     "Device ID tidak ditemukan",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -159,16 +143,15 @@ class AccountFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            requireActivity()
-                .supportFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.mainFragment,
-                    HistoryFragment()
+            val intent =
+                Intent(
+                    this@AccountActivity,
+                    HistoryActivity::class.java
                 )
-                .addToBackStack(null)
-                .commit()
+
+            startActivity(intent)
         }
+
         disconnectBt.setOnClickListener {
 
             // logout firebase
@@ -188,7 +171,7 @@ class AccountFragment : Fragment() {
             val googleSignInClient =
                 com.google.android.gms.auth.api.signin.GoogleSignIn
                     .getClient(
-                        requireContext(),
+                        this,
                         gso
                     )
 
@@ -203,14 +186,14 @@ class AccountFragment : Fragment() {
                         .apply()
 
                     Toast.makeText(
-                        requireContext(),
+                        this@AccountActivity,
                         "Berhasil keluar akun",
                         Toast.LENGTH_SHORT
                     ).show()
 
                     val intent =
                         Intent(
-                            requireContext(),
+                            this@AccountActivity,
                             LoginActivity::class.java
                         )
 
@@ -220,7 +203,7 @@ class AccountFragment : Fragment() {
 
                     startActivity(intent)
 
-                    requireActivity().finish()
+                    finish()
                 }
         }
     }

@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,7 +28,7 @@ import java.io.OutputStreamWriter
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HistoryFragment : Fragment() {
+class HistoryActivity : AppCompatActivity(){
 
     // FILTER UI
     private lateinit var btnDateRange: Button
@@ -57,6 +58,7 @@ class HistoryFragment : Fragment() {
 
     // EXPORT
     private lateinit var btnExport: Button
+    private lateinit var btnBack: ImageView
 
     // OTHER UI
     private lateinit var tvTotal: TextView
@@ -74,99 +76,98 @@ class HistoryFragment : Fragment() {
 
     private var isFilterOpen = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.fragment_history, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_history)
+
+        initView()
+
     }
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?
-    ) {
-        super.onViewCreated(view, savedInstanceState)
-
         // INIT VIEW
-
+        private fun initView() {
         btnDateRange =
-            view.findViewById(R.id.btnRangeDate)
+            findViewById(R.id.btnRangeDate)
 
         btnClear =
-            view.findViewById(R.id.btnClearFilter)
+            findViewById(R.id.btnClearFilter)
+
+            btnBack = findViewById(R.id.btnBack)
+            btnBack.setOnClickListener {
+                finish()
+            }
 
         layoutFilterHeader =
-            view.findViewById(R.id.layoutFilterHeader)
+            findViewById(R.id.layoutFilterHeader)
 
         layoutFilterContent =
-            view.findViewById(R.id.layoutFilterContent)
+            findViewById(R.id.layoutFilterContent)
 
         ivArrow =
-            view.findViewById(R.id.ivFilterArrow)
+            findViewById(R.id.ivFilterArrow)
 
         btnExport =
-            view.findViewById(R.id.btnExport)
+            findViewById(R.id.btnExport)
 
         tvTotal =
-            view.findViewById(R.id.tvTotalData)
+            findViewById(R.id.tvTotalData)
 
         progressBar =
-            view.findViewById(R.id.progressBar)
+            findViewById(R.id.progressBar)
 
         recyclerView =
-            view.findViewById(R.id.rvHistory)
+            findViewById(R.id.rvHistory)
 
         // CHIP
 
         cbAll =
-            view.findViewById(R.id.cbAll)
+            findViewById(R.id.cbAll)
 
         cbPpm =
-            view.findViewById(R.id.cbppm)
+            findViewById(R.id.cbppm)
 
         cbPh =
-            view.findViewById(R.id.cbPh)
+            findViewById(R.id.cbPh)
 
         cbWaterTemp =
-            view.findViewById(R.id.cbWaterTemp)
+            findViewById(R.id.cbWaterTemp)
 
         cbAirTemp =
-            view.findViewById(R.id.cbairTemp)
+            findViewById(R.id.cbairTemp)
 
         cbLight =
-            view.findViewById(R.id.cblight)
+            findViewById(R.id.cblight)
 
         cbWaterLevel =
-            view.findViewById(R.id.cbwaterLevel)
+            findViewById(R.id.cbwaterLevel)
 
         // HEADER
 
         headerTimestamp =
-            view.findViewById(R.id.headerTimestamp)
+            findViewById(R.id.headerTimestamp)
 
         headerPh =
-            view.findViewById(R.id.headerPh)
+            findViewById(R.id.headerPh)
 
         headerPpm =
-            view.findViewById(R.id.headerPpm)
+            findViewById(R.id.headerPpm)
 
         headerWaterTemp =
-            view.findViewById(R.id.headerWaterTemp)
+            findViewById(R.id.headerWaterTemp)
 
         headerAirTemp =
-            view.findViewById(R.id.headerAirTemp)
+            findViewById(R.id.headerAirTemp)
 
         headerLight =
-            view.findViewById(R.id.headerLight)
+            findViewById(R.id.headerLight)
 
         headerWaterLevel =
-            view.findViewById(R.id.headerWaterLevel)
+           findViewById(R.id.headerWaterLevel)
 
         // RECYCLER
 
         recyclerView.layoutManager =
-            LinearLayoutManager(requireContext())
+            LinearLayoutManager(this)
 
         adapter = HistoryAdapter(listData)
 
@@ -182,7 +183,7 @@ class HistoryFragment : Fragment() {
             isFilterOpen = !isFilterOpen
 
             TransitionManager.beginDelayedTransition(
-                view as ViewGroup,
+                findViewById(android.R.id.content),
                 AutoTransition()
             )
 
@@ -220,7 +221,7 @@ class HistoryFragment : Fragment() {
                 "Export CSV"
             )
 
-            AlertDialog.Builder(requireContext())
+            AlertDialog.Builder(this)
                 .setTitle("Pilih Format Export")
                 .setItems(options) { _, which ->
 
@@ -280,7 +281,7 @@ class HistoryFragment : Fragment() {
                     buttonView.isChecked = true
 
                     Toast.makeText(
-                        requireContext(),
+                        this,
                         "Minimal 1 data dipilih",
                         Toast.LENGTH_SHORT
                     ).show()
@@ -377,7 +378,7 @@ class HistoryFragment : Fragment() {
 
             val file =
                 File(
-                    requireContext()
+                    this
                         .getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS),
                     fileName
                 )
@@ -450,7 +451,7 @@ class HistoryFragment : Fragment() {
             e.printStackTrace()
 
             Toast.makeText(
-                requireContext(),
+                this,
                 "Export CSV gagal",
                 Toast.LENGTH_SHORT
             ).show()
@@ -470,7 +471,7 @@ class HistoryFragment : Fragment() {
 
             val file =
                 File(
-                    requireContext()
+                    this
                         .getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS),
                     fileName
                 )
@@ -554,7 +555,7 @@ class HistoryFragment : Fragment() {
             e.printStackTrace()
 
             Toast.makeText(
-                requireContext(),
+                this,
                 "Export PDF gagal",
                 Toast.LENGTH_SHORT
             ).show()
@@ -574,8 +575,8 @@ class HistoryFragment : Fragment() {
 
             val uri: Uri =
                 FileProvider.getUriForFile(
-                    requireContext(),
-                    requireContext().packageName + ".provider",
+                    this,
+                    this.packageName + ".provider",
                     file
                 )
 
@@ -588,7 +589,7 @@ class HistoryFragment : Fragment() {
             startActivity(intent)
 
             Toast.makeText(
-                requireContext(),
+                this,
                 "File berhasil diexport",
                 Toast.LENGTH_SHORT
             ).show()
@@ -598,7 +599,7 @@ class HistoryFragment : Fragment() {
             e.printStackTrace()
 
             Toast.makeText(
-                requireContext(),
+                this,
                 "File tersimpan di folder Documents aplikasi",
                 Toast.LENGTH_LONG
             ).show()
@@ -775,7 +776,7 @@ class HistoryFragment : Fragment() {
         val cal = Calendar.getInstance()
 
         DatePickerDialog(
-            requireContext(),
+            this,
             { _, year, month, day ->
 
                 val startCal =
@@ -810,7 +811,7 @@ class HistoryFragment : Fragment() {
         val cal = Calendar.getInstance()
 
         DatePickerDialog(
-            requireContext(),
+            this,
             { _, year, month, day ->
 
                 val endCal =
@@ -860,8 +861,7 @@ class HistoryFragment : Fragment() {
             View.VISIBLE
 
         val accPref =
-            requireActivity()
-                .getSharedPreferences(
+            getSharedPreferences(
                     "ACCOUNT",
                     MODE_PRIVATE
                 )

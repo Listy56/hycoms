@@ -1,294 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bg_home"
-    android:padding="16dp"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="Perangkat"
-        android:fontFamily="@font/poppinmedium"
-        android:textColor="@color/hijau_end"
-        android:layout_gravity="center"/>
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_home">
 
-    <TextView
-        android:id="@+id/tvInputDevice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Masukkan ID Perangkat :"
-        android:fontFamily="@font/poppinsbold"
-        android:textColor="@color/hijau_end"
-        android:textSize="14sp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="10dp"/>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/layoutInputDevice"
+    <!-- HEADER -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="2dp"
-        android:backgroundTint="@color/white"
-        app:cardCornerRadius="50dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/idInput"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/edittext_bg"
-                android:fontFamily="@font/poppinmedium"
-                android:textSize="14sp"
-                android:textColor="@color/hijau_end"/>
+        android:layout_height="70dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="20dp">
 
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_back"
+            app:tint="#244636" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/connectBt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="2dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/hijau_end"
-        app:cardCornerRadius="30dp">
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hubungkan"
-                android:fontFamily="@font/poppinmedium"
-                android:textColor="@color/white"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+            android:text="Perangkat"
+            android:textColor="#244636"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppinsbold" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/layoutInfo"
+        <View
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+    </LinearLayout>
+
+    <!-- CONTENT -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="2dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
             <TextView
+                android:id="@+id/tvInputDevice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Informasi Perangkat"
-                android:textSize="14sp"
+                android:text="Masukkan ID Perangkat :"
                 android:fontFamily="@font/poppinsbold"
-                android:textColor="@color/hijau_end"/>
+                android:textColor="@color/hijau_end"
+                android:textSize="14sp"
+                android:layout_marginBottom="5dp" />
 
-            <!--            Device ID-->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
+                android:id="@+id/layoutInputDevice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/device_id"/>
+                android:backgroundTint="@android:color/white"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="3dp">
+
+                <EditText
+                    android:id="@+id/idInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edittext_bg"
+                    android:fontFamily="@font/poppinmedium"
+                    android:paddingHorizontal="16dp"
+                    android:textColor="@color/hijau_end"
+                    android:textSize="14sp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/connectBt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/hijau_end"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="3dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hubungkan"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppinmedium" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- INFO DEVICE -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/layoutInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Informasi Perangkat"
+                        android:textColor="@color/hijau_end"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppinsbold" />
+
+                    <!-- Device ID -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:weightSum="4"
+                        android:layout_marginTop="12dp"
                         android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/device_id" />
+
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppinmedium"
+                            android:layout_weight="1"
+                            android:layout_marginStart="10dp"
+                            android:text="ID Perangkat"
                             android:textColor="@color/hijau_end"
-                            android:textSize="14sp"
-                            android:layout_weight="2"
-                            android:text="ID Perangkat"/>
+                            android:fontFamily="@font/poppinmedium" />
 
                         <TextView
                             android:id="@+id/deviceID"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppinsregular"
-                            android:textColor="#66000000"
-                            android:textSize="12sp"
+                            android:text="-"
                             android:textStyle="italic"
-                            android:textAlignment="textEnd"
-                            android:layout_weight="2"
-                            android:paddingRight="10dp"
-                            android:text="ID Perangkat"/>
+                            android:textColor="#66000000" />
+
                     </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="5dp"
-                        android:background="#22000000"/>
-                </LinearLayout>
+                        android:layout_marginVertical="10dp"
+                        android:background="#22000000" />
 
-            </LinearLayout>
-
-            <!--            SSID-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ssid"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    <!-- SSID -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:weightSum="4"
                         android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ssid" />
+
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppinmedium"
+                            android:layout_weight="1"
+                            android:layout_marginStart="10dp"
+                            android:text="Nama WiFi"
                             android:textColor="@color/hijau_end"
-                            android:textSize="14sp"
-                            android:layout_weight="2"
-                            android:text="Nama WiFi"/>
+                            android:fontFamily="@font/poppinmedium" />
 
                         <TextView
                             android:id="@+id/ssid"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppinsregular"
-                            android:textColor="#66000000"
-                            android:textSize="12sp"
+                            android:text="-"
                             android:textStyle="italic"
-                            android:paddingRight="10dp"
-                            android:textAlignment="textEnd"
-                            android:layout_weight="2"
-                            android:text="Nama Wifi"/>
+                            android:textColor="#66000000" />
+
                     </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="5dp"
-                        android:background="#22000000"/>
-                </LinearLayout>
+                        android:layout_marginVertical="10dp"
+                        android:background="#22000000" />
 
-            </LinearLayout>
-
-            <!--            Device ID-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:layout_gravity="top"
-                    android:src="@drawable/update"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    <!-- LAST UPDATE -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:weightSum="4"
                         android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/update" />
+
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppinmedium"
+                            android:layout_weight="1"
+                            android:layout_marginStart="10dp"
+                            android:text="Pembaruan Terakhir"
                             android:textColor="@color/hijau_end"
-                            android:textSize="14sp"
-                            android:layout_weight="2"
-                            android:text="Pembaruan Terakhir"/>
+                            android:fontFamily="@font/poppinmedium" />
 
                         <TextView
                             android:id="@+id/lastUpdate"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppinsregular"
-                            android:textColor="#66000000"
-                            android:textSize="12sp"
-                            android:paddingRight="10dp"
+                            android:text="-"
                             android:textStyle="italic"
-                            android:textAlignment="textEnd"
-                            android:layout_weight="2"
-                            android:text="Pembaruan Terakhir"/>
+                            android:textColor="#66000000" />
+
                     </LinearLayout>
+
                 </LinearLayout>
 
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/disconnectBt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="2dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/hijau_end"
-        app:cardCornerRadius="30dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <TextView
+            <androidx.cardview.widget.CardView
+                android:id="@+id/disconnectBt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/hijau_end"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Putuskan Perangkat"
+                        android:textColor="@android:color/white"
+                        android:fontFamily="@font/poppinmedium" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <ProgressBar
+                android:id="@+id/progres"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Putuskan Perangkat"
-                android:fontFamily="@font/poppinmedium"
-                android:textColor="@color/white"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp" />
 
-    <ProgressBar
-        android:id="@+id/progres"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:layout_height="match_parent"/>
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

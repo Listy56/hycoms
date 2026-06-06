@@ -6,21 +6,39 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_home"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="0dp">
 
-    <!-- TITLE -->
+    <!-- HEADER -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="20dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="14dp"
-        android:fontFamily="@font/poppinmedium"
-        android:text="Riwayat Monitoring"
-        android:textColor="@color/hijau_end"
-        android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_back"
+            app:tint="@color/hijau_end" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Riwayat Monitoring"
+            android:textColor="@color/hijau_end"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppinsbold"/>
+
+        <View
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
+    </LinearLayout>
 
     <!-- SCROLL -->
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -32,7 +50,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">>
 
             <!-- FILTER CARD -->
 
