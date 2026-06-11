@@ -161,6 +161,8 @@ class HomeFragment : Fragment() {
 
                 // ===== WATER LEVEL =====
                 val waterPercent = level.coerceIn(0.0, 100.0)
+                val text = "${waterPercent.toInt()}%"
+                waterLevelPercent.text = text
 
                 baseWaterLevel.post {
 
