@@ -5,30 +5,19 @@
     android:layout_height="match_parent"
     android:background="@color/auth_background">
 
-    <!-- Header Area dengan Gradient Background -->
+    <!-- Header Area -->
     <ImageView
         android:id="@+id/imgHeaderBackground"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/bg_auth_header_gradient"
+        android:contentDescription="@null"
         android:scaleType="centerCrop"
+        android:src="@drawable/bg_header_hy"
         app:layout_constraintBottom_toTopOf="@id/scrollView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.28"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Decorative Leaf/Circle (Optional) -->
-    <ImageView
-        android:id="@+id/imgDecor"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:alpha="0.2"
-        android:contentDescription="@null"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_auth_leaf"
-        app:layout_constraintEnd_toEndOf="@id/imgHeaderBackground"
-        app:layout_constraintTop_toTopOf="@id/imgHeaderBackground" />
 
     <!-- Logo -->
     <ImageView

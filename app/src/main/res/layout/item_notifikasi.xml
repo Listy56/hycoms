@@ -1,64 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    app:cardCornerRadius="15dp"
-    android:backgroundTint="@color/white"
-    app:cardElevation="5dp">
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="3dp"
+    app:strokeColor="@color/hycoms_border"
+    app:strokeWidth="1dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="12dp">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="6">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.2">
+        android:paddingTop="20dp"
+        android:paddingEnd="22dp"
+        android:paddingBottom="20dp">
+
+        <View
+            android:id="@+id/unreadAccent"
+            android:layout_width="5dp"
+            android:layout_height="72dp"
+            android:layout_marginEnd="14dp"
+            android:background="@drawable/bg_notification_unread_accent" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="88dp"
+            android:layout_weight="1"
+            android:foregroundGravity="center">
+
+            <FrameLayout
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_notification_icon_circle">
+
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/notif_photo"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
+                    android:id="@+id/imgNotifIcon"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_notifications_hycoms" />
+            </FrameLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/judulNotif"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="5.8"
-                android:orientation="vertical">
+                android:fontFamily="@font/poppinsbold"
+                android:text="Judul Notifikasi"
+                android:textColor="@color/hycoms_primary_green"
+                android:textSize="19sp" />
 
-                <TextView
-                    android:id="@+id/judulNotif"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Judul Notifikasi"
-                    android:textColor="@color/hijau_end"
-                    android:fontFamily="@font/poppinsbold"
-                    android:textSize="15sp" />
+            <TextView
+                android:id="@+id/detailNotif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/poppinsregular"
+                android:lineSpacingExtra="3dp"
+                android:text="Detail Notifikasi"
+                android:textColor="@color/hycoms_text_secondary"
+                android:textSize="14sp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginEnd="12dp"
-                    android:background="@color/hijau_start" />
+            <TextView
+                android:id="@+id/timeNotif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppinsregular"
+                android:text="Baru saja"
+                android:textColor="@color/hycoms_timestamp"
+                android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/detailNotif"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppinsregular"
-                    android:text="Detail Notifikasi"
-                    android:layout_marginTop="5dp"
-                    android:textColor="#66000000"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
