@@ -3,12 +3,18 @@ package com.example.hycoms
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.*
-import com.google.firebase.database.FirebaseDatabase
-import com.google.android.gms.auth.api.signin.*
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.FirebaseDatabase
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -19,8 +25,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        val etFirstName = findViewById<EditText>(R.id.etFirstName)
-        val etLastName = findViewById<EditText>(R.id.etLastName)
+        val etUsername = findViewById<EditText>(R.id.etUsername)
         val etEmail = findViewById<EditText>(R.id.etEmail)
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword)
@@ -32,7 +37,6 @@ class RegisterActivity : AppCompatActivity() {
         val auth = FirebaseAuth.getInstance()
         val database = FirebaseDatabase.getInstance().reference
 
-        // 🔥 GOOGLE CONFIG
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -45,20 +49,23 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
 
-        // =========================
-        // 🔥 REGISTER MANUAL
-        // =========================
         btnRegister.setOnClickListener {
-
-            val firstName = etFirstName.text.toString().trim()
-            val lastName = etLastName.text.toString().trim()
+            val username = etUsername.text.toString().trim().lowercase()
             val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString()
             val confirm = etConfirmPassword.text.toString()
 
             when {
-                firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() -> {
+                username.isEmpty() || email.isEmpty() || password.isEmpty() -> {
                     Toast.makeText(this, "Semua field harus diisi", Toast.LENGTH_SHORT).show()
+                }
+
+                !isValidUsername(username) -> {
+                    Toast.makeText(
+                        this,
+                        "Username minimal 3 karakter dan hanya boleh berisi huruf, angka, underscore, atau titik",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
 
                 !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
@@ -74,26 +81,30 @@ class RegisterActivity : AppCompatActivity() {
                 }
 
                 else -> {
-
                     btnRegister.isEnabled = false
 
-                    // 🔥 CEK EMAIL DI AUTH
-                    auth.fetchSignInMethodsForEmail(email)
-                        .addOnSuccessListener { result ->
+                    database.child("user").get()
+                        .addOnSuccessListener { snapshot ->
+                            val usernameExists = snapshot.children.any { snap ->
+                                snap.child("userName").value?.toString() == username
+                            }
 
-                            if (result.signInMethods?.isNotEmpty() == true) {
+                            if (usernameExists) {
                                 btnRegister.isEnabled = true
-                                Toast.makeText(this, "Email sudah terdaftar", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Username sudah dipakai", Toast.LENGTH_SHORT).show()
                                 return@addOnSuccessListener
                             }
 
-                            // 🔥 BUAT USER AUTH
-                            auth.createUserWithEmailAndPassword(email, password)
-                                .addOnSuccessListener {
+                            auth.fetchSignInMethodsForEmail(email)
+                                .addOnSuccessListener { result ->
+                                    if (result.signInMethods?.isNotEmpty() == true) {
+                                        btnRegister.isEnabled = true
+                                        Toast.makeText(this, "Email sudah terdaftar", Toast.LENGTH_SHORT).show()
+                                        return@addOnSuccessListener
+                                    }
 
-                                    database.child("user").get()
-                                        .addOnSuccessListener { snapshot ->
-
+                                    auth.createUserWithEmailAndPassword(email, password)
+                                        .addOnSuccessListener { authResult ->
                                             var index = 1
                                             var key: String
 
@@ -102,42 +113,33 @@ class RegisterActivity : AppCompatActivity() {
                                                 index++
                                             } while (snapshot.hasChild(key))
 
-                                            val fullName = "$firstName $lastName".trim()
                                             val currentTime = System.currentTimeMillis()
+                                            val uid = authResult.user?.uid
+                                                ?: FirebaseAuth.getInstance().currentUser?.uid
+                                                ?: ""
 
-                                            val userMap = HashMap<String, Any>()
-                                            userMap["firstName"] = firstName
-                                            userMap["lastName"] = lastName
-                                            userMap["fullName"] = fullName
-                                            userMap["userName"] = ""
-                                            userMap["email"] = email
-                                            userMap["id"] = ""
-                                            userMap["profileCompleted"] = false
-                                            userMap["createdAt"] = currentTime
-                                            userMap["updatedAt"] = currentTime
+                                            val userMap = hashMapOf<String, Any>(
+                                                "userName" to username,
+                                                "email" to email,
+                                                "id" to uid,
+                                                "profileCompleted" to true,
+                                                "createdAt" to currentTime,
+                                                "updatedAt" to currentTime
+                                            )
 
-                                            // 🔥 SIMPAN USER INCOMPLETE
                                             database.child("user")
                                                 .child(key)
                                                 .setValue(userMap)
                                                 .addOnSuccessListener {
-
                                                     val indexFix = key.substringAfter("_").toIntOrNull()
-                                                    
-                                                    // 🔥 SIMPAN SESSION SEMENTARA
+
                                                     getSharedPreferences("ACCOUNT", MODE_PRIVATE).edit()
                                                         .putInt("index", indexFix ?: -1)
+                                                        .putBoolean("isLogin", true)
                                                         .apply()
 
-                                                    Toast.makeText(this, "Email berhasil terdaftar, silakan isi username", Toast.LENGTH_SHORT).show()
-
-                                                    // 🔥 REDIRECT KE USERNAME ACTIVITY
-                                                    val intent = Intent(this, UsernameActivity::class.java)
-                                                    intent.putExtra("email", email)
-                                                    intent.putExtra("firstName", firstName)
-                                                    intent.putExtra("lastName", lastName)
-                                                    intent.putExtra("fullName", fullName)
-                                                    startActivity(intent)
+                                                    Toast.makeText(this, "Registrasi berhasil", Toast.LENGTH_SHORT).show()
+                                                    startActivity(Intent(this, MainActivity::class.java))
                                                     finish()
                                                 }
                                                 .addOnFailureListener {
@@ -145,31 +147,29 @@ class RegisterActivity : AppCompatActivity() {
                                                     Toast.makeText(this, "Gagal simpan user", Toast.LENGTH_SHORT).show()
                                                 }
                                         }
+                                        .addOnFailureListener {
+                                            btnRegister.isEnabled = true
+                                            Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                                        }
                                 }
                                 .addOnFailureListener {
                                     btnRegister.isEnabled = true
-                                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, "Gagal cek email", Toast.LENGTH_SHORT).show()
                                 }
                         }
                         .addOnFailureListener {
                             btnRegister.isEnabled = true
-                            Toast.makeText(this, "Gagal cek email", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Gagal ambil data user", Toast.LENGTH_SHORT).show()
                         }
                 }
             }
         }
 
-        // =========================
-        // 🔥 GOOGLE REGISTER
-        // =========================
         btnGoogle.setOnClickListener {
             startActivityForResult(googleSignInClient.signInIntent, RC_SIGN_IN)
         }
     }
 
-    // =========================
-    // 🔥 RESULT GOOGLE
-    // =========================
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -185,13 +185,11 @@ class RegisterActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(this, "Token Google null", Toast.LENGTH_SHORT).show()
                 }
-
             } catch (e: ApiException) {
-                // DIAGNOSTIC LOGGING
                 android.util.Log.e("GoogleSignIn_Register", "API Exception StatusCode: ${e.statusCode}", e)
                 android.util.Log.e("GoogleSignIn_Register", "Message: ${e.message}")
                 android.util.Log.e("GoogleSignIn_Register", "LocalizedMessage: ${e.localizedMessage}")
-                
+
                 val errorMsg = when (e.statusCode) {
                     10 -> "DEVELOPER_ERROR - Certificate hash/package name mismatch. Check Firebase Console."
                     12501 -> "Sign-in cancelled by user"
@@ -199,9 +197,8 @@ class RegisterActivity : AppCompatActivity() {
                     12500 -> "Internal error"
                     else -> "Google Sign-In Error ${e.statusCode}: ${e.message}"
                 }
-                
+
                 Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show()
-                
             } catch (e: Exception) {
                 android.util.Log.e("GoogleSignIn_Register", "Unexpected Exception: ${e.message}", e)
                 Toast.makeText(this, "Google gagal: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -209,116 +206,95 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    // =========================
-    // 🔥 GOOGLE AUTH
-    // =========================
     private fun firebaseAuthWithGoogle(idToken: String) {
-
         val credential = GoogleAuthProvider.getCredential(idToken, null)
 
         FirebaseAuth.getInstance().signInWithCredential(credential)
             .addOnSuccessListener {
-
                 val user = FirebaseAuth.getInstance().currentUser
                 val email = user?.email
-                val displayName = user?.displayName ?: "user"
+                val fullName = user?.displayName ?: "user"
+                val uid = user?.uid ?: ""
 
                 if (email.isNullOrEmpty()) {
                     Toast.makeText(this, "Email tidak ditemukan", Toast.LENGTH_SHORT).show()
                     return@addOnSuccessListener
                 }
 
-                // 🔥 PARSE firstName & lastName dari displayName
-                val nameParts = displayName.trim().split("\\s+".toRegex())
-                val firstName = nameParts.getOrNull(0) ?: "user"
-                val lastName = nameParts.drop(1).joinToString(" ")
-                val fullName = displayName
-
                 val database = FirebaseDatabase.getInstance().reference
 
                 database.child("user").get()
                     .addOnSuccessListener { snapshot ->
-
                         var foundIndex: Int? = null
                         var profileCompleted = true
+                        var userName = ""
 
                         for (snap in snapshot.children) {
                             if (snap.child("email").value.toString() == email) {
-                                val key = snap.key
-                                foundIndex = key?.substringAfter("_")?.toIntOrNull()
+                                foundIndex = snap.key?.substringAfter("_")?.toIntOrNull()
                                 val completed = snap.child("profileCompleted").value
                                 profileCompleted = completed != null && completed.toString().toBoolean()
+                                userName = snap.child("userName").value?.toString() ?: ""
                                 break
                             }
                         }
 
-                        if (foundIndex != null && profileCompleted) {
-                            // ✅ user sudah lengkap
+                        if (foundIndex != null && profileCompleted && userName.isNotEmpty()) {
                             getSharedPreferences("ACCOUNT", MODE_PRIVATE).edit()
                                 .putInt("index", foundIndex)
+                                .putBoolean("isLogin", true)
                                 .apply()
+
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()
-                        } else if (foundIndex != null && !profileCompleted) {
-                            // ⚠️ user sudah ada tapi belum lengkap
+                        } else if (foundIndex != null) {
                             getSharedPreferences("ACCOUNT", MODE_PRIVATE).edit()
                                 .putInt("index", foundIndex)
                                 .apply()
+
                             val intent = Intent(this, UsernameActivity::class.java)
                             intent.putExtra("email", email)
-                            intent.putExtra("firstName", firstName)
-                            intent.putExtra("lastName", lastName)
                             intent.putExtra("fullName", fullName)
                             startActivity(intent)
                             finish()
                         } else {
-                            // ✨ user baru → buat entry incomplete
-                            database.child("user").get()
-                                .addOnSuccessListener { userSnapshot ->
+                            var index = 1
+                            var key: String
 
-                                    var index = 1
-                                    var key: String
+                            do {
+                                key = "user_$index"
+                                index++
+                            } while (snapshot.hasChild(key))
 
-                                    do {
-                                        key = "user_$index"
-                                        index++
-                                    } while (userSnapshot.hasChild(key))
+                            val currentTime = System.currentTimeMillis()
+                            val userMap = hashMapOf<String, Any>(
+                                "fullName" to fullName,
+                                "userName" to "",
+                                "email" to email,
+                                "id" to uid,
+                                "profileCompleted" to false,
+                                "createdAt" to currentTime,
+                                "updatedAt" to currentTime
+                            )
 
-                                    val currentTime = System.currentTimeMillis()
+                            database.child("user")
+                                .child(key)
+                                .setValue(userMap)
+                                .addOnSuccessListener {
+                                    val indexFix = key.substringAfter("_").toIntOrNull()
 
-                                    val userMap = HashMap<String, Any>()
-                                    userMap["firstName"] = firstName
-                                    userMap["lastName"] = lastName
-                                    userMap["fullName"] = fullName
-                                    userMap["userName"] = ""
-                                    userMap["email"] = email
-                                    userMap["id"] = ""
-                                    userMap["profileCompleted"] = false
-                                    userMap["createdAt"] = currentTime
-                                    userMap["updatedAt"] = currentTime
+                                    getSharedPreferences("ACCOUNT", MODE_PRIVATE).edit()
+                                        .putInt("index", indexFix ?: -1)
+                                        .apply()
 
-                                    database.child("user")
-                                        .child(key)
-                                        .setValue(userMap)
-                                        .addOnSuccessListener {
-
-                                            val indexFix = key.substringAfter("_").toIntOrNull()
-                                            
-                                            getSharedPreferences("ACCOUNT", MODE_PRIVATE).edit()
-                                                .putInt("index", indexFix ?: -1)
-                                                .apply()
-
-                                            val intent = Intent(this, UsernameActivity::class.java)
-                                            intent.putExtra("email", email)
-                                            intent.putExtra("firstName", firstName)
-                                            intent.putExtra("lastName", lastName)
-                                            intent.putExtra("fullName", fullName)
-                                            startActivity(intent)
-                                            finish()
-                                        }
-                                        .addOnFailureListener {
-                                            Toast.makeText(this, "Gagal simpan user", Toast.LENGTH_SHORT).show()
-                                        }
+                                    val intent = Intent(this, UsernameActivity::class.java)
+                                    intent.putExtra("email", email)
+                                    intent.putExtra("fullName", fullName)
+                                    startActivity(intent)
+                                    finish()
+                                }
+                                .addOnFailureListener {
+                                    Toast.makeText(this, "Gagal simpan user", Toast.LENGTH_SHORT).show()
                                 }
                         }
                     }
@@ -329,4 +305,7 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
+    private fun isValidUsername(username: String): Boolean {
+        return username.length >= 3 && username.matches(Regex("^[a-z0-9._]+$"))
+    }
 }

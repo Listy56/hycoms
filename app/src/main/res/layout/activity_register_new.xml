@@ -96,56 +96,25 @@
             android:paddingTop="24dp"
             android:paddingBottom="32dp">
 
-            <!-- First Name & Last Name Row -->
-            <LinearLayout
+            <!-- Username -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.HYCOMS.Auth.TextInputLayout"
+                app:boxStrokeColor="@color/auth_input_stroke"
+                app:startIconDrawable="@drawable/ic_auth_person">
 
-                <!-- First Name -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilFirstName"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    style="@style/Widget.HYCOMS.Auth.TextInputLayout"
-                    app:boxStrokeColor="@color/auth_input_stroke"
-                    app:startIconDrawable="@drawable/ic_auth_person">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etFirstName"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/auth_input_height"
-                        android:hint="First Name"
-                        android:inputType="textPersonName"
-                        android:textSize="16sp"
-                        style="@style/TextAppearance.HYCOMS.Auth.Input" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Last Name -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilLastName"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    style="@style/Widget.HYCOMS.Auth.TextInputLayout"
-                    app:boxStrokeColor="@color/auth_input_stroke"
-                    app:startIconDrawable="@drawable/ic_auth_person">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etLastName"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/auth_input_height"
-                        android:hint="Last Name"
-                        android:inputType="textPersonName"
-                        android:textSize="16sp"
-                        style="@style/TextAppearance.HYCOMS.Auth.Input" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/auth_input_height"
+                    android:hint="Username"
+                    android:inputType="text"
+                    android:textSize="16sp"
+                    style="@style/TextAppearance.HYCOMS.Auth.Input" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Email -->
             <com.google.android.material.textfield.TextInputLayout

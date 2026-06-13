@@ -32,12 +32,23 @@ class UsernameActivity : AppCompatActivity() {
 
         googleClient = GoogleSignIn.getClient(this, gso)
 
+        // Completion screen for new Google users, legacy incomplete users,
+        // and Splash/Login fallbacks when profileCompleted is false.
         btnSave.setOnClickListener {
 
             val username = etUsername.text.toString().trim().lowercase()
 
             if (username.isEmpty()) {
                 Toast.makeText(this, "Username wajib diisi", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!isValidUsername(username)) {
+                Toast.makeText(
+                    this,
+                    "Username minimal 3 karakter dan hanya boleh berisi huruf, angka, underscore, atau titik",
+                    Toast.LENGTH_LONG
+                ).show()
                 return@setOnClickListener
             }
 
@@ -135,5 +146,9 @@ class UsernameActivity : AppCompatActivity() {
 
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
+    }
+
+    private fun isValidUsername(username: String): Boolean {
+        return username.length >= 3 && username.matches(Regex("^[a-z0-9._]+$"))
     }
 }
