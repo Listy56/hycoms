@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.addCallback
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import com.example.hycoms.databinding.FragmentChartBinding
 import com.github.mikephil.charting.animation.Easing
@@ -32,6 +33,9 @@ import java.io.IOException
 import java.util.*
 
 class ChartFragment : Fragment() {
+
+    private lateinit var chartScroll: NestedScrollView
+    private lateinit var headerContent: View
 
     private var _binding: FragmentChartBinding? = null
     private val binding get() = _binding!!
@@ -92,6 +96,37 @@ class ChartFragment : Fragment() {
     ) {
 
         super.onViewCreated(view, savedInstanceState)
+
+        chartScroll = view.findViewById(R.id.chartScroll)
+        headerContent = view.findViewById(R.id.headerContent)
+
+        chartScroll.setOnScrollChangeListener(
+            NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
+
+                val activity = requireActivity() as MainActivity
+
+                if (scrollY > 0) {
+                    activity.showMiniHeader()
+                } else {
+                    activity.hideMiniHeader()
+                }
+
+                val maxScroll = 80f
+                val progress =
+                    (scrollY.coerceAtMost(maxScroll.toInt())) / maxScroll
+
+
+                val scale = 1f - (progress * 0.5f)
+
+                headerContent.scaleX = scale
+                headerContent.scaleY = scale
+
+
+                headerContent.alpha = 1f - (progress * 1.5f)
+
+                headerContent.translationY = -(scrollY * 2f)
+            }
+        )
 
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner) {

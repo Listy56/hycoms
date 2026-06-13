@@ -4,101 +4,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@android:color/white"
     tools:context=".MainActivity">
 
-    <!-- TOP BACKGROUND -->
-    <ImageView
-        android:id="@+id/bgTop"
-        android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/background" />
+    <!-- ================= HEADER MINI ================= -->
 
-    <!-- KONTEN ATAS -->
     <RelativeLayout
+        android:id="@+id/headerMini"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:padding="20dp">
+        android:layout_height="70dp"
+        android:background="@android:color/white"
+        android:elevation="8dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:visibility="gone">
 
-        <!-- Logo -->
         <ImageView
-            android:id="@+id/logoLeaf"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            />
+            android:id="@+id/logoMini"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/leafijo"/>
 
-        <!-- NOTIF -->
+        <TextView
+            android:id="@+id/tvMiniTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/logoMini"
+            android:layout_marginStart="10dp"
+            android:text="hycoms"
+            android:textColor="#2E7D5B"
+            android:textSize="24sp"
+            android:fontFamily="@font/poppinsbold"/>
+
         <RelativeLayout
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/bg_circle_dark"
-            android:gravity="center">
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_circle_white">
 
             <ImageView
                 android:id="@+id/btn_notif"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/notif" />
+                android:layout_centerInParent="true"
+                android:src="@drawable/notifijo"/>
 
             <TextView
                 android:id="@+id/badge_notif"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:layout_alignEnd="@id/btn_notif"
+                android:layout_alignParentEnd="true"
                 android:background="@drawable/badge_background"
                 android:gravity="center"
                 android:text="0"
                 android:textColor="@android:color/white"
-                android:textSize="9sp" />
+                android:textSize="9sp"/>
+
         </RelativeLayout>
-
-        <!-- TITLE -->
-        <TextView
-            android:id="@+id/titleHycoms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/logoLeaf"
-            android:layout_marginTop="8dp"
-            android:text="hycoms"
-            android:textColor="@android:color/white"
-            android:textSize="32sp"
-            android:fontFamily="@font/poppinsbold" />
-
-        <!-- SUBTITLE -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/titleHycoms"
-            android:text="Hydroponic Control &amp; Monitoring System"
-            android:textColor="@android:color/white"
-            android:textSize="11sp"
-            android:fontFamily="@font/poppinsregular" />
 
     </RelativeLayout>
 
-    <!-- CONTENT -->
-    <LinearLayout
-        android:id="@+id/contentContainer"
+    <!-- ================= FRAGMENT ================= -->
+
+    <FrameLayout
+        android:id="@+id/mainFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/bgTop"
-        android:layout_above="@id/bottomNav"
-        android:layout_marginTop="-85dp"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/transparent"
-        android:orientation="vertical">
+        android:layout_above="@id/bottomNav"/>
 
-        <FrameLayout
-            android:id="@+id/mainFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <!-- ================= BOTTOM NAV ================= -->
 
-    </LinearLayout>
-
-    <!-- BOTTOM NAV -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
@@ -134,7 +113,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_home"
-                    app:tint="@android:color/white" />
+                    app:tint="@android:color/white"/>
 
                 <TextView
                     android:id="@+id/tvHome"
@@ -144,7 +123,8 @@
                     android:text="Home"
                     android:textColor="@android:color/white"
                     android:textSize="12sp"
-                    android:fontFamily="@font/poppinsbold" />
+                    android:fontFamily="@font/poppinsbold"/>
+
             </LinearLayout>
 
             <!-- CHART -->
@@ -161,17 +141,15 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_chart"
-                    app:tint="#9B9B9B" />
+                    app:tint="#9B9B9B"/>
 
                 <TextView
                     android:id="@+id/tvChart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
                     android:text="Charts"
-                    android:textColor="#9B9B9B"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/poppinsregular" />
+                    android:textColor="#9B9B9B"/>
+
             </LinearLayout>
 
             <!-- SETTINGS -->
@@ -188,17 +166,15 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_setting"
-                    app:tint="#9B9B9B" />
+                    app:tint="#9B9B9B"/>
 
                 <TextView
                     android:id="@+id/tvSetting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
                     android:text="Settings"
-                    android:textColor="#9B9B9B"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/poppinsregular" />
+                    android:textColor="#9B9B9B"/>
+
             </LinearLayout>
 
         </LinearLayout>

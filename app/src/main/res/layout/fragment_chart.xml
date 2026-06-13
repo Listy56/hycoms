@@ -1,204 +1,282 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/chartScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
-    android:orientation="vertical"
-    android:paddingLeft="21dp"
-    android:paddingRight="21dp"
-    android:paddingTop="0dp"
-    android:paddingBottom="21dp">
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- ========================================= -->
-    <!-- WEATHER CARD -->
-    <!-- ========================================= -->
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardWeather"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginBottom="16dp"
-        app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="1dp"
-        app:strokeColor="#6B8F7A"
-        app:strokeWidth="0.8dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- HEADER BESAR -->
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="270dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_top"/>
+
+            <RelativeLayout
+                android:id="@+id/headerContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/logoChart"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/leaf"/>
+
+                <!-- NOTIF -->
+
+                <RelativeLayout
+                    android:id="@+id/notifContainer"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/bg_circle_dark"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/btn_notif"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/notif"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/titleChart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/logoChart"
+                    android:layout_marginTop="8dp"
+                    android:text="hycoms"
+                    android:textColor="@android:color/white"
+                    android:textSize="32sp"
+                    android:fontFamily="@font/poppinsbold"/>
+
+                <TextView
+                    android:id="@+id/subTitleChart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/titleChart"
+                    android:text="Hydroponic Control &amp; Monitoring System"
+                    android:textColor="@android:color/white"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/poppinsregular"/>
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+        <!-- CONTENT -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="14dp">
+            android:layout_marginTop="-85dp"
+            android:paddingStart="21dp"
+            android:paddingEnd="21dp"
+            android:paddingBottom="100dp">
 
-            <!-- HEADER -->
+            <!-- WEATHER CARD -->
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardWeather"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppinsbold"
-                    android:text="Prakiraan Cuaca"
-                    android:textColor="#244636"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Data Langsung"
-                    android:textColor="#8A9BB0"
-                    android:textSize="11sp" />
-
-            </LinearLayout>
-
-            <!-- WEATHER LIST -->
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none">
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="1dp"
+                app:strokeColor="#6B8F7A"
+                app:strokeWidth="0.8dp">
 
                 <LinearLayout
-                    android:id="@+id/layoutWeatherContainer"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"/>
+                    android:orientation="vertical"
+                    android:padding="14dp">
 
-            </HorizontalScrollView>
+                    <!-- HEADER -->
 
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <!-- ========================================= -->
-    <!-- CHART CARD -->
-    <!-- ========================================= -->
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardChart"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="1dp"
-        app:strokeColor="#6B8F7A"
-        app:strokeWidth="0.8dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="14dp">
-
-            <!-- HEADER -->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:layout_marginBottom="12dp">
-
-                <!-- TITLE -->
-
-                <TextView
-                    android:id="@+id/tvChartTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppinsbold"
-                    android:text="Grafik Sensor"
-                    android:textColor="#244636"
-                    android:textSize="14sp" />
-
-                <!-- SPINNER DATA -->
-
-                <LinearLayout
-                    android:id="@+id/layoutSpinnerData"
-                    android:layout_width="wrap_content"
-                    android:layout_height="34dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/bg_pill_teal"
-                    android:gravity="center_vertical"
-                    android:minWidth="95dp"
-                    android:orientation="horizontal"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="10dp">
-
-                    <Spinner
-                        android:id="@+id/spinnerDataType"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:popupBackground="@drawable/bg_dropdown_item"
-                        android:spinnerMode="dropdown" />
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp">
 
-                    <ImageView
-                        android:id="@+id/ivArrowData"
-                        android:layout_width="7dp"
-                        android:layout_height="7dp"
-                        android:layout_marginStart="4dp"
-                        android:contentDescription="dropdown"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/arrow_white" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppinsbold"
+                            android:text="Prakiraan Cuaca"
+                            android:textColor="#244636"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Data Langsung"
+                            android:textColor="#8A9BB0"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
+
+                    <!-- WEATHER LIST -->
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:id="@+id/layoutWeatherContainer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"/>
+
+                    </HorizontalScrollView>
 
                 </LinearLayout>
 
-                <!-- SPINNER PERIOD -->
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- CHART CARD -->
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardChart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="1dp"
+                app:strokeColor="#6B8F7A"
+                app:strokeWidth="0.8dp">
 
                 <LinearLayout
-                    android:id="@+id/layoutSpinnerPeriod"
-                    android:layout_width="wrap_content"
-                    android:layout_height="34dp"
-                    android:background="@drawable/bg_pill_white_stroke"
-                    android:gravity="center_vertical"
-                    android:minWidth="95dp"
-                    android:orientation="horizontal"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="10dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
 
-                    <Spinner
-                        android:id="@+id/spinnerPeriod"
+                    <!-- HEADER -->
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:spinnerMode="dropdown" />
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="12dp">
 
-                    <ImageView
-                        android:id="@+id/ivArrowPeriod"
-                        android:layout_width="7dp"
-                        android:layout_height="7dp"
-                        android:layout_marginStart="4dp"
-                        android:contentDescription="dropdown"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/arrow_grey" />
+                        <!-- TITLE -->
+
+                        <TextView
+                            android:id="@+id/tvChartTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppinsbold"
+                            android:text="Grafik Sensor"
+                            android:textColor="#244636"
+                            android:textSize="14sp" />
+
+                        <!-- SPINNER DATA -->
+
+                        <LinearLayout
+                            android:id="@+id/layoutSpinnerData"
+                            android:layout_width="wrap_content"
+                            android:layout_height="34dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/bg_pill_teal"
+                            android:gravity="center_vertical"
+                            android:minWidth="95dp"
+                            android:orientation="horizontal"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="10dp">
+
+                            <Spinner
+                                android:id="@+id/spinnerDataType"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:popupBackground="@drawable/bg_dropdown_item"
+                                android:spinnerMode="dropdown" />
+
+                            <ImageView
+                                android:id="@+id/ivArrowData"
+                                android:layout_width="7dp"
+                                android:layout_height="7dp"
+                                android:layout_marginStart="4dp"
+                                android:contentDescription="dropdown"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/arrow_white" />
+
+                        </LinearLayout>
+
+                        <!-- SPINNER PERIOD -->
+
+                        <LinearLayout
+                            android:id="@+id/layoutSpinnerPeriod"
+                            android:layout_width="wrap_content"
+                            android:layout_height="34dp"
+                            android:background="@drawable/bg_pill_white_stroke"
+                            android:gravity="center_vertical"
+                            android:minWidth="95dp"
+                            android:orientation="horizontal"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="10dp">
+
+                            <Spinner
+                                android:id="@+id/spinnerPeriod"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:spinnerMode="dropdown" />
+
+                            <ImageView
+                                android:id="@+id/ivArrowPeriod"
+                                android:layout_width="7dp"
+                                android:layout_height="7dp"
+                                android:layout_marginStart="4dp"
+                                android:contentDescription="dropdown"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/arrow_grey" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- CHART -->
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/lineChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"/>
 
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <!-- CHART -->
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/lineChart"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>
+
+

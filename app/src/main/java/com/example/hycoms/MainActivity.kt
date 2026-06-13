@@ -22,7 +22,11 @@ import androidx.core.content.ContextCompat
 import android.graphics.Typeface
 import androidx.core.content.res.ResourcesCompat
 
+
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var headerMini: View
+    private var isHeaderVisible = false
 
     private lateinit var homeBt: LinearLayout
     private lateinit var chartBt: LinearLayout
@@ -50,7 +54,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
+        headerMini = findViewById(R.id.headerMini)
+
+        headerMini.translationY = -200f
+        headerMini.visibility = View.GONE
+
         poppinsBold = ResourcesCompat.getFont(this, R.font.poppinsbold)!!
         poppinsRegular = ResourcesCompat.getFont(this, R.font.poppinsregular)!!
         NotificationHelper.createChannel(this)
@@ -273,6 +283,34 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun showMiniHeader() {
+
+        if (isHeaderVisible) return
+
+        isHeaderVisible = true
+
+        headerMini.visibility = View.VISIBLE
+
+        headerMini.animate()
+            .translationY(0f)
+            .setDuration(120)
+            .start()
+    }
+
+    fun hideMiniHeader() {
+
+        if (!isHeaderVisible) return
+
+        isHeaderVisible = false
+
+        headerMini.animate()
+            .translationY(-headerMini.height.toFloat())
+            .setDuration(120)
+            .withEndAction {
+                headerMini.visibility = View.GONE
+            }
+            .start()
+    }
     // CHANGE FRAGMENT
     private fun replaceFragment(fragment: Fragment, mode: Int) {
 
@@ -334,6 +372,7 @@ class MainActivity : AppCompatActivity() {
                 imgSetting.setColorFilter(Color.WHITE)
             }
         }
+        hideMiniHeader()
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.mainFragment, fragment)

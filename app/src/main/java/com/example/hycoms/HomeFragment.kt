@@ -2,6 +2,7 @@ package com.example.hycoms
 
 import android.animation.ValueAnimator
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,10 +17,17 @@ import android.graphics.Color
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
+import androidx.core.widget.NestedScrollView
+import android.widget.ImageView
+import kotlin.jvm.java
+
 
 class HomeFragment : Fragment() {
 
     // ================= UI =================
+    private lateinit var homeScroll: NestedScrollView
+    private lateinit var headerContent: View
+
     private lateinit var phTextView: TextView
     private lateinit var nutrisiTextView: TextView
     private lateinit var statusSwitch: TextView
@@ -32,6 +40,7 @@ class HomeFragment : Fragment() {
     private var lastWaterTempStatus = Status.NORMAL
     private var lastAirTempStatus = Status.NORMAL
     private lateinit var tvStatus: TextView
+    private lateinit var btnNotif: ImageView
 
     private var deviceID: String? = ""
     private var firebaseDatabase = FirebaseDatabase.getInstance()
@@ -77,6 +86,44 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        btnNotif = view.findViewById(R.id.btn_notif)
+
+        btnNotif.setOnClickListener {
+            startActivity(
+                Intent(requireContext(), NotifActivity::class.java)
+            )
+        }
+        homeScroll = view.findViewById(R.id.homeScroll)
+        headerContent = view.findViewById(R.id.headerContent)
+
+        homeScroll.setOnScrollChangeListener(
+            NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
+
+                val activity = requireActivity() as MainActivity
+
+                if (scrollY > 0) {
+                    activity.showMiniHeader()
+                } else {
+                    activity.hideMiniHeader()
+                }
+
+                val maxScroll = 80f
+                val progress =
+                    (scrollY.coerceAtMost(maxScroll.toInt())) / maxScroll
+
+
+                val scale = 1f - (progress * 0.5f)
+
+                headerContent.scaleX = scale
+                headerContent.scaleY = scale
+
+
+                headerContent.alpha = 1f - (progress * 1.5f)
+
+                headerContent.translationY = -(scrollY * 2f)
+            }
+        )
 
         // init UI
         phTextView = view.findViewById(R.id.tvPh)

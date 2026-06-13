@@ -1,556 +1,666 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/homeScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
-    android:orientation="vertical"
-    android:paddingLeft="21dp"
-    android:paddingRight="21dp"
-    android:paddingTop="0dp"
-    android:paddingBottom="0dp">
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <!-- ================= TOP CARD ================= -->
-
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.4"
-        app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="28dp"
-        android:layout_marginBottom="21dp"
-        app:cardElevation="1dp"
-        app:strokeColor="#6B8F7A"
-        app:strokeWidth="0.8dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- HEADER -->
+
+        <FrameLayout
+            android:id="@+id/headerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="270dp">
+
+            <ImageView
+                android:id="@+id/bgTop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_top"/>
+
+            <RelativeLayout
+                android:id="@+id/headerContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp">
+
+
+        <!-- Logo -->
+
+        <ImageView
+            android:id="@+id/logoLeaf"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/leaf" />
+
+        <!-- Notif -->
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_cardwater"
-            android:clipToOutline="true"
-            android:padding="16dp">
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/bg_circle_dark"
+            android:gravity="center">
 
-            <!-- TITLE -->
-
-            <LinearLayout
-                android:id="@+id/topTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/water" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:text="Water Availability"
-                    android:textColor="#244636"
-                    android:textSize="15sp"
-                    android:fontFamily="@font/poppinsbold" />
-
-            </LinearLayout>
-
-            <!-- PERCENT -->
-
-            <TextView
-                android:id="@+id/waterLevelPercent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/topTitle"
-                android:layout_marginTop="12dp"
-                android:text="72%"
-                android:textColor="#2E7D5B"
-                android:textSize="48sp"
-                android:fontFamily="@font/poppinsbold" />
-
-            <!-- WATER BAR -->
-            <TextView
-                android:id="@+id/tvStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/waterLevelPercent"
-                android:layout_marginTop="12dp"
-                android:autoSizeMaxTextSize="11sp"
-                android:autoSizeMinTextSize="8sp"
-                android:autoSizeStepGranularity="1sp"
-                android:autoSizeTextType="uniform"
-                android:fontFamily="@font/poppinsbold"
-                android:text="Status: Safe"
-                android:textColor="#244636" />
-
-            <LinearLayout
-                android:id="@+id/waterContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="155dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="24dp"
-                android:orientation="horizontal">
-
-                <!-- WATER BAR -->
-
-                <LinearLayout
-                    android:id="@+id/baseWaterLevel"
-                    android:layout_width="38dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_air_putih"
-                    android:gravity="bottom">
-
-                    <LinearLayout
-                        android:id="@+id/waterLevel"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:background="@drawable/bg_air_hijau" />
-
-                </LinearLayout>
-
-                <!-- SCALE -->
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="12dp"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:text="100%"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="10sp"
-                        android:textColor="#244636"/>
-
-                    <View
-                        android:layout_width="18dp"
-                        android:layout_height="1dp"
-                        android:background="#244636"/>
-
-                    <TextView
-                        android:layout_marginTop="18dp"
-                        android:text="75%"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="10sp"
-                        android:textColor="#244636"/>
-
-                    <View
-                        android:layout_width="18dp"
-                        android:layout_height="1dp"
-                        android:background="#244636"/>
-
-                    <TextView
-                        android:layout_marginTop="18dp"
-                        android:text="50%"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="10sp"
-                        android:textColor="#244636"/>
-
-                    <View
-                        android:layout_width="18dp"
-                        android:layout_height="1dp"
-                        android:background="#244636"/>
-
-                    <TextView
-                        android:layout_marginTop="18dp"
-                        android:text="25%"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="10sp"
-                        android:textColor="#244636"/>
-
-                    <View
-                        android:layout_width="18dp"
-                        android:layout_height="1dp"
-                        android:background="#244636"/>
-
-                    <TextView
-                        android:layout_marginTop="18dp"
-                        android:text="0%"
-                        android:textSize="10sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#244636"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/btn_notif"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/notif" />
 
         </RelativeLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+        <!-- Title -->
 
-    <!-- ================= 3 CARD ROW ================= -->
+        <TextView
+            android:id="@+id/titleHycoms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logoLeaf"
+            android:layout_marginTop="8dp"
+            android:text="hycoms"
+            android:textColor="@android:color/white"
+            android:textSize="32sp"
+            android:fontFamily="@font/poppinsbold" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginBottom="21dp"
-        android:orientation="horizontal"
-        android:weightSum="3">
+        <!-- Subtitle -->
 
-        <!-- WATER PUMP -->
+        <TextView
+            android:id="@+id/subTitleHycoms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleHycoms"
+            android:text="Hydroponic Control &amp; Monitoring System"
+            android:textColor="@android:color/white"
+            android:textSize="11sp"
+            android:fontFamily="@font/poppinsregular" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginEnd="21dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="1dp"
-            app:strokeColor="#6B8F7A"
-            app:strokeWidth="0.8dp">
+            </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/pompa_air" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Water Pump"
-                    android:textColor="#244636"
-                    android:textSize="11sp"
-                    android:fontFamily="@font/poppinsbold" />
-
-
-                <TextView
-                    android:id="@+id/statusSwitch"
-                    android:layout_width="36dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_height="wrap_content"
-                    android:autoSizeMaxTextSize="24sp"
-                    android:autoSizeMinTextSize="18sp"
-                    android:autoSizeStepGranularity="2sp"
-                    android:autoSizeTextType="uniform"
-                    android:fontFamily="@font/poppinsbold"
-                    android:text="ON"
-                    android:textColor="#2E7D5B" />
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- NUTRITION -->
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginEnd="21dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="1dp"
-            app:strokeColor="#6B8F7A"
-            app:strokeWidth="0.8dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/nutrisi" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/poppinsbold"
-                    android:text="Nutrition"
-                    android:textColor="#244636"
-                    android:textSize="11sp" />
-
-                <TextView
-                    android:id="@+id/tvNutrisi"
-                    android:layout_width="39dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:autoSizeMaxTextSize="24sp"
-                    android:autoSizeMinTextSize="18sp"
-                    android:autoSizeStepGranularity="2sp"
-                    android:autoSizeTextType="uniform"
-                    android:fontFamily="@font/poppinsbold"
-                    android:text="900"
-                    android:textColor="#2E7D5B" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="PPM"
-                    android:layout_marginTop="12dp"
-                    android:textColor="#2E7D5B"
-                    android:textSize="11sp"
-                    android:fontFamily="@font/poppinsbold" />
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- PH -->
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="1dp"
-            app:strokeColor="#6B8F7A"
-            app:strokeWidth="0.8dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ph" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="pH"
-                    android:textColor="#244636"
-                    android:textSize="11sp"
-                    android:fontFamily="@font/poppinsbold" />
-
-                <TextView
-                    android:id="@+id/tvPh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="6"
-                    android:textColor="#2E7D5B"
-                    android:autoSizeTextType="uniform"
-                    android:autoSizeMinTextSize="18sp"
-                    android:autoSizeMaxTextSize="40sp"
-                    android:autoSizeStepGranularity="2sp"
-                    android:fontFamily="@font/poppinsbold" />
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
-
-    <!-- ================= BOTTOM ROW ================= -->
+        </FrameLayout>
+    <!-- ================= CONTENT ================= -->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="-85dp"
+        android:paddingStart="21dp"
+        android:paddingEnd="21dp"
+        android:paddingBottom="100dp">
 
-        <!-- TEMP CARD -->
+        <!-- ================= TOP CARD ================= -->
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginEnd="21dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.4"
             app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="24dp"
+            app:cardCornerRadius="28dp"
+            android:layout_marginBottom="21dp"
             app:cardElevation="1dp"
             app:strokeColor="#6B8F7A"
             app:strokeWidth="0.8dp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:background="@drawable/bg_cardtemp"
+                android:background="@drawable/bg_cardwater"
                 android:clipToOutline="true"
-                android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="16dp">
+
+                <!-- TITLE -->
 
                 <LinearLayout
+                    android:id="@+id/topTitle"
+                    android:layout_marginStart="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
+                        android:layout_width="17dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_height="14dp"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/suhu" />
+                        android:src="@drawable/water" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
-                        android:text="Temp. &amp; Air"
+                        android:layout_marginTop="10dp"
+                        android:text="Water Availability"
                         android:textColor="#244636"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:fontFamily="@font/poppinsbold" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:gravity="center_horizontal"
+                <!-- PERCENT -->
+
+                <TextView
+                    android:id="@+id/waterLevelPercent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_below="@id/topTitle"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="72%"
+                    android:textColor="#2E7D5B"
+                    android:textSize="50sp"
+                    android:fontFamily="@font/poppinsbold" />
+
+                <!-- WATER BAR -->
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_marginStart="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/waterLevelPercent"
+                    android:layout_marginTop="10dp"
+                    android:autoSizeMaxTextSize="10sp"
+                    android:autoSizeMinTextSize="8sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/poppinsbold"
+                    android:text="Status: Safe"
+                    android:textColor="#244636" />
+
+                <LinearLayout
+                    android:id="@+id/waterContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="175dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="24dp"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Udara"
-                        android:textColor="#244636"
-                        android:textSize="14sp" />
+                    <!-- WATER BAR -->
 
-                    <TextView
-                        android:id="@+id/airTemp"
+                    <LinearLayout
+                        android:id="@+id/baseWaterLevel"
+                        android:layout_width="38dp"
+                        android:layout_height="175dp"
+                        android:background="@drawable/bg_air_putih"
+                        android:gravity="bottom">
+
+                        <LinearLayout
+                            android:id="@+id/waterLevel"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:background="@drawable/bg_air_hijau" />
+
+                    </LinearLayout>
+
+                    <!-- SCALE -->
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="18dp"
-                        android:text="20 C"
-                        android:textColor="#2E7D5B"
-                        android:autoSizeTextType="uniform"
-                        android:autoSizeMinTextSize="14sp"
-                        android:autoSizeMaxTextSize="20sp"
-                        android:autoSizeStepGranularity="2sp"
-                        android:fontFamily="@font/poppinsbold" />
+                        android:layout_height="175dp"
+                        android:layout_marginStart="12dp"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100%"
+                            android:textColor="#244636"
+                            android:textSize="10sp" />
+
+                        <View
+                            android:layout_width="18dp"
+                            android:layout_height="1dp"
+                            android:background="#244636" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:text="75%"
+                            android:textColor="#244636"
+                            android:textSize="10sp" />
+
+                        <View
+                            android:layout_width="18dp"
+                            android:layout_height="1dp"
+                            android:background="#244636" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:text="50%"
+                            android:textColor="#244636"
+                            android:textSize="10sp" />
+
+                        <View
+                            android:layout_width="18dp"
+                            android:layout_height="1dp"
+                            android:background="#244636" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:text="25%"
+                            android:textColor="#244636"
+                            android:textSize="10sp" />
+
+                        <View
+                            android:layout_width="18dp"
+                            android:layout_height="1dp"
+                            android:background="#244636" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:text="0%"
+                            android:textColor="#244636"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ================= 3 CARD ROW ================= -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="21dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <!-- WATER PUMP -->
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginEnd="21dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="1dp"
+                app:strokeColor="#6B8F7A"
+                app:strokeWidth="0.8dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:gravity="center_horizontal"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="34dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_height="34dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/pompa_air" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Air"
+                        android:layout_marginTop="8dp"
+                        android:text="Water Pump"
                         android:textColor="#244636"
-                        android:textSize="14sp" />
+                        android:textSize="11sp"
+                        android:fontFamily="@font/poppinsbold" />
+
 
                     <TextView
-                        android:id="@+id/waterTemp"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/statusSwitch"
+                        android:layout_width="36dp"
+                        android:layout_marginTop="12dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="38dp"
-                        android:autoSizeMaxTextSize="20sp"
-                        android:autoSizeMinTextSize="14sp"
+                        android:autoSizeMaxTextSize="28sp"
+                        android:autoSizeMinTextSize="18sp"
                         android:autoSizeStepGranularity="2sp"
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/poppinsbold"
-                        android:text="20 C"
+                        android:text="ON"
                         android:textColor="#2E7D5B" />
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        </com.google.android.material.card.MaterialCardView>
+            <!-- NUTRITION -->
 
-        <!-- LUX CARD -->
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="1dp"
-            app:strokeColor="#6B8F7A"
-            app:strokeWidth="0.8dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/bg_luxcard"
-                android:clipToOutline="true"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="12dp">
+                android:layout_weight="1"
+                android:layout_marginEnd="21dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="1dp"
+                app:strokeColor="#6B8F7A"
+                app:strokeWidth="0.8dp">
 
-                <!-- Header -->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="12dp">
 
                     <ImageView
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_marginTop="15dp"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/cahaya" />
+                        android:src="@drawable/nutrisi" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:text="Intensity"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poppinsbold"
+                        android:text="Nutrition"
                         android:textColor="#244636"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/tvNutrisi"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:autoSizeMaxTextSize="28sp"
+                        android:autoSizeMinTextSize="18sp"
+                        android:autoSizeStepGranularity="2sp"
+                        android:autoSizeTextType="uniform"
+                        android:fontFamily="@font/poppinsbold"
+                        android:text="900"
+                        android:textColor="#2E7D5B" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PPM"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="15dp"
+                        android:textColor="#2E7D5B"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/poppinsbold" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- PH -->
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="1dp"
+                app:strokeColor="#6B8F7A"
+                app:strokeWidth="0.8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_marginTop="15dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ph" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="pH"
+                        android:textColor="#244636"
+                        android:textSize="11sp"
+                        android:fontFamily="@font/poppinsbold" />
+
+                    <TextView
+                        android:id="@+id/tvPh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="6"
+                        android:textColor="#2E7D5B"
+                        android:autoSizeTextType="uniform"
+                        android:autoSizeMinTextSize="18sp"
+                        android:autoSizeMaxTextSize="28sp"
+                        android:autoSizeStepGranularity="2sp"
+                        android:fontFamily="@font/poppinsbold" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <!-- ================= BOTTOM ROW ================= -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <!-- TEMP CARD -->
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginEnd="21dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="1dp"
+                app:strokeColor="#6B8F7A"
+                app:strokeWidth="0.8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/bg_cardtemp"
+                    android:clipToOutline="true"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/suhu" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="Temp. &amp; Air"
+                            android:textColor="#244636"
+                            android:textSize="13sp"
+                            android:fontFamily="@font/poppinsbold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:gravity="center_horizontal"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Udara"
+                            android:fontFamily="@font/poppinsbold"
+                            android:textColor="#244636"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/airTemp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="18dp"
+                            android:text="20 C"
+                            android:textColor="#2E7D5B"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="14sp"
+                            android:autoSizeMaxTextSize="20sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/poppinsbold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:gravity="center_horizontal"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Air"
+                            android:fontFamily="@font/poppinsbold"
+                            android:textColor="#244636"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/waterTemp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="38dp"
+                            android:autoSizeMaxTextSize="20sp"
+                            android:autoSizeMinTextSize="14sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:autoSizeTextType="uniform"
+                            android:fontFamily="@font/poppinsbold"
+                            android:text="20 C"
+                            android:textColor="#2E7D5B" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- LUX CARD -->
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="1dp"
+                app:strokeColor="#6B8F7A"
+                app:strokeWidth="0.8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_luxcard"
+                    android:clipToOutline="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <!-- Header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginBottom="2dp"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/cahaya" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="Intensity"
+                            android:textColor="#244636"
+                            android:textSize="13sp"
+                            android:fontFamily="@font/poppinsbold" />
+
+                    </LinearLayout>
+
+                    <!-- Value -->
+                    <TextView
+                        android:id="@+id/tvIntensitas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="900"
+                        android:textColor="#2E7D5B"
+                        android:autoSizeTextType="uniform"
+                        android:autoSizeMinTextSize="18sp"
+                        android:autoSizeMaxTextSize="28sp"
+                        android:autoSizeStepGranularity="2sp"
+                        android:fontFamily="@font/poppinsbold" />
+
+                    <!-- Unit -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="LUX"
+                        android:textColor="#2E7D5B"
                         android:textSize="14sp"
                         android:fontFamily="@font/poppinsbold" />
 
                 </LinearLayout>
 
-                <!-- Value -->
-                <TextView
-                    android:id="@+id/tvIntensitas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="900"
-                    android:textColor="#2E7D5B"
-                    android:autoSizeTextType="uniform"
-                    android:autoSizeMinTextSize="18sp"
-                    android:autoSizeMaxTextSize="24sp"
-                    android:autoSizeStepGranularity="2sp"
-                    android:fontFamily="@font/poppinsbold" />
-
-                <!-- Unit -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="LUX"
-                    android:textColor="#2E7D5B"
-                    android:textSize="11sp"
-                    android:fontFamily="@font/poppinsbold" />
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
-  
+</androidx.core.widget.NestedScrollView>
+
+
+
+
+
+

@@ -63,6 +63,7 @@ dependencies {
     implementation("com.google.firebase:firebase-database")
 
     implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation(libs.play.services.maps3d)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
