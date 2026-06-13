@@ -3,7 +3,10 @@ package com.example.hycoms
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +16,8 @@ import com.google.firebase.database.*
 class NotifActivity: AppCompatActivity() {
     private lateinit var back: ImageView
     private lateinit var recyclerView: RecyclerView
+    private lateinit var title: TextView
+    private lateinit var emptyState: LinearLayout
     private lateinit var adapter: NotificationAdapter
     private lateinit var notifList : MutableList<NotificationModel>
 
@@ -21,6 +26,8 @@ class NotifActivity: AppCompatActivity() {
         setContentView(R.layout.activity_notif)
 
         back         = findViewById(R.id.back)
+        title        = findViewById(R.id.tvTitle)
+        emptyState   = findViewById(R.id.emptyState)
         recyclerView = findViewById(R.id.recyclerView)
         notifList    = mutableListOf()
         adapter      = NotificationAdapter(notifList)
@@ -55,6 +62,7 @@ class NotifActivity: AppCompatActivity() {
                     }
 
                     adapter.notifyDataSetChanged()
+                    updateEmptyState()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -67,6 +75,13 @@ class NotifActivity: AppCompatActivity() {
             finish()
         }
 
+    }
+
+    private fun updateEmptyState() {
+        val count = notifList.size
+        title.text = if (count > 0) "Notifikasi ($count)" else "Notifikasi"
+        emptyState.visibility = if (count == 0) View.VISIBLE else View.GONE
+        recyclerView.visibility = if (count == 0) View.GONE else View.VISIBLE
     }
 
     @SuppressLint("GestureBackNavigation")

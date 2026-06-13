@@ -190,15 +190,10 @@ class LoginActivity : AppCompatActivity() {
                                 .putInt("index", foundIndex)
                                 .apply()
 
-                            val nameParts = displayName.trim().split("\\s+".toRegex())
-                            val firstName = nameParts.getOrNull(0) ?: "user"
-                            val lastName = nameParts.drop(1).joinToString(" ")
                             val fullName = displayName
 
                             val intent = Intent(this, UsernameActivity::class.java)
                             intent.putExtra("email", email)
-                            intent.putExtra("firstName", firstName)
-                            intent.putExtra("lastName", lastName)
                             intent.putExtra("fullName", fullName)
                             startActivity(intent)
                             finish()

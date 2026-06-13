@@ -25,4 +25,13 @@
     <color name="auth_divider">#5EB75A</color>
     <color name="auth_icon">#5EB75A</color>
     <color name="auth_border">#E5E7EB</color>
+
+    <color name="hycoms_primary_green">#1F7A45</color>
+    <color name="hycoms_mint_background">#D8F0E8</color>
+    <color name="hycoms_soft_background">#F6FAF8</color>
+    <color name="hycoms_text_primary">#1D1D1D</color>
+    <color name="hycoms_text_secondary">#808080</color>
+    <color name="hycoms_border">#E8E8E8</color>
+    <color name="hycoms_unread_accent">#1F7A45</color>
+    <color name="hycoms_timestamp">#A0A0A0</color>
 </resources>
