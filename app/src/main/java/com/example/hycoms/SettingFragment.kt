@@ -10,9 +10,16 @@ import android.widget.LinearLayout
 import androidx.activity.addCallback
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
+import android.widget.ImageView
+import android.widget.TextView
+import com.google.firebase.database.*
 
 class SettingFragment: Fragment() {
 
+    private lateinit var badgeNotif: TextView
+    private lateinit var btnNotif: ImageView
+
+    private val firebaseDatabase = FirebaseDatabase.getInstance()
     private lateinit var monitoring: LinearLayout
     private lateinit var control: LinearLayout
     private lateinit var device: LinearLayout
@@ -31,6 +38,8 @@ class SettingFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        badgeNotif = view.findViewById(R.id.badge_notif)
+        btnNotif = view.findViewById(R.id.btn_notif)
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             requireActivity().finish()
@@ -59,6 +68,7 @@ class SettingFragment: Fragment() {
 
                 headerContent.scaleX = scale
                 headerContent.scaleY = scale
+                headerContent.scaleY = scale
 
 
                 headerContent.alpha = 1f - (progress * 1.5f)
@@ -76,6 +86,9 @@ class SettingFragment: Fragment() {
         val accPref      = requireActivity().getSharedPreferences("ACCOUNT", MODE_PRIVATE)
         val indexAcc         = accPref.getInt("index", -1)
         val deviceID         = accPref.getString("deviceID", "")
+        if (!deviceID.isNullOrEmpty()) {
+            loadNotifications(deviceID)
+        }
 
 
         monitoring.setOnClickListener {
@@ -99,6 +112,54 @@ class SettingFragment: Fragment() {
             startActivity(
                 Intent(requireContext(), AccountActivity::class.java)
             )
+        }
+    }
+    private fun loadNotifications(deviceID: String) {
+
+        firebaseDatabase.getReference("hycoms")
+            .child(deviceID)
+            .child("notifications")
+            .addValueEventListener(object : ValueEventListener {
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    var unreadCount = 0
+
+                    for (data in snapshot.children) {
+
+                        val isRead = data.child("isRead")
+                            .getValue(Boolean::class.java) ?: false
+
+                        if (!isRead) unreadCount++
+                    }
+
+                    if (unreadCount > 0) {
+                        badgeNotif.visibility = View.VISIBLE
+                        badgeNotif.text = unreadCount.toString()
+                    } else {
+                        badgeNotif.visibility = View.GONE
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
+
+        btnNotif.setOnClickListener {
+
+            firebaseDatabase.getReference("hycoms")
+                .child(deviceID)
+                .child("notifications")
+                .get()
+                .addOnSuccessListener { snapshot ->
+
+                    for (data in snapshot.children) {
+                        data.ref.child("isRead").setValue(true)
+                    }
+
+                    startActivity(
+                        Intent(requireContext(), NotifActivity::class.java)
+                    )
+                }
         }
     }
 }

@@ -41,23 +41,33 @@
             android:layout_height="60dp"
             android:src="@drawable/leaf" />
 
-        <!-- Notif -->
+                <FrameLayout
+                    android:id="@+id/notifContainer"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/bg_circle_dark">
 
-        <RelativeLayout
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/bg_circle_dark"
-            android:gravity="center">
+                    <ImageView
+                        android:id="@+id/btn_notif"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/notif" />
 
-            <ImageView
-                android:id="@+id/btn_notif"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/notif" />
+                    <TextView
+                        android:id="@+id/badge_notif"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="top|end"
+                        android:background="@drawable/badge_background"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@android:color/white"
+                        android:textSize="8sp"
+                        android:visibility="gone"/>
 
-        </RelativeLayout>
-
+                </FrameLayout>
         <!-- Title -->
 
         <TextView

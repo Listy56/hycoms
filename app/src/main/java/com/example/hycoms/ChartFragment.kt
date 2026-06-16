@@ -1,6 +1,7 @@
 package com.example.hycoms
 
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -31,8 +32,12 @@ import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 import java.util.*
+import com.google.firebase.database.*
 
 class ChartFragment : Fragment() {
+
+    private lateinit var badgeNotif: TextView
+    private lateinit var btnNotif: ImageView
 
     private lateinit var chartScroll: NestedScrollView
     private lateinit var headerContent: View
@@ -97,6 +102,9 @@ class ChartFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
 
+        badgeNotif = view.findViewById(R.id.badge_notif)
+        btnNotif = view.findViewById(R.id.btn_notif)
+
         chartScroll = view.findViewById(R.id.chartScroll)
         headerContent = view.findViewById(R.id.headerContent)
 
@@ -137,6 +145,9 @@ class ChartFragment : Fragment() {
             .getSharedPreferences("ACCOUNT", MODE_PRIVATE)
 
         deviceID = accPref.getString("deviceID", "")
+        if (!deviceID.isNullOrEmpty()) {
+            loadNotifications(deviceID!!)
+        }
 
         Log.d("ChartFragment", "Device ID : $deviceID")
 
@@ -706,6 +717,54 @@ class ChartFragment : Fragment() {
             mv.chartView = this
 
             marker = mv
+        }
+    }
+    private fun loadNotifications(deviceID: String) {
+
+        firebaseDatabase.getReference("hycoms")
+            .child(deviceID)
+            .child("notifications")
+            .addValueEventListener(object : ValueEventListener {
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    var unreadCount = 0
+
+                    for (data in snapshot.children) {
+
+                        val isRead = data.child("isRead")
+                            .getValue(Boolean::class.java) ?: false
+
+                        if (!isRead) unreadCount++
+                    }
+
+                    if (unreadCount > 0) {
+                        badgeNotif.visibility = View.VISIBLE
+                        badgeNotif.text = unreadCount.toString()
+                    } else {
+                        badgeNotif.visibility = View.GONE
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
+
+        btnNotif.setOnClickListener {
+
+            firebaseDatabase.getReference("hycoms")
+                .child(deviceID)
+                .child("notifications")
+                .get()
+                .addOnSuccessListener { snapshot ->
+
+                    for (data in snapshot.children) {
+                        data.ref.child("isRead").setValue(true)
+                    }
+
+                    startActivity(
+                        Intent(requireContext(), NotifActivity::class.java)
+                    )
+                }
         }
     }
 

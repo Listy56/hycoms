@@ -1,81 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/auth_background">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/auth_background"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Header Area -->
-    <ImageView
-        android:id="@+id/imgHeaderBackground"
+    <!-- HEADER HICS -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:contentDescription="@null"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg_header_hy"
-        app:layout_constraintBottom_toTopOf="@id/scrollView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.28"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="220dp"
+        android:background="@drawable/bg_header_hy"
+        android:minHeight="180dp"
+        android:orientation="horizontal"
+        android:weightSum="10">
 
-    <!-- Logo -->
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:contentDescription="@null"
-        android:src="@drawable/logo"
-        android:layout_marginStart="@dimen/auth_header_horizontal_margin"
-        android:layout_marginTop="@dimen/auth_header_top_margin"
-        app:layout_constraintStart_toStartOf="@id/imgHeaderBackground"
-        app:layout_constraintTop_toTopOf="@id/imgHeaderBackground" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5" />
 
-    <!-- Welcome Text -->
-    <TextView
-        android:id="@+id/tvWelcome"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/auth_header_horizontal_margin"
-        android:layout_marginEnd="@dimen/auth_header_horizontal_margin"
-        android:layout_marginTop="12dp"
-        android:text="Welcome Back"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/poppinsregular"
-        app:layout_constraintEnd_toEndOf="@id/imgHeaderBackground"
-        app:layout_constraintStart_toStartOf="@id/imgHeaderBackground"
-        app:layout_constraintTop_toBottomOf="@id/imgLogo" />
+        <LinearLayout
+            android:id="@+id/headerCenter"
+            android:layout_width="0dp"
+            android:layout_height="220dp"
+            android:layout_weight="9.5"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
-    <!-- Subtitle -->
-    <TextView
-        android:id="@+id/tvSubtitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/auth_header_horizontal_margin"
-        android:layout_marginEnd="@dimen/auth_header_horizontal_margin"
-        android:layout_marginTop="8dp"
-        android:text="Login to continue"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="normal"
-        android:fontFamily="@font/poppinsregular"
-        android:alpha="0.8"
-        app:layout_constraintEnd_toEndOf="@id/imgHeaderBackground"
-        app:layout_constraintStart_toStartOf="@id/imgHeaderBackground"
-        app:layout_constraintTop_toBottomOf="@id/tvWelcome" />
+            <ImageView
+                android:id="@+id/imgLogo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/leaf" />
+
+            <TextView
+                android:id="@+id/tvWelcome"
+                android:layout_width="219dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:autoSizeMaxTextSize="40sp"
+                android:autoSizeMinTextSize="25sp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/poppinsbold"
+                android:text="Welcome Back"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tvSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoSizeMaxTextSize="18sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/poppinsregular"
+                android:text="Login to continue"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <!-- Main ScrollView untuk Form -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgHeaderBackground">
+        android:layout_weight="1"
+        android:scrollbars="none">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -147,7 +142,7 @@
                 android:layout_height="@dimen/auth_button_height"
                 android:text="Login"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:cornerRadius="@dimen/auth_radius"
                 app:backgroundTint="@color/auth_primary_green"
                 app:elevation="6dp"
@@ -199,7 +194,7 @@
                 app:icon="@drawable/ic_google"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="16dp"
                 style="@style/Widget.HYCOMS.Auth.GoogleButton" />
 
             <!-- Footer - Don't have account? -->
@@ -225,8 +220,8 @@
                     android:focusable="true"
                     style="@style/TextAppearance.HYCOMS.Auth.FooterLink" />
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
+</LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
