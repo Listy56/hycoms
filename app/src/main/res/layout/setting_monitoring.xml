@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/bg_top" />
+            android:src="@drawable/bg_notification_appbar" />
 
         <!-- Content -->
         <RelativeLayout
@@ -27,14 +27,24 @@
             android:paddingEnd="20dp">
 
             <!-- Back -->
-            <ImageView
-                android:id="@+id/btnBack"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+
+            <FrameLayout
+                android:id="@+id/backContainer"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/back"
-                app:tint="@android:color/white" />
+                android:background="@drawable/bg_notification_icon_circle">
+
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/back"
+                    app:tint="@color/hycoms_primary_green"/>
+
+            </FrameLayout>
 
             <!-- Home -->
             <ImageView
@@ -54,7 +64,7 @@
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/poppinsbold"
                 android:text="Monitoring"
-                android:textColor="@android:color/white"
+                android:textColor="@color/hycoms_text_primary"
                 android:textSize="20sp" />
 
         </RelativeLayout>
@@ -79,6 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
+                app:cardUseCompatPadding="true"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="2dp">
                 <LinearLayout
@@ -95,7 +106,7 @@
                         android:text="Ambang Batas"
                         android:textSize="14sp"
                         android:fontFamily="@font/poppinsbold"
-                        android:textColor="@color/hijau_end"/>
+                        android:textColor="#2E7D5B"/>
 
                     <!--            Motitoring-->
                     <LinearLayout
@@ -126,7 +137,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/poppinmedium"
-                                    android:textColor="@color/hijau_end"
+                                    android:textColor="#2E7D5B"
                                     android:textSize="14sp"
                                     android:layout_weight="0.5"
                                     android:text="pH"/>
@@ -141,7 +152,7 @@
                                         android:layout_height="wrap_content"
                                         android:text="Min"
                                         android:textSize="10sp"
-                                        android:textColor="@color/hijau_end"
+                                        android:textColor="#2E7D5B"
                                         android:layout_marginRight="10dp"
                                         android:layout_gravity="center_vertical"
                                         android:fontFamily="@font/poppinsregular"/>
@@ -156,8 +167,8 @@
                                             android:inputType="numberDecimal"
                                             android:padding="8dp"
                                             android:textSize="14sp"
-                                            android:textColor="@color/hijau_end"
-                                            android:textColorHint="@color/hijau_end"
+                                            android:textColor="#2E7D5B"
+                                            android:textColorHint="#2E7D5B"
                                             android:textAlignment="center"
                                             android:fontFamily="@font/poppinsbold"
                                             android:background="@drawable/edittext_bg"/>
@@ -167,7 +178,7 @@
                                         android:layout_height="wrap_content"
                                         android:text="Max"
                                         android:textSize="10sp"
-                                        android:textColor="@color/hijau_end"
+                                        android:textColor="#2E7D5B"
                                         android:layout_gravity="center_vertical"
                                         android:gravity="end"
                                         android:layout_marginRight="10dp"
@@ -185,8 +196,8 @@
                                             android:inputType="numberDecimal"
                                             android:padding="8dp"
                                             android:textSize="14sp"
-                                            android:textColor="@color/hijau_end"
-                                            android:textColorHint="@color/hijau_end"
+                                            android:textColor="#2E7D5B"
+                                            android:textColorHint="#2E7D5B"
                                             android:fontFamily="@font/poppinsbold"
                                             android:textAlignment="center"
                                             android:background="@drawable/edittext_bg"/>
@@ -231,7 +242,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/poppinmedium"
-                                    android:textColor="@color/hijau_end"
+                                    android:textColor="#2E7D5B"
                                     android:textSize="14sp"
                                     android:layout_weight="0.7"
                                     android:text="Nutrisi"/>
@@ -246,7 +257,7 @@
                                         android:layout_height="wrap_content"
                                         android:text="Min"
                                         android:textSize="10sp"
-                                        android:textColor="@color/hijau_end"
+                                        android:textColor="#2E7D5B"
                                         android:layout_marginRight="10dp"
                                         android:layout_gravity="center_vertical"
                                         android:fontFamily="@font/poppinsregular"/>
@@ -261,8 +272,8 @@
                                             android:inputType="numberDecimal"
                                             android:padding="8dp"
                                             android:textSize="14sp"
-                                            android:textColor="@color/hijau_end"
-                                            android:textColorHint="@color/hijau_end"
+                                            android:textColor="#2E7D5B"
+                                            android:textColorHint="#2E7D5B"
                                             android:fontFamily="@font/poppinsbold"
                                             android:textAlignment="center"
                                             android:background="@drawable/edittext_bg"/>
@@ -272,7 +283,7 @@
                                         android:layout_height="wrap_content"
                                         android:text="Max"
                                         android:textSize="10sp"
-                                        android:textColor="@color/hijau_end"
+                                        android:textColor="#2E7D5B"
                                         android:layout_gravity="center_vertical"
                                         android:gravity="end"
                                         android:layout_marginRight="10dp"
@@ -289,8 +300,8 @@
                                             android:inputType="numberDecimal"
                                             android:padding="8dp"
                                             android:textSize="14sp"
-                                            android:textColor="@color/hijau_end"
-                                            android:textColorHint="@color/hijau_end"
+                                            android:textColor="#2E7D5B"
+                                            android:textColorHint="#2E7D5B"
                                             android:fontFamily="@font/poppinsbold"
                                             android:textAlignment="center"
                                             android:background="@drawable/edittext_bg"/>
@@ -308,7 +319,8 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
                 app:cardCornerRadius="10dp"
-                android:layout_marginTop="20dp"
+                app:cardUseCompatPadding="true"
+                android:layout_marginTop="5dp"
                 app:cardElevation="2dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -316,6 +328,7 @@
                     android:paddingLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
@@ -323,7 +336,7 @@
                         android:text="Satuan"
                         android:textSize="14sp"
                         android:fontFamily="@font/poppinsbold"
-                        android:textColor="@color/hijau_end"/>
+                        android:textColor="#2E7D5B"/>
 
                     <!--            Unit-->
                     <LinearLayout
@@ -350,7 +363,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/poppinmedium"
-                                    android:textColor="@color/hijau_end"
+                                    android:textColor="#2E7D5B"
                                     android:layout_gravity="center_vertical"
                                     android:textSize="14sp"
                                     android:layout_weight="1"
@@ -399,8 +412,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
+                app:cardUseCompatPadding="true"
                 app:cardCornerRadius="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
                 app:cardElevation="2dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -416,7 +430,7 @@
                         android:text="Interval Pembaruan"
                         android:textSize="14sp"
                         android:fontFamily="@font/poppinsbold"
-                        android:textColor="@color/hijau_end"/>
+                        android:textColor="#2E7D5B"/>
 
                     <!--            Interval-->
                     <LinearLayout
@@ -430,7 +444,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
-                            android:src="@drawable/interval"/>
+                            android:src="@drawable/update"/>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -439,7 +453,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppinmedium"
-                                android:textColor="@color/hijau_end"
+                                android:textColor="#2E7D5B"
                                 android:textSize="14sp"
                                 android:layout_weight="1"
                                 android:layout_gravity="center_vertical"
@@ -486,14 +500,15 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
                 app:cardCornerRadius="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
+                app:cardUseCompatPadding="true"
                 app:cardElevation="2dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingRight="0dp"
-                    android:paddingLeft="10dp"
                     android:paddingTop="5dp"
+                    android:paddingLeft="10dp"
                     android:paddingBottom="5dp"
                     android:orientation="vertical">
                     <TextView
@@ -502,7 +517,7 @@
                         android:text="Notifikasi"
                         android:textSize="14sp"
                         android:fontFamily="@font/poppinsbold"
-                        android:textColor="@color/hijau_end"/>
+                        android:textColor="#2E7D5B"/>
 
                     <!--            Notification-->
                     <LinearLayout
@@ -526,7 +541,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppinmedium"
                                 android:layout_gravity="center_vertical"
-                                android:textColor="@color/hijau_end"
+                                android:textColor="#2E7D5B"
                                 android:textSize="14sp"
                                 android:layout_weight="1"
                                 android:text="Notifikasi Peringatan"/>
@@ -555,7 +570,7 @@
                 android:id="@+id/save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/hijau_end"
+                android:backgroundTint="#2E7D5B"
                 android:layout_marginTop="15dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp">

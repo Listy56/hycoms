@@ -7,7 +7,6 @@
     android:background="@drawable/bg_home"
     android:orientation="vertical"
     android:padding="0dp">
-
     <!-- HEADER -->
     <FrameLayout
         android:layout_width="match_parent"
@@ -18,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/bg_top" />
+            android:src="@drawable/bg_notification_appbar" />
 
         <!-- Content -->
         <RelativeLayout
@@ -28,24 +27,23 @@
             android:paddingEnd="20dp">
 
             <!-- Back -->
-            <ImageView
-                android:id="@+id/btnBack"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+            <FrameLayout
+                android:id="@+id/backContainer"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_back"
-                app:tint="@android:color/white" />
+                android:background="@drawable/bg_notification_icon_circle">
 
-            <!-- Home -->
-            <ImageView
-                android:id="@+id/btnHome"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_home"
-                app:tint="@android:color/white" />
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/back"
+                    app:tint="@color/hycoms_primary_green"/>
+
+            </FrameLayout>
 
             <!-- Title -->
             <TextView
@@ -54,8 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/poppinsbold"
-                android:text="Riwayat Data"
-                android:textColor="@android:color/white"
+                android:text="Akun dan Data"
+                android:textColor="@color/hycoms_text_primary"
                 android:textSize="20sp" />
 
         </RelativeLayout>
@@ -108,8 +106,8 @@
                         <ImageView
                             android:layout_width="16dp"
                             android:layout_height="16dp"
-                            android:src="@android:drawable/ic_menu_sort_by_size"
-                            app:tint="@color/hijau_end" />
+                            android:src="@drawable/ic_filter_hycoms"
+                            />
 
                         <TextView
                             android:layout_width="0dp"
@@ -118,7 +116,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/poppinsbold"
                             android:text="Filter Riwayat"
-                            android:textColor="@color/hijau_end"
+                            android:textColor="#2E7D5B"
                             android:textSize="14sp" />
 
                         <ImageView
@@ -126,7 +124,7 @@
                             android:layout_width="14dp"
                             android:layout_height="14dp"
                             android:src="@drawable/ic_arrow_down"
-                            app:tint="@color/hijau_end" />
+                            app:tint="#2E7D5B" />
 
                     </LinearLayout>
 
@@ -297,7 +295,7 @@
                                 android:backgroundTint="@null"
                                 android:text="Rentang Waktu"
                                 android:textAllCaps="false"
-                                android:textColor="@color/hijau_end"
+                                android:textColor="#2E7D5B"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
 
@@ -314,7 +312,7 @@
                                 android:backgroundTint="@null"
                                 android:text="Reset"
                                 android:textAllCaps="false"
-                                android:textColor="@color/hijau_end"
+                                android:textColor="#2E7D5B"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
 
@@ -327,7 +325,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_marginTop="10dp"
-                            android:background="@color/hijau_end"
+                            android:background="#2E7D5B"
                             android:text="Ekspor Data"
                             android:textAllCaps="false"
                             android:textColor="@android:color/white"
@@ -362,7 +360,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsbold"
                         android:text="Total Data : "
-                        android:textColor="@color/hijau_end"
+                        android:textColor="#2E7D5B"
                         android:textSize="13sp" />
 
                     <TextView
@@ -371,7 +369,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsbold"
                         android:text="0"
-                        android:textColor="@color/hijau_end"
+                        android:textColor="#2E7D5B"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -419,7 +417,7 @@
                             android:id="@+id/headerLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/hijau_end"
+                            android:background="#2E7D5B"
                             android:orientation="horizontal"
                             android:paddingHorizontal="10dp"
                             android:paddingVertical="12dp">

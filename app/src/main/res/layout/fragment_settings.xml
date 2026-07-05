@@ -153,7 +153,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Monitoring"
-                                android:textColor="#244636"
+                                android:textColor="#2E7D5B"
                                 android:textSize="15sp"
                                 android:fontFamily="@font/poppinsbold"/>
 
@@ -212,7 +212,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Control"
-                                android:textColor="#244636"
+                                android:textColor="#2E7D5B"
                                 android:textSize="15sp"
                                 android:fontFamily="@font/poppinsbold"/>
 
@@ -271,7 +271,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Device"
-                                android:textColor="#244636"
+                                android:textColor="#2E7D5B"
                                 android:textSize="15sp"
                                 android:fontFamily="@font/poppinsbold"/>
 
@@ -315,7 +315,7 @@
                             <ImageView
                                 android:layout_width="22dp"
                                 android:layout_height="22dp"
-                                android:src="@drawable/profile"/>
+                                android:src="@drawable/user_name"/>
 
                         </LinearLayout>
 
@@ -330,7 +330,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Account &amp; Data"
-                                android:textColor="#244636"
+                                android:textColor="#2E7D5B"
                                 android:textSize="15sp"
                                 android:fontFamily="@font/poppinsbold"/>
 

@@ -7,6 +7,6 @@
         android:color="@android:color/white"/>
 
     <item
-        android:color="#374151"/>
+        android:color="#2E7D5B"/>
 
 </selector>

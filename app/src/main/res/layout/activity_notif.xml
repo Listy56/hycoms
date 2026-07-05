@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/appBar"
         android:layout_width="0dp"
-        android:layout_height="88dp"
+        android:layout_height="72dp"
         android:background="@drawable/bg_notification_appbar"
         android:elevation="2dp"
         android:paddingStart="16dp"
@@ -24,7 +24,7 @@
             android:layout_height="44dp"
             android:background="@drawable/bg_notification_icon_circle"
             android:contentDescription="Kembali"
-            android:padding="11dp"
+            android:padding="10dp"
             android:src="@drawable/back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
             android:fontFamily="@font/poppinsbold"
             android:text="Notifikasi"
             android:textColor="@color/hycoms_text_primary"
-            android:textSize="22sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@id/back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/back"
@@ -74,8 +74,8 @@
         app:layout_constraintTop_toBottomOf="@id/appBar">
 
         <FrameLayout
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
             android:background="@drawable/bg_notification_icon_circle">
 
             <ImageView
@@ -93,7 +93,7 @@
             android:fontFamily="@font/poppinsbold"
             android:text="Belum ada notifikasi"
             android:textColor="@color/hycoms_text_primary"
-            android:textSize="20sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -103,7 +103,7 @@
             android:gravity="center"
             android:text="Notifikasi sistem akan muncul di sini."
             android:textColor="@color/hycoms_text_secondary"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 

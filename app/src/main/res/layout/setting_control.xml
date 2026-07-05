@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/bg_top" />
+            android:src="@drawable/bg_notification_appbar" />
 
         <!-- Content -->
         <RelativeLayout
@@ -26,24 +26,27 @@
             android:paddingEnd="20dp">
 
             <!-- Back -->
-            <ImageView
-                android:id="@+id/btnBack"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+
+            <!-- Back -->
+
+            <FrameLayout
+                android:id="@+id/backContainer"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/back"
-                app:tint="@android:color/white" />
+                android:background="@drawable/bg_notification_icon_circle">
 
-            <!-- Home -->
-            <ImageView
-                android:id="@+id/btnHome"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_home"
-                app:tint="@android:color/white" />
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/back"
+                    app:tint="@color/hycoms_primary_green"/>
+
+            </FrameLayout>
+
 
             <!-- Title -->
             <TextView
@@ -53,7 +56,7 @@
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/poppinsbold"
                 android:text="Kontrol"
-                android:textColor="@android:color/white"
+                android:textColor="@color/hycoms_text_primary"
                 android:textSize="20sp" />
 
         </RelativeLayout>
@@ -79,6 +82,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:cardUseCompatPadding="true"
                 android:backgroundTint="@android:color/white"
                 app:cardCornerRadius="14dp">
 
@@ -88,19 +92,14 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:padding="12dp">
-
-                    <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/mode" />
+]
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinmedium"
                         android:text="Mode : "
-                        android:textColor="@color/hijau_end"
+                        android:textColor="#2E7D5B"
                         android:textSize="14sp" />
 
                     <TextView
@@ -110,7 +109,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/poppinmedium"
                         android:text="Otomatis"
-                        android:textColor="@color/hijau_end"
+                        android:textColor="#2E7D5B"
                         android:textSize="14sp"
                         android:textStyle="italic" />
 
@@ -149,7 +148,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 android:weightSum="3">
 
@@ -157,11 +156,11 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/pumpLayout"
                     android:layout_width="0dp"
-                    android:layout_height="130dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_marginEnd="5dp"
                     android:backgroundTint="@android:color/white"
                     app:cardCornerRadius="14dp"
+                    app:cardUseCompatPadding="true"
                     app:cardElevation="3dp">
 
                     <LinearLayout
@@ -182,8 +181,8 @@
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/poppinmedium"
                             android:text="Pompa Air"
-                            android:textColor="#08AAA3"
-                            android:textSize="12sp" />
+                            android:textColor="#2E7D5B"
+                            android:textSize="11sp" />
 
                         <LinearLayout
                             android:id="@+id/switchPump"
@@ -208,7 +207,7 @@
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/poppinsbold"
                             android:text="-"
-                            android:textColor="#08AAA3"
+                            android:textColor="#2E7D5B"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -219,11 +218,11 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/phUpLayout"
                     android:layout_width="0dp"
-                    android:layout_height="130dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_marginHorizontal="2.5dp"
                     android:backgroundTint="@android:color/white"
                     app:cardCornerRadius="14dp"
+                    app:cardUseCompatPadding="true"
                     app:cardElevation="3dp">
 
                     <LinearLayout
@@ -244,8 +243,8 @@
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/poppinmedium"
                             android:text="Penambah pH"
-                            android:textColor="#08AAA3"
-                            android:textSize="12sp" />
+                            android:textColor="#2E7D5B"
+                            android:textSize="11sp" />
 
                         <LinearLayout
                             android:id="@+id/switchPhUp"
@@ -270,7 +269,7 @@
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/poppinsbold"
                             android:text="-"
-                            android:textColor="#08AAA3"
+                            android:textColor="#2E7D5B"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -281,11 +280,11 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/phDownLayout"
                     android:layout_width="0dp"
-                    android:layout_height="130dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_marginStart="5dp"
                     android:backgroundTint="@android:color/white"
                     app:cardCornerRadius="14dp"
+                    app:cardUseCompatPadding="true"
                     app:cardElevation="3dp">
 
                     <LinearLayout
@@ -306,8 +305,8 @@
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/poppinmedium"
                             android:text="Penurun pH"
-                            android:textColor="#08AAA3"
-                            android:textSize="12sp" />
+                            android:textColor="#2E7D5B"
+                            android:textSize="11sp" />
 
                         <LinearLayout
                             android:id="@+id/switchPhDown"
@@ -332,7 +331,7 @@
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/poppinsbold"
                             android:text="-"
-                            android:textColor="#08AAA3"
+                            android:textColor="#2E7D5B"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -345,7 +344,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
@@ -353,11 +351,11 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/nutrisiUpLayout"
                     android:layout_width="0dp"
-                    android:layout_height="130dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_marginEnd="5dp"
                     android:backgroundTint="@android:color/white"
                     app:cardCornerRadius="14dp"
+                    app:cardUseCompatPadding="true"
                     app:cardElevation="3dp">
 
                     <LinearLayout
@@ -378,8 +376,8 @@
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/poppinmedium"
                             android:text="Penambah Nutrisi"
-                            android:textColor="#08AAA3"
-                            android:textSize="12sp" />
+                            android:textColor="#2E7D5B"
+                            android:textSize="11sp" />
 
                         <LinearLayout
                             android:id="@+id/switchNutrisiUp"
@@ -404,7 +402,7 @@
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/poppinsbold"
                             android:text="-"
-                            android:textColor="#08AAA3"
+                            android:textColor="#2E7D5B"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -415,11 +413,11 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/nutrisiDownLayout"
                     android:layout_width="0dp"
-                    android:layout_height="130dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_marginStart="5dp"
                     android:backgroundTint="@android:color/white"
                     app:cardCornerRadius="14dp"
+                    app:cardUseCompatPadding="true"
                     app:cardElevation="3dp">
 
                     <LinearLayout
@@ -440,8 +438,8 @@
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/poppinmedium"
                             android:text="Penurun Nutrisi"
-                            android:textColor="#08AAA3"
-                            android:textSize="12sp" />
+                            android:textColor="#2E7D5B"
+                            android:textSize="11sp" />
 
                         <LinearLayout
                             android:id="@+id/switchNutrisiDown"
@@ -466,7 +464,7 @@
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/poppinsbold"
                             android:text="-"
-                            android:textColor="#08AAA3"
+                            android:textColor="#2E7D5B"
                             android:textSize="13sp" />
 
                     </LinearLayout>

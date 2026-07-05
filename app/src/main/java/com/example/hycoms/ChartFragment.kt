@@ -78,7 +78,7 @@ class ChartFragment : Fragment() {
     private var selectedDataType = "Nutrisi"
     private var selectedPeriod = "Daily"
 
-    private val colorTeal = Color.parseColor("#2BBFA4")
+    private val colorTeal = Color.parseColor("#2E7D5B")
 
     private val chartEntries = ArrayList<Entry>()
     private val chartLabels = ArrayList<String>()
