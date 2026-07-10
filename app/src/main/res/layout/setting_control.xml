@@ -75,6 +75,33 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/layoutWarning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="#FFF8E1"
+                android:orientation="horizontal"
+                android:padding="12dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_warning"
+                    app:tint="#F57C00"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="Hubungkan Device ID terlebih dahulu untuk menggunakan fitur Kontrol."
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="#F57C00"/>
+
+            </LinearLayout>
 
             <!-- PASTE SEMUA ISI CONTROL DI SINI -->
 

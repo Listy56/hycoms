@@ -30,6 +30,7 @@ class MonitoringActivity : AppCompatActivity() {
     private lateinit var switchNotif : LinearLayout
     private lateinit var circleNotif : View
     private lateinit var save : CardView
+    private lateinit var layoutWarning: LinearLayout
 
     private lateinit var spinnerInterval : Spinner
     private lateinit var spinnerSuhu : Spinner
@@ -44,7 +45,7 @@ class MonitoringActivity : AppCompatActivity() {
     var phMin: String? = ""
     var phMax: String? = ""
     var ppmMin: String? = ""
-    var ppmMax: String = ""
+    var ppmMax: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +64,7 @@ class MonitoringActivity : AppCompatActivity() {
         spinnerSuhu = findViewById(R.id.spinnerSuhu)
 
         save = findViewById(R.id.save)
+        layoutWarning = findViewById(R.id.layoutWarning)
 
         val btnBack = findViewById<ImageView>(R.id.btnBack)
 
@@ -146,16 +148,32 @@ class MonitoringActivity : AppCompatActivity() {
                         spinnerSuhu.setSelection(suhuIndex)
 
                         online = true
+                        saveLastState()
+                        setMonitoringEnabled(true)
 
                     } else {
-                        spinnerInterval.visibility = View.GONE
-                        spinnerSuhu.visibility     = View.GONE
-
                         online = false
+
+                        loadLastState()
+
+                        spinnerInterval.visibility = View.VISIBLE
+                        spinnerSuhu.visibility = View.VISIBLE
+
+                        setMonitoringEnabled(false)
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
+
+                    online = false
+
+                    loadLastState()
+
+                    spinnerInterval.visibility = View.VISIBLE
+                    spinnerSuhu.visibility = View.VISIBLE
+
+                    setMonitoringEnabled(false)
+
                     Toast.makeText(
                         this@MonitoringActivity,
                         "Error: ${error.message}",
@@ -163,48 +181,154 @@ class MonitoringActivity : AppCompatActivity() {
                     ).show()
                 }
             })
+        }
+        else {
 
+            online = false
+
+            loadLastState()
+
+            spinnerInterval.visibility = View.VISIBLE
+            spinnerSuhu.visibility = View.VISIBLE
+
+            setMonitoringEnabled(false)
         }
 
+
         switchNotif.setOnClickListener {
+
+            if(!online){
+
+                Toast.makeText(
+                    this,
+                    "Hubungkan Device ID terlebih dahulu.",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                return@setOnClickListener
+            }
+
             isOn = !isOn
             updateSwitchUI(isOn)
         }
         save.setOnClickListener {
-            if(online) {
-                val newPhMax = etPhMax.text.toString().ifEmpty { phMax }
-                val newPhMin = etPhMin.text.toString().ifEmpty { phMin }
-                val newPpmMax = etPpmMax.text.toString().ifEmpty { ppmMax }
-                val newPpmMin = etPpmMin.text.toString().ifEmpty { ppmMin }
 
-                if (deviceID != null && deviceID.toString().isNotEmpty()) {
-                    baseFirebase.child(deviceID!!)
-                        .child("setting")
-                        .updateChildren(
-                            mapOf(
-                                "phMax" to newPhMax,
-                                "phMin" to newPhMin,
-                                "ppmMax" to newPpmMax,
-                                "ppmMin" to newPpmMin,
-                                "notifAlert" to isOn,
-                                "tempUnit" to spinnerSuhu.selectedItem.toString(),
-                                "intervalUpdate" to spinnerInterval.selectedItem.toString()
-                            )
-                        )
-                }
+            if (!online) {
 
                 Toast.makeText(
-                    this@MonitoringActivity,
-                    "Data Updated",
+                    this,
+                    "Hubungkan Device ID terlebih dahulu.",
                     Toast.LENGTH_SHORT
                 ).show()
-                finish()
-                overridePendingTransition(
-                    android.R.anim.fade_in,
-                    android.R.anim.fade_out
-                )
+
+                return@setOnClickListener
             }
+
+            val newPhMax = etPhMax.text.toString().ifEmpty { phMax }
+            val newPhMin = etPhMin.text.toString().ifEmpty { phMin }
+            val newPpmMax = etPpmMax.text.toString().ifEmpty { ppmMax }
+            val newPpmMin = etPpmMin.text.toString().ifEmpty { ppmMin }
+
+            baseFirebase.child(deviceID!!)
+                .child("setting")
+                .updateChildren(
+                    mapOf(
+                        "phMax" to newPhMax,
+                        "phMin" to newPhMin,
+                        "ppmMax" to newPpmMax,
+                        "ppmMin" to newPpmMin,
+                        "notifAlert" to isOn,
+                        "tempUnit" to spinnerSuhu.selectedItem.toString(),
+                        "intervalUpdate" to spinnerInterval.selectedItem.toString()
+                    )
+                )
+                .addOnSuccessListener {
+
+                    phMin = newPhMin
+                    phMax = newPhMax
+                    ppmMin = newPpmMin
+                    ppmMax = newPpmMax
+
+                    saveLastState()
+
+                    Toast.makeText(
+                        this,
+                        "Data Updated",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    finish()
+                    overridePendingTransition(
+                        android.R.anim.fade_in,
+                        android.R.anim.fade_out
+                    )
+                }
         }
+    }
+    private fun saveLastState() {
+
+        val pref = getSharedPreferences("MONITORING_STATE", MODE_PRIVATE)
+
+        pref.edit()
+            .putString("phMin", phMin)
+            .putString("phMax", phMax)
+            .putString("ppmMin", ppmMin)
+            .putString("ppmMax", ppmMax)
+            .putBoolean("notifAlert", isOn)
+            .putString("tempUnit", spinnerSuhu.selectedItem.toString())
+            .putString("interval", spinnerInterval.selectedItem.toString())
+            .apply()
+    }
+    private fun loadLastState() {
+
+        val pref = getSharedPreferences("MONITORING_STATE", MODE_PRIVATE)
+
+        phMin = pref.getString("phMin", "")
+        phMax = pref.getString("phMax", "")
+        ppmMin = pref.getString("ppmMin", "")
+        ppmMax = pref.getString("ppmMax", "")
+        isOn = pref.getBoolean("notifAlert", false)
+
+        val temp = pref.getString("tempUnit", "C")
+        val interval = pref.getString("interval", "10")
+
+        etPhMin.hint = phMin
+        etPhMax.hint = phMax
+        etPpmMin.hint = ppmMin
+        etPpmMax.hint = ppmMax
+
+        updateSwitchUI(isOn)
+
+        spinnerSuhu.setSelection(
+            if (temp == "F") 1 else 0
+        )
+
+        spinnerInterval.setSelection(
+            when(interval){
+                "10" -> 0
+                "30" -> 1
+                "60" -> 2
+                "120" -> 3
+                else -> 0
+            }
+        )
+    }
+    private fun setMonitoringEnabled(enable: Boolean){
+
+        etPhMin.isEnabled = enable
+        etPhMax.isEnabled = enable
+        etPpmMin.isEnabled = enable
+        etPpmMax.isEnabled = enable
+
+        spinnerInterval.isEnabled = enable
+        spinnerSuhu.isEnabled = enable
+
+        save.alpha = if(enable) 1f else 0.5f
+        switchNotif.alpha = if(enable) 1f else 0.5f
+
+        layoutWarning.visibility =
+            if(enable) View.GONE
+            else View.VISIBLE
     }
 
     fun updateSwitchUI(isOn: Boolean) {
