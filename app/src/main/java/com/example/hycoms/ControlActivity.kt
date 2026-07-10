@@ -162,11 +162,11 @@ class ControlActivity : AppCompatActivity() {
                                     .value.toString().toBoolean()
 
                             nutrisiUpOn =
-                                snapshot.child("nutrisiUp")
+                                snapshot.child("nutrisiA")
                                     .value.toString().toBoolean()
 
                             nutrisiDownOn =
-                                snapshot.child("nutrisiDown")
+                                snapshot.child("nutrisiB")
                                     .value.toString().toBoolean()
 
                             // MODE
@@ -302,7 +302,7 @@ class ControlActivity : AppCompatActivity() {
 
                 baseFirebase.child(deviceID!!)
                     .child("control")
-                    .child("nutrisiUp")
+                    .child("nutrisiA")
                     .setValue(nutrisiUpOn)
             }
         }
@@ -319,7 +319,7 @@ class ControlActivity : AppCompatActivity() {
 
                 baseFirebase.child(deviceID!!)
                     .child("control")
-                    .child("nutrisiDown")
+                    .child("nutrisiB")
                     .setValue(nutrisiDownOn)
             }
         }

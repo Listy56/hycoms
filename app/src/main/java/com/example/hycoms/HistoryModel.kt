@@ -1,11 +1,11 @@
 package com.example.hycoms
 
 data class HistoryModel(
-    var timestamp: String = "",
-    var airTemp: String = "",
-    var light: String = "",
-    var ph: String = "",
-    var ppm: String = "",
-    var waterLevel: String = "",
-    var waterTemp: String = ""
+    val timestamp: String,
+    val airTemp: String,
+    val humidity: String,
+    val ph: String,
+    val ppm: String,
+    val waterLevel: String,
+    val waterTemp: String
 )

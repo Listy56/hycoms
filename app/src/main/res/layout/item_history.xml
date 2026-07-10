@@ -76,19 +76,17 @@
             android:paddingHorizontal="10dp"
             android:textColor="#2D3A4A"
             android:textSize="12sp" />
-
-        <!-- LIGHT -->
+        <!-- HUMIDITY -->
 
         <TextView
-            android:id="@+id/tvLight"
+            android:id="@+id/tvHumidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="100dp"
+            android:minWidth="120dp"
             android:gravity="center"
             android:paddingHorizontal="10dp"
             android:textColor="#2D3A4A"
             android:textSize="12sp" />
-
         <!-- WATER LEVEL -->
 
         <TextView

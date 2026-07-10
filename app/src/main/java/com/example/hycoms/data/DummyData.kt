@@ -5,7 +5,7 @@ data class SensorData(
     val nutrisi: Int,
     val suhuUdara: Float,
     val suhuAir: Float,
-    val intensitas: Int,
+    val humidity: Int,
     val air: Int,
     val pompaOn: Boolean
 )
@@ -17,7 +17,7 @@ object DummyData {
             nutrisi = 900,
             suhuUdara = 28f,
             suhuAir = 26f,
-            intensitas = 10000,
+            humidity = 75,
             air = 80,
             pompaOn = true
         )

@@ -19,7 +19,7 @@ class HistoryAdapter(
     var showPpm = true
     var showWaterTemp = true
     var showAirTemp = true
-    var showLight = true
+    var showHumidity = true
     var showWaterLevel = true
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -42,8 +42,8 @@ class HistoryAdapter(
         val tvAirTemp: TextView =
             view.findViewById(R.id.tvAirTemp)
 
-        val tvLight: TextView =
-            view.findViewById(R.id.tvLight)
+        val tvHumidity: TextView =
+            view.findViewById(R.id.tvHumidity)
 
         val tvWaterLevel: TextView =
             view.findViewById(R.id.tvWaterLevel)
@@ -78,7 +78,7 @@ class HistoryAdapter(
         holder.tvPpm.text = data.ppm
         holder.tvWaterTemp.text = data.waterTemp
         holder.tvAirTemp.text = data.airTemp
-        holder.tvLight.text = data.light
+        holder.tvHumidity.text = "${data.humidity}%"
         holder.tvWaterLevel.text = data.waterLevel
 
         // =========================
@@ -91,7 +91,7 @@ class HistoryAdapter(
         if (showPpm) visibleColumn++
         if (showWaterTemp) visibleColumn++
         if (showAirTemp) visibleColumn++
-        if (showLight) visibleColumn++
+        if (showHumidity) visibleColumn++
         if (showWaterLevel) visibleColumn++
 
         /*
@@ -152,8 +152,8 @@ class HistoryAdapter(
         )
 
         setColumnVisibility(
-            holder.tvLight,
-            showLight,
+            holder.tvHumidity,
+            showHumidity,
             if (useDynamicWidth) 1f else 0f
         )
 

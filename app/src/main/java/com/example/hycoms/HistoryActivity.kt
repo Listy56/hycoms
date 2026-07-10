@@ -44,7 +44,7 @@ class HistoryActivity : AppCompatActivity(){
     private lateinit var cbPh: CheckBox
     private lateinit var cbWaterTemp: CheckBox
     private lateinit var cbAirTemp: CheckBox
-    private lateinit var cbLight: CheckBox
+    private lateinit var cbHumidity: CheckBox
     private lateinit var cbWaterLevel: CheckBox
 
     // HEADER TABLE
@@ -53,7 +53,7 @@ class HistoryActivity : AppCompatActivity(){
     private lateinit var headerPpm: TextView
     private lateinit var headerWaterTemp: TextView
     private lateinit var headerAirTemp: TextView
-    private lateinit var headerLight: TextView
+    private lateinit var headerHumidity: TextView
     private lateinit var headerWaterLevel: TextView
 
     // EXPORT
@@ -135,8 +135,8 @@ class HistoryActivity : AppCompatActivity(){
         cbAirTemp =
             findViewById(R.id.cbairTemp)
 
-        cbLight =
-            findViewById(R.id.cblight)
+        cbHumidity =
+                findViewById(R.id.cbHumidity)
 
         cbWaterLevel =
             findViewById(R.id.cbwaterLevel)
@@ -158,8 +158,8 @@ class HistoryActivity : AppCompatActivity(){
         headerAirTemp =
             findViewById(R.id.headerAirTemp)
 
-        headerLight =
-            findViewById(R.id.headerLight)
+        headerHumidity =
+                findViewById(R.id.headerHumidity)
 
         headerWaterLevel =
            findViewById(R.id.headerWaterLevel)
@@ -244,7 +244,7 @@ class HistoryActivity : AppCompatActivity(){
         cbPh.isChecked = true
         cbWaterTemp.isChecked = true
         cbAirTemp.isChecked = true
-        cbLight.isChecked = true
+        cbHumidity.isChecked = true
         cbWaterLevel.isChecked = true
 
         cbAll.setOnCheckedChangeListener { _, isChecked ->
@@ -255,7 +255,7 @@ class HistoryActivity : AppCompatActivity(){
                 cbPh.isChecked = true
                 cbWaterTemp.isChecked = true
                 cbAirTemp.isChecked = true
-                cbLight.isChecked = true
+                cbHumidity.isChecked = true
                 cbWaterLevel.isChecked = true
             }
 
@@ -272,7 +272,7 @@ class HistoryActivity : AppCompatActivity(){
                     cbPh,
                     cbWaterTemp,
                     cbAirTemp,
-                    cbLight,
+                    cbHumidity,
                     cbWaterLevel
                 ).count { it.isChecked }
 
@@ -296,7 +296,7 @@ class HistoryActivity : AppCompatActivity(){
                             cbPh.isChecked &&
                             cbWaterTemp.isChecked &&
                             cbAirTemp.isChecked &&
-                            cbLight.isChecked &&
+                            cbHumidity.isChecked &&
                             cbWaterLevel.isChecked
 
                 cbAll.setOnCheckedChangeListener { _, checked ->
@@ -307,7 +307,7 @@ class HistoryActivity : AppCompatActivity(){
                         cbPh.isChecked = true
                         cbWaterTemp.isChecked = true
                         cbAirTemp.isChecked = true
-                        cbLight.isChecked = true
+                        cbHumidity.isChecked = true
                         cbWaterLevel.isChecked = true
                     }
 
@@ -333,7 +333,7 @@ class HistoryActivity : AppCompatActivity(){
             checkboxListener
         )
 
-        cbLight.setOnCheckedChangeListener(
+        cbHumidity.setOnCheckedChangeListener(
             checkboxListener
         )
 
@@ -403,8 +403,8 @@ class HistoryActivity : AppCompatActivity(){
             if (cbAirTemp.isChecked)
                 headers.add("Air Temp")
 
-            if (cbLight.isChecked)
-                headers.add("Light")
+            if (cbHumidity.isChecked)
+                headers.add("Humidity")
 
             if (cbWaterLevel.isChecked)
                 headers.add("Water Level")
@@ -431,8 +431,8 @@ class HistoryActivity : AppCompatActivity(){
                 if (cbAirTemp.isChecked)
                     row.add(data.airTemp)
 
-                if (cbLight.isChecked)
-                    row.add(data.light)
+                if (cbHumidity.isChecked)
+                    row.add(data.humidity)
 
                 if (cbWaterLevel.isChecked)
                     row.add(data.waterLevel)
@@ -515,8 +515,8 @@ class HistoryActivity : AppCompatActivity(){
             if (cbAirTemp.isChecked)
                 table.addCell("Air Temp")
 
-            if (cbLight.isChecked)
-                table.addCell("Light")
+            if (cbHumidity.isChecked)
+                table.addCell("Humidity (%)")
 
             if (cbWaterLevel.isChecked)
                 table.addCell("Water Level")
@@ -537,8 +537,8 @@ class HistoryActivity : AppCompatActivity(){
                 if (cbAirTemp.isChecked)
                     table.addCell(data.airTemp)
 
-                if (cbLight.isChecked)
-                    table.addCell(data.light)
+                if (cbHumidity.isChecked)
+                    table.addCell(data.humidity)
 
                 if (cbWaterLevel.isChecked)
                     table.addCell(data.waterLevel)
@@ -618,7 +618,7 @@ class HistoryActivity : AppCompatActivity(){
         if (cbPpm.isChecked) total++
         if (cbWaterTemp.isChecked) total++
         if (cbAirTemp.isChecked) total++
-        if (cbLight.isChecked) total++
+        if (cbHumidity.isChecked) total++
         if (cbWaterLevel.isChecked) total++
 
         return total
@@ -642,8 +642,8 @@ class HistoryActivity : AppCompatActivity(){
         adapter.showAirTemp =
             cbAirTemp.isChecked
 
-        adapter.showLight =
-            cbLight.isChecked
+        adapter.showHumidity =
+            cbHumidity.isChecked
 
         adapter.showWaterLevel =
             cbWaterLevel.isChecked
@@ -654,7 +654,7 @@ class HistoryActivity : AppCompatActivity(){
         if (cbPpm.isChecked) visibleColumn++
         if (cbWaterTemp.isChecked) visibleColumn++
         if (cbAirTemp.isChecked) visibleColumn++
-        if (cbLight.isChecked) visibleColumn++
+        if (cbHumidity.isChecked) visibleColumn++
         if (cbWaterLevel.isChecked) visibleColumn++
 
         val useWeight =
@@ -698,8 +698,8 @@ class HistoryActivity : AppCompatActivity(){
         )
 
         setHeaderVisibility(
-            headerLight,
-            cbLight.isChecked,
+            headerHumidity,
+            cbHumidity.isChecked,
             if (useWeight) 1f else 0f
         )
 
@@ -926,7 +926,7 @@ class HistoryActivity : AppCompatActivity(){
                                             HistoryModel(
                                                 timestamp = dateStr,
                                                 airTemp = hour.child("airTemp").value.toString(),
-                                                light = hour.child("light").value.toString(),
+                                                humidity = hour.child("humidity").value.toString(),
                                                 ph = hour.child("pH").value.toString(),
                                                 ppm = hour.child("ppm").value.toString(),
                                                 waterLevel = hour.child("waterLevel").value.toString(),

@@ -243,7 +243,7 @@
                                     android:layout_height="wrap_content" />
 
                                 <CheckBox
-                                    android:id="@+id/cblight"
+                                    android:id="@+id/cbHumidity"
                                     android:layout_width="wrap_content"
                                     android:layout_height="34dp"
                                     android:background="@drawable/bg_chip"
@@ -252,9 +252,9 @@
                                     android:gravity="center"
                                     android:minWidth="0dp"
                                     android:paddingHorizontal="12dp"
-                                    android:text="Intensitas"
+                                    android:text="Kelembapan"
                                     android:textColor="@drawable/chip_text_selector"
-                                    android:textSize="12sp" />
+                                    android:textSize="12sp"/>
 
                                 <Space
                                     android:layout_width="6dp"
@@ -492,19 +492,19 @@
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
 
-                            <!-- LIGHT -->
+                            <!-- humidity -->
 
                             <TextView
-                                android:id="@+id/headerLight"
+                                android:id="@+id/headerHumidity"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:minWidth="100dp"
                                 android:gravity="center"
                                 android:paddingHorizontal="10dp"
-                                android:text="Intensitas"
+                                android:text="Kelembapan"
                                 android:textColor="@android:color/white"
                                 android:textSize="11sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"/>
 
                             <!-- WATER LEVEL -->
 

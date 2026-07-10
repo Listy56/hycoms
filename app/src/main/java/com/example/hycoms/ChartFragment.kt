@@ -65,7 +65,7 @@ class ChartFragment : Fragment() {
         "Suhu Air",
         "Suhu Udara",
         "pH",
-        "Intensitas Cahaya"
+        "Kelembapan Udara"
     )
 
     private val periodList = listOf(
@@ -826,9 +826,11 @@ class ChartFragment : Fragment() {
                                                 timeSnap.child("pH")
                                                     .getValue(Float::class.java)
 
-                                            "Intensitas Cahaya" ->
-                                                timeSnap.child("light")
-                                                    .getValue(Float::class.java)
+                                            "Kelembapan Udara" -> {
+                                                timeSnap.child("humidity")
+                                                    .getValue(Int::class.java)
+                                                    ?.toFloat()
+                                            }
 
                                             else -> null
                                         }

@@ -114,7 +114,7 @@
             android:layout_height="0dp"
             android:layout_weight="1.4"
             app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="28dp"
+            app:cardCornerRadius="46dp"
             android:layout_marginBottom="21dp"
             app:cardElevation="1dp"
             app:strokeColor="#6B8F7A"
@@ -213,73 +213,91 @@
 
                     </LinearLayout>
 
-                    <!-- SCALE -->
-
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="175dp"
                         android:layout_marginStart="12dp"
-                        android:gravity="center_vertical"
                         android:orientation="vertical">
 
+                        <!-- 100% -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="100%"
                             android:textColor="#244636"
-                            android:textSize="10sp" />
+                            android:textSize="10sp"/>
 
                         <View
                             android:layout_width="18dp"
                             android:layout_height="1dp"
-                            android:background="#244636" />
+                            android:background="#244636"/>
 
+                        <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"/>
+
+                        <!-- 75% -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="18dp"
                             android:text="75%"
                             android:textColor="#244636"
-                            android:textSize="10sp" />
+                            android:textSize="10sp"/>
 
                         <View
                             android:layout_width="18dp"
                             android:layout_height="1dp"
-                            android:background="#244636" />
+                            android:background="#244636"/>
 
+                        <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"/>
+
+                        <!-- 50% -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="18dp"
                             android:text="50%"
                             android:textColor="#244636"
-                            android:textSize="10sp" />
+                            android:textSize="10sp"/>
 
                         <View
                             android:layout_width="18dp"
                             android:layout_height="1dp"
-                            android:background="#244636" />
+                            android:background="#244636"/>
 
+                        <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"/>
+
+                        <!-- 25% -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="18dp"
                             android:text="25%"
                             android:textColor="#244636"
-                            android:textSize="10sp" />
+                            android:textSize="10sp"/>
 
                         <View
                             android:layout_width="18dp"
                             android:layout_height="1dp"
-                            android:background="#244636" />
+                            android:background="#244636"/>
 
+                        <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"/>
+
+                        <!-- 0% -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="18dp"
                             android:text="0%"
                             android:textColor="#244636"
-                            android:textSize="10sp" />
+                            android:textSize="10sp"/>
 
                     </LinearLayout>
 
@@ -307,7 +325,7 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="21dp"
                 app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="24dp"
+                app:cardCornerRadius="32dp"
                 app:cardElevation="1dp"
                 app:strokeColor="#6B8F7A"
                 app:strokeWidth="0.8dp">
@@ -361,7 +379,7 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="21dp"
                 app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="24dp"
+                app:cardCornerRadius="32dp"
                 app:cardElevation="1dp"
                 app:strokeColor="#6B8F7A"
                 app:strokeWidth="0.8dp">
@@ -424,7 +442,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="24dp"
+                app:cardCornerRadius="32dp"
                 app:cardElevation="1dp"
                 app:strokeColor="#6B8F7A"
                 app:strokeWidth="0.8dp">
@@ -488,7 +506,7 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="21dp"
                 app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="24dp"
+                app:cardCornerRadius="40dp"
                 app:cardElevation="1dp"
                 app:strokeColor="#6B8F7A"
                 app:strokeWidth="0.8dp">
@@ -596,7 +614,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="24dp"
+                app:cardCornerRadius="40dp"
                 app:cardElevation="1dp"
                 app:strokeColor="#6B8F7A"
                 app:strokeWidth="0.8dp">
@@ -623,13 +641,13 @@
                             android:layout_height="18dp"
                             android:layout_marginBottom="2dp"
                             android:adjustViewBounds="true"
-                            android:src="@drawable/cahaya" />
+                            android:src="@drawable/ic_humidity" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
-                            android:text="Intensity"
+                            android:text="Humidity"
                             android:textColor="#244636"
                             android:textSize="13sp"
                             android:fontFamily="@font/poppinsbold" />
@@ -638,26 +656,16 @@
 
                     <!-- Value -->
                     <TextView
-                        android:id="@+id/tvIntensitas"
+                        android:id="@+id/tvHumidity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="900"
+                        android:text="75%"
                         android:textColor="#2E7D5B"
                         android:autoSizeTextType="uniform"
                         android:autoSizeMinTextSize="18sp"
                         android:autoSizeMaxTextSize="28sp"
                         android:autoSizeStepGranularity="2sp"
-                        android:fontFamily="@font/poppinsbold" />
-
-                    <!-- Unit -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:text="LUX"
-                        android:textColor="#2E7D5B"
-                        android:textSize="14sp"
                         android:fontFamily="@font/poppinsbold" />
 
                 </LinearLayout>

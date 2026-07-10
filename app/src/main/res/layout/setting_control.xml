@@ -375,7 +375,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/poppinmedium"
-                            android:text="Penambah Nutrisi"
+                            android:text="Nutrisi A"
                             android:textColor="#2E7D5B"
                             android:textSize="11sp" />
 
@@ -437,7 +437,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/poppinmedium"
-                            android:text="Penurun Nutrisi"
+                            android:text="Nutrisi B"
                             android:textColor="#2E7D5B"
                             android:textSize="11sp" />
 
